@@ -29,10 +29,23 @@ def autorunner():
     while True:
         time.sleep(1)
         if is_scenario_started.is_set():
-            if configs['autorunner_mode'] == 'LKAS': os.system(configs[target_environment]['cubetown_lkas_autorunner_cmd'])
-            elif configs['autorunner_mode'] == 'FULL': os.system(configs[target_environment]['cubetown_full_autorunner_cmd'])
+            if target_environment == 'exynos':
+                if configs['autorunner_mode'] == 'LKAS': 
+                    os.system('ssh root@' + configs[target_environment]['target_ip'] + ' \"lxc-attach -n linux1 -- /home/root/scripts/cubetown_lkas_autorunner.sh\"')
+                elif configs['autorunner_mode'] == 'FULL': 
+                    os.system('ssh root@' + configs[target_environment]['target_ip'] + ' \"lxc-attach -n linux1 -- /home/root/scripts/cubetown_full_autorunner.sh\"')
+                else:
+                    print('Invalidate mode:', configs['autorunner_mode'])
+            elif target_environment == 'desktop':
+                if configs['autorunner_mode'] == 'LKAS': 
+                    os.system('roslaunch rubis_autorunner cubetown_lkas_autorunner.launch')                                                
+                elif configs['autorunner_mode'] == 'FULL':
+                    os.system('roslaunch rubis_autorunner cubetown_full_autorunner.launch')
+                else:
+                    print('Invalidate mode:', configs['autorunner_mode'])
             else:
-                print('Invalidate mode:', configs['autorunner_mode'])
+                print('Wrong target environment: ', target_environment)
+                exit()
             print('- Autorunner: Start Autorunner')
         else:
             continue
@@ -51,7 +64,7 @@ def save_result(iter, experiment_info):
     if configs['target_environment'] == 'desktop':
         os.system('cp -r '+configs[target_environment]['response_time_path']+ ' ' + output_path)
     elif configs['target_environment'] == 'exynos':
-        os.system('scp -r root@192.168.0.8:'+configs[target_environment]['response_time_path']+ ' ' + output_path)
+        os.system('scp -r root@' + configs[target_environment]['target_ip'] +':'+configs[target_environment]['response_time_path']+ ' ' + output_path)
     else:
         print('[Error] Invalid target environment:',configs['target_envirnment'])
 
@@ -91,6 +104,88 @@ def twist_cmd_cb(msg):
         is_autorunner_started.clear()
     return
 
+def perf_thread_main(type='all'):
+    if target_environment == 'desktop': return
+    elif target_environment == 'exynos':
+        if type == 'all':
+            os.system('ssh root@' + configs[target_environment]['target_ip'] +  ' \"perf stat -e l3d_cache_refill -C ' + configs['all_cores'] +' &> /home/root/perf_output.txt\"')
+        elif type == 'ADAS':
+            os.system('ssh root@' + configs[target_environment]['target_ip'] +  ' \"perf stat -e l3d_cache_refill -C ' + configs['ADAS_cores'] +' &> /home/root/perf_ADAS_output.txt\"')
+        else:
+            print('Wrong time is given to perf_thread_main(): ', type)
+            exit()
+    return
+
+def parse_ps_output(ps_output):
+    ps_info_list = []
+    for line in ps_output:        
+        ps_info = line.split(' ')
+        ps_info = [v for v in ps_info if v != '']
+        ps_info_list.append(ps_info)
+    return ps_info_list
+
+
+def kill_perf():    
+    if target_environment == 'exynos':
+        os.system('ssh root@' + configs[target_environment]['target_ip'] +  ' \"ps ax | grep perf > ps_output.txt\"')
+        os.system('scp root@' + configs[target_environment]['target_ip'] + ':/home/root/ps_output.txt .')
+        
+        ps_output = str(os.popen('cat ps_output.txt').read()).split('\n')
+        ps_info_list = parse_ps_output(ps_output)
+
+        for ps_info in ps_info_list:
+            if len(ps_info) == 0: continue
+            pid = ps_info[0]
+            os.system('ssh root@' + configs[target_environment]['target_ip'] +  ' \"kill -2 ' + pid + '\"')
+        
+        os.system('ssh root@' + configs[target_environment]['target_ip'] +  ' \"rm /home/root/ps_output.txt\"')        
+        os.system('rm ps_output.txt')
+
+def get_avg_perf_event_cnt_per_sec(event, type='all'):
+    if target_environment != 'exynos': return
+    path = 'none'
+    if type == 'all':
+        os.system('scp root@' + configs[target_environment]['target_ip'] + ':/home/root/perf_output.txt .')    
+        os.system('ssh root@' + configs[target_environment]['target_ip'] +  ' \"rm /home/root/perf_output.txt\"')        
+        path = 'perf_output.txt'
+    elif type == 'ADAS':
+        os.system('scp root@' + configs[target_environment]['target_ip'] + ':/home/root/perf_ADAS_output.txt .')    
+        os.system('ssh root@' + configs[target_environment]['target_ip'] +  ' \"rm /home/root/perf_ADAS_output.txt\"')
+        path = 'perf_ADAS_output.txt'
+    else:
+        print('Wrong type is given to get_perf_avg_event_cnt_per_sec(): ',type)
+        exit()    
+
+    event_output = []
+    duration_output = []
+    with open(path) as f:
+        lines = f.readlines()
+        for line in lines:            
+            if event in line:
+                event_output = line.split(' ')
+            if 'seconds time elapsed' in line:
+                duration_output = line.split(' ')
+
+    event_cnt = -1        
+    for v in event_output: 
+        if v != '':            
+            event_cnt = float(v.replace(',',''))
+            break
+    duration = -1.0
+    for v in duration_output: 
+        if v != '':
+            duration = float(v)
+            break
+
+    avg_event_cnt = event_cnt / duration
+
+    return avg_event_cnt
+
+def calculate_avg_memory_bandwidth_usage(l3d_cache_refill_event_cnt_per_sec):
+    cache_line_size = 64 # Bytes
+    avg_memory_bandwidth_usage = l3d_cache_refill_event_cnt_per_sec * cache_line_size * 0.000000001
+    return avg_memory_bandwidth_usage
+
 def experiment_manager(main_thread_pid):
     print('- Manager: Start manager')
     svl_scenario = svl.svl_scenario(configs['svl_cfg_path'])
@@ -105,8 +200,11 @@ def experiment_manager(main_thread_pid):
 
     for i in range(configs['max_iteration']):
         experiment_info = {}
-        is_collapsed = False
+        is_collapsed = False        
         is_experiment_running.set()
+
+        perf_thread_for_ADAS_profiling = threading.Thread(target=perf_thread_main, args=('ADAS',))
+        perf_thread_for_profiling = threading.Thread(target=perf_thread_main, args=('all',))
 
         # Initialize SVL scenario
         print('- Manager: Init svl scenario')
@@ -116,18 +214,32 @@ def experiment_manager(main_thread_pid):
         
         # Start Experiment
         print('- Mnager: Start Experiment')
-        start_writing_position_info()
-        is_collapsed, collapsed_position = svl_scenario.run(timeout=configs['duration'], label='Iteration: ' + str(i+1)+'/'+str(configs['max_iteration']))
+        start_writing_position_info()                
+        perf_thread_for_ADAS_profiling.start()
+        perf_thread_for_profiling.start()
+        is_collapsed, collapsed_position = svl_scenario.run(timeout=configs['duration'], label='Iteration: ' + str(i+1)+'/'+str(configs['max_iteration']))        
+        kill_perf()
         stop_writing_position_info()
-        experiment_info['is_collaped'] = is_collapsed
-        experiment_info['collapsed_position'] = collapsed_position
 
         if i+1 == int(configs['max_iteration']): is_experiment_running.clear()
 
-        # Terminate
+        # Terminate        
         kill_autorunner()
+        perf_thread_for_ADAS_profiling.join()
+        perf_thread_for_profiling.join()
         is_autorunner_started.clear()
         is_scenario_started.clear()
+        
+        # Get experiment_info
+        experiment_info['is_collaped'] = is_collapsed
+        experiment_info['collapsed_position'] = collapsed_position
+        
+        l3d_cache_refill_event_cnt_of_all_cores = get_avg_perf_event_cnt_per_sec('l3d_cache_refill', type='all')
+        l3d_cache_refill_event_cnt_of_ADAS_cores = get_avg_perf_event_cnt_per_sec('l3d_cache_refill', type='ADAS')
+        experiment_info['l3d_cache_refill_event_cnt_of_all_cores(per sec)'] = l3d_cache_refill_event_cnt_of_all_cores
+        experiment_info['l3d_cache_refill_event_cnt_of_ADAS_cores(per sec)'] = l3d_cache_refill_event_cnt_of_ADAS_cores
+        experiment_info['avg_total_memory_bandwidth_usage(GB/s)'] = calculate_avg_memory_bandwidth_usage(l3d_cache_refill_event_cnt_of_all_cores)
+
         print('- Manager: Save result')
         save_result(i, experiment_info)       
         if not is_experiment_running.is_set():
@@ -168,8 +280,14 @@ if __name__ == '__main__':
     with open('yaml/svl_auto_experiment_configs.yaml') as f:
         configs = yaml.load(f, Loader=yaml.FullLoader)
 
+    # Setup target environment
+    target_environment = configs['target_environment']
+    if target_environment not in ['desktop', 'exynos']:
+        print('[Error] Invalid target environment')
+        exit()
+
+    # Create result dir
     does_dir_exist = os.path.exists('results/'+configs['experiment_title'])
-    # If dir exist
     if configs['experiment_title'] == 'test':
         if does_dir_exist:
             os.system('rm -r results/'+configs['experiment_title'])
@@ -178,11 +296,26 @@ if __name__ == '__main__':
             print('[Error] Experiment result exists already')
             exit()
     os.mkdir('results/'+configs['experiment_title'])
+    os.mkdir('results/'+configs['experiment_title']+'/configs')
+    
+    # Backup autoware params
+    if target_environment == 'desktop':
+        print('##')
+        os.system('cp ~/rubis_ws/src/rubis_autorunner/cfg/cubetown_autorunner/cubetown_autorunner_params.yaml ' + 'results/'+configs['experiment_title']+'/configs')
+    elif target_environment == 'exynos':
+        print('!!')
+        os.system('scp -r root@' + configs[target_environment]['target_ip'] +':/var/lib/lxc/linux1/rootfs/opt/ros/melodic/share/rubis_autorunner/cfg/cubetown_autorunner/cubetown_autorunner_params.yaml ' + 'results/'+configs['experiment_title']+'/configs')        
 
-    target_environment = configs['target_environment']
-    if target_environment not in ['desktop', 'exynos']:
-        print('[Error] Invalid target environment')
-        exit()
+    # Backup svl scenario
+    os.system('cp yaml/svl_scenario.yaml ' + 'results/'+configs['experiment_title']+'/configs')
+
+    # Backup image name
+    with open('results/'+configs['experiment_title']+'/configs/image.txt', 'w') as f:
+        f.write(configs['adas_image_name'])      
+
+    # Backup duration time
+    with open('results/'+configs['experiment_title']+'/configs/duration.txt', 'w') as f:
+        f.write(str(configs['duration']))  
 
     manager_thread = threading.Thread(target=experiment_manager, args=(main_thread_pid, ))    
     manager_thread.start()
@@ -191,3 +324,5 @@ if __name__ == '__main__':
     rospy.Subscriber('imu_raw', Imu, imu_cb)
     rospy.Subscriber('twist_cmd', TwistStamped, twist_cmd_cb)
     rospy.spin()
+
+
