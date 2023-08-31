@@ -1,9 +1,7 @@
 import math
 from autoware_msgs.msg import LaneArray, NDTStat, VehicleCmd
 from geometry_msgs.msg import PoseStamped
-import geometry_msgs
 from rubis_msgs.msg import TwistStamped
-from rubis_msgs.msg import PoseTwistStamped
 from visualization_msgs.msg import MarkerArray
 import rospy
 import os
@@ -90,19 +88,22 @@ def write_position_info():
     rospy.wait_for_message('/vehicle_cmd', VehicleCmd, timeout=None)
     with open(center_offset_file, "w") as f:
         center_offset_wr = csv.writer(f)
-        center_offset_wr.writerow(['ts', 'state', 'center_offset', 'ndt_response_time(ms)', 'instance', 'gnss_pose_x', 'gnss_pose_y', 'ndt_score', 'current_pose_x', 'current_pose_y', 'current_velocity'])
+        center_offset_wr.writerow(['ts', 'state', 'center_offset', 'ndt_response_time(ms)', 'instance', 'gnss_pose_x', 'gnss_pose_y', 'ndt_score', 'current_pose_x', 'current_pose_y'])
         prev_dis = 0
         while not rospy.is_shutdown():
-            rubis_current_pose_twist_msg = rospy.wait_for_message('/rubis_current_pose_twist', PoseTwistStamped, timeout=None)            
+            gnss_pose_msg = rospy.wait_for_message('/gnss_pose', PoseStamped, timeout=None)
+            current_pose_msg = rospy.wait_for_message('/current_pose', PoseStamped, timeout=None)
+            ndt_stat_msg = rospy.wait_for_message('/ndt_stat', NDTStat, timeout=None)
+            twist_msg = rospy.wait_for_message('/rubis_twist_cmd', TwistStamped, timeout=None)
 
-            instance=rubis_current_pose_twist_msg.instance
+            instance=twist_msg.instance
 
-            gnss_pose_x = round(rubis_current_pose_twist_msg.pose.pose.position.x, 3)
-            gnss_pose_y = round(rubis_current_pose_twist_msg.pose.pose.position.y, 3)
-            gnss_ori_x = rubis_current_pose_twist_msg.pose.pose.orientation.x
-            gnss_ori_y = rubis_current_pose_twist_msg.pose.pose.orientation.y
-            gnss_ori_z = rubis_current_pose_twist_msg.pose.pose.orientation.z
-            gnss_ori_w = rubis_current_pose_twist_msg.pose.pose.orientation.w                                                         
+            gnss_pose_x = round(gnss_pose_msg.pose.position.x, 3)
+            gnss_pose_y = round(gnss_pose_msg.pose.position.y, 3)
+            gnss_ori_x = gnss_pose_msg.pose.orientation.x
+            gnss_ori_y = gnss_pose_msg.pose.orientation.y
+            gnss_ori_z = gnss_pose_msg.pose.orientation.z
+            gnss_ori_w = gnss_pose_msg.pose.orientation.w                                                         
             gnss_r, gnss_p, gnss_y = euler_from_quaternion(gnss_ori_x, gnss_ori_y, gnss_ori_z, gnss_ori_w)
 
             yaw_deg = (gnss_y * 180 / math.pi + 1800) % 360
@@ -115,16 +116,14 @@ def write_position_info():
 
             state_text = 'None'
 
-            current_pose_x = round(rubis_current_pose_twist_msg.pose.pose.position.x, 3)
-            current_pose_y = round(rubis_current_pose_twist_msg.pose.pose.position.y, 3)
-            ndt_ori_x = rubis_current_pose_twist_msg.pose.pose.orientation.x
-            ndt_ori_y = rubis_current_pose_twist_msg.pose.pose.orientation.y
-            ndt_ori_z = rubis_current_pose_twist_msg.pose.pose.orientation.z
-            ndt_ori_w = rubis_current_pose_twist_msg.pose.pose.orientation.w                 
-            current_velocity = rubis_current_pose_twist_msg.twist.twist.linear.x
-            if current_velocity > 20: continue
+            current_pose_x = round(current_pose_msg.pose.position.x, 3)
+            current_pose_y = round(current_pose_msg.pose.position.y, 3)
+            ndt_ori_x = current_pose_msg.pose.orientation.x
+            ndt_ori_y = current_pose_msg.pose.orientation.y
+            ndt_ori_z = current_pose_msg.pose.orientation.z
+            ndt_ori_w = current_pose_msg.pose.orientation.w     
 
-            center_offset_wr.writerow([time.clock_gettime(time.CLOCK_MONOTONIC), state_text, str(min_dis), 'None', instance, gnss_pose_x, gnss_pose_y, 0.0, current_pose_x, current_pose_y, current_velocity])
+            center_offset_wr.writerow([time.clock_gettime(time.CLOCK_MONOTONIC), state_text, str(min_dis), str(ndt_stat_msg.exe_time), instance, gnss_pose_x, gnss_pose_y, str(ndt_stat_msg.score), current_pose_x, current_pose_y])
     f.close()
 
 if __name__ == '__main__':

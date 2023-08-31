@@ -1,3 +1,4 @@
+rosnode kill /svl_sensing
 rosnode kill /twist_gate
 rosnode kill /lidar_republisher
 rosnode kill /base_link_to_velodyne

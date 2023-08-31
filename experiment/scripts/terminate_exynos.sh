@@ -1,3 +1,4 @@
+rosnode kill /svl_sensing
 rosnode kill /twist_gate
 rosnode kill /lidar_republisher
 rosnode kill /lidar_republisher_redundant1

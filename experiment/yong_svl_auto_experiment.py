@@ -7,8 +7,7 @@ import yaml
 from sensor_msgs.msg import Imu
 from geometry_msgs.msg import TwistStamped
 from autoware_msgs.msg import NDTStat
-from autoware_msgs.msg import VehicleCmd
-import scripts.slack_library as slack_library
+import scripts.yong_slack_library as slack_library
 import scripts.svl_scenario as svl
 import signal
 
@@ -98,8 +97,8 @@ def imu_cb(msg):
         is_scenario_started.clear()
     return
 
-def vehicle_cmd_cb(msg):
-    if is_experiment_running.is_set() and msg.twist_cmd.twist.linear.x > 0.0:
+def twist_cmd_cb(msg):
+    if is_experiment_running.is_set():
         is_autorunner_started.set()
     else:
         is_autorunner_started.clear()
@@ -190,7 +189,6 @@ def calculate_avg_memory_bandwidth_usage(l3d_cache_refill_event_cnt_per_sec):
 def experiment_manager(main_thread_pid):
     print('- Manager: Start manager')
     svl_scenario = svl.svl_scenario(configs['svl_cfg_path'])
-    
 
     # Threads
     autorunner_thread = threading.Thread(target=autorunner)
@@ -216,10 +214,14 @@ def experiment_manager(main_thread_pid):
         
         # Start Experiment
         print('- Mnager: Start Experiment')
+        if configs['memguard']:
+            os.system('ssh root@' + configs[target_environment]['target_ip'] + f' \"echo mb {configs["bw_thr"]} 640000 > /sys/kernel/debug/memguard/manager_limit\"')
         start_writing_position_info()                
         perf_thread_for_ADAS_profiling.start()
         perf_thread_for_profiling.start()
         is_collapsed, collapsed_position = svl_scenario.run(timeout=configs['duration'], label='Iteration: ' + str(i+1)+'/'+str(configs['max_iteration']))        
+        if configs['memguard']:
+            os.system('ssh root@' + configs[target_environment]['target_ip'] + f' \"echo mb 640000 640000 > /sys/kernel/debug/memguard/manager_limit\"')
         kill_perf()
         stop_writing_position_info()
 
@@ -244,11 +246,18 @@ def experiment_manager(main_thread_pid):
 
         print('- Manager: Save result')
         save_result(i, experiment_info)       
+
+        if is_collapsed:
+            message = 'hayeonp Collapse occure: '+str(i)
+            slack_library.send_slack_message(message, slack_webhook)
+        
         if not is_experiment_running.is_set():
             message = 'Experiment is finished: '+configs['experiment_title']
-            payload = {"text": message}
+            # payload = {"text": message}
+            payload = message
             slack_library.send_slack_message(payload, slack_webhook)
             break
+        
         print('- Manager: Unlock barrier')
         barrier.wait()
         barrier.reset()
@@ -277,7 +286,7 @@ def stop_writing_position_info():
 if __name__ == '__main__':
     main_thread_pid = os.getpid()
 
-    slack_webhook = slack_library.get_slack_webhook()    
+    slack_webhook = slack_library.get_slack_webhook()
 
     with open('yaml/svl_auto_experiment_configs.yaml') as f:
         configs = yaml.load(f, Loader=yaml.FullLoader)
@@ -287,10 +296,6 @@ if __name__ == '__main__':
     if target_environment not in ['desktop', 'exynos']:
         print('[Error] Invalid target environment')
         exit()
-
-    # Setup ssh key of host to the exynos board
-    if target_environment == 'exynos':
-        os.system('bash scripts/setup_ssh_key_to_board.bash')
 
     # Create result dir
     does_dir_exist = os.path.exists('results/'+configs['experiment_title'])
@@ -306,8 +311,10 @@ if __name__ == '__main__':
     
     # Backup autoware params
     if target_environment == 'desktop':
+        print('##')
         os.system('cp ~/rubis_ws/src/rubis_autorunner/cfg/cubetown_autorunner/cubetown_autorunner_params.yaml ' + 'results/'+configs['experiment_title']+'/configs')
     elif target_environment == 'exynos':
+        print('!!')
         os.system('scp -r root@' + configs[target_environment]['target_ip'] +':/var/lib/lxc/linux1/rootfs/opt/ros/melodic/share/rubis_autorunner/cfg/cubetown_autorunner/cubetown_autorunner_params.yaml ' + 'results/'+configs['experiment_title']+'/configs')        
 
     # Backup svl scenario
@@ -326,7 +333,7 @@ if __name__ == '__main__':
 
     rospy.init_node('svl_auto_experiment', anonymous=True)
     rospy.Subscriber('imu_raw', Imu, imu_cb)
-    rospy.Subscriber('vehicle_cmd', VehicleCmd, vehicle_cmd_cb)
+    rospy.Subscriber('twist_cmd', TwistStamped, twist_cmd_cb)
     rospy.spin()
 
 

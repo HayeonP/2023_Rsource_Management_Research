@@ -6,6 +6,7 @@ import os
 import signal
 import subprocess
 import matplotlib.pyplot as plt
+import numpy as np
 
 def save_dict(data, path):
     with open(path, 'w') as f:
@@ -88,8 +89,6 @@ def get_E2E_response_time(first_node_path, last_node_path, E2E_start_instance, E
         print('[ERROR] Invalidate type:', type)
         exit()
 
-    E2E_start_instance = 368 # debug
-
     instance_info = {}
     start_instance = -1
     E2E_response_time = {}
@@ -117,6 +116,7 @@ def get_E2E_response_time(first_node_path, last_node_path, E2E_start_instance, E
                 continue       
 
             start_time = float(row[column_idx['start']])
+            # start_time = float(row[column_idx['topic_pub_time']])
             instance_id = int(row[column_idx['instance']])
             if instance_id < start_instance: continue
             if instance_id not in instance_info: continue
@@ -137,8 +137,7 @@ def get_E2E_response_time(first_node_path, last_node_path, E2E_start_instance, E
             continue                       
         if key >= E2E_end_instance and E2E_end_instance > 0.0: 
             E2E_end_instance = key
-            break
-    E2E_end_instance = 800 #debug
+            break        
     remove_target = []
     for k in E2E_response_time:
         if k < E2E_start_instance or k > E2E_end_instance or k not in keys: remove_target.append(k)
@@ -153,6 +152,45 @@ def get_E2E_response_time(first_node_path, last_node_path, E2E_start_instance, E
 
     return E2E_response_time, max_E2E_response_time, avg_E2E_response_time
 
+def get_missing_obj(node_path, E2E_start_instance, E2E_end_instance):
+    hole_cnt = 0
+    ins_num = 0
+    is_running = False
+
+    with open(node_path) as f_node:
+        reader = csv.reader(f_node)        
+        for i, row in enumerate(reader):
+            if i == 0: 
+                column_idx = get_column_idx_from_csv(row)
+                continue
+
+            if is_running:
+                ins_num += 1
+                if row[column_idx['instance']] != ins_num:
+                    hole_cnt += 1
+                    ins_num = row[column_idx['instance']]
+
+                if row[column_idx['instance']] >= E2E_end_instance:
+                    break
+
+            if not is_running and row[column_idx['instance']] == E2E_start_instance:
+                ins_num = row[column_idx['instance']]
+                is_running = True
+
+    return hole_cnt
+
+def get_missing_obj2(instance_list):
+    hole_cnt = 0
+    ins_num = instance_list[0]
+
+    for i in instance_list:
+        if i != ins_num:
+            hole_cnt += 1
+            ins_num = i
+        ins_num += 1
+
+    return hole_cnt
+
 '''
 def start_rosbag_record(topic_names):   
     topic_str = '' 
@@ -166,19 +204,43 @@ def start_rosbag_record(topic_names):
 def get_center_offset(center_offset_path):
     column_idx = {}
     center_offset = {}
+    origin_center_offset = {}
     with open(center_offset_path) as f:
         reader = csv.reader(f)
         for i, line in enumerate(reader):
             if i == 0: 
                 column_idx = get_column_idx_from_csv(line)
                 continue
+            # if float(line[column_idx['gnss_pose_x']]) < 20:
+            #     continue
+            # if float(line[column_idx['gnss_pose_y']]) < 20:
+            #     continue 
             instance = float(line[column_idx['instance']])
             center_offset[instance] = abs(float(line[column_idx['center_offset']]))
-
+            origin_center_offset[instance] = float(line[column_idx['center_offset']])
+    
     max_center_offset = get_dict_max(center_offset)
     avg_center_offset = get_dict_avg(center_offset)
 
+    
+
     return center_offset, max_center_offset, avg_center_offset
+
+def get_velocity_info(velocity_info_path):
+    column_idx = {}
+    velocity_info = {}
+    with open(velocity_info_path) as f:
+        reader = csv.reader(f)
+        for i, line in enumerate(reader):
+            if i == 0: 
+                column_idx = get_column_idx_from_csv(line)
+                continue
+            instance = float(line[column_idx['instance']])
+            velocity_info[instance] = abs(float(line[column_idx['current_velocity']]))
+
+    avg_velocity = get_dict_avg(velocity_info)
+
+    return velocity_info, avg_velocity
 
 def get_waypoints(center_offset_path, simulator):
     waypoints = []
@@ -297,7 +359,7 @@ def convert_boolean_list_to_int_list(list_of_booleans):
 def get_idices_of_one_from_list(input, reverse=False):
     output = []
     for i, v in enumerate(input):
-        if reverse: v = 2**v%2
+        if reverse: v = not v # 2**v%2
         if v: output.append(i)
     return output
 
