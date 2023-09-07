@@ -1,7 +1,7 @@
 
  Performance counter stats for 'CPU(s) 4-6':
 
-         155246861      l3d_cache_refill                                            
+        1467336481      l3d_cache_refill                                              (58.57%)
 
-      20.698600109 seconds time elapsed
+     202.699701336 seconds time elapsed
 

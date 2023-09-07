@@ -72,7 +72,7 @@ def save_result(iter, experiment_info):
     if configs['target_environment'] == 'desktop':
         os.system('cp -r '+configs[target_environment]['response_time_path']+ ' ' + output_path)
     elif configs['target_environment'] == 'exynos':
-        os.system('scp -r root@192.168.0.8:'+configs[target_environment]['response_time_path']+ ' ' + output_path)
+        os.system('scp -r root@192.168.0.11:'+configs[target_environment]['response_time_path']+ ' ' + output_path)
     else:
         print('[Error] Invalid target environment:',configs['target_envirnment'])
 

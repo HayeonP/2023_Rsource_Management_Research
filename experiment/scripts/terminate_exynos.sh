@@ -35,8 +35,10 @@ rosnode kill /world_to_map
 rosnode kill /yolo3_rects
 rosnode kill /vision_darknet_detect
 rosnode kill /ndt_matching
+rosnode kill /image_redundant1
+rosnode kill /image_redundant2
 
 sleep 1
 rosnode kill /driving_progress_logger
 
-ssh root@192.168.0.8 "python3 /home/root/scripts/terminate_cubetown_autorunner.py"
+ssh root@192.168.0.11 "python3 /home/root/scripts/terminate_cubetown_autorunner.py"

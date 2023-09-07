@@ -3,11 +3,11 @@ import os
 def setup_palloc(page_num):
         # os.system(f'cp palloc_yaml/svl_auto_experiment_configs_{i}.yaml yaml/svl_auto_experiment_configs.yaml')
         # print(i)
-        os.system(f'ssh root@192.168.0.8 "echo 0x000001f000 > /sys/kernel/debug/palloc/palloc_mask"')
-        os.system(f'ssh root@192.168.0.8 "echo 1 > /sys/kernel/debug/palloc/debug_level"')
-        os.system(f'ssh root@192.168.0.8 "echo 32 > /sys/kernel/debug/palloc/alloc_balance"')
-        os.system(f'ssh root@192.168.0.8 "echo 1 > /sys/kernel/debug/palloc/use_palloc"')
-        os.system(f'ssh root@192.168.0.8 "echo 0-{page_num-1} > /sys/fs/cgroup/palloc/lxc.payload.linux1/palloc.bins"')
+        os.system(f'ssh root@192.168.0.11 "echo 0x000001f000 > /sys/kernel/debug/palloc/palloc_mask"')
+        os.system(f'ssh root@192.168.0.11 "echo 1 > /sys/kernel/debug/palloc/debug_level"')
+        os.system(f'ssh root@192.168.0.11 "echo 32 > /sys/kernel/debug/palloc/alloc_balance"')
+        os.system(f'ssh root@192.168.0.11 "echo 1 > /sys/kernel/debug/palloc/use_palloc"')
+        os.system(f'ssh root@192.168.0.11 "echo 0-{page_num-1} > /sys/fs/cgroup/palloc/lxc.payload.linux1/palloc.bins"')
 
 def change_experiment_title(file_path, new_str):
     # 파일 읽어들이기

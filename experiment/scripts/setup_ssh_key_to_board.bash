@@ -1,6 +1,6 @@
 #!/bin/bash
 
-EXYNOS_IP=192.168.0.8
+EXYNOS_IP=192.168.0.11
 
 # If authorized_key exists, do nothing
 if [ -e "/home/$USER/.ssh/id_rsa.pub" ]

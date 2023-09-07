@@ -45,7 +45,7 @@ def change_velocity(new_vel, file_path='yaml/cubetown_autorunner_params.yaml'):
         fw.write(line)
     fw.close()
 
-    os.system('scp -r yaml/cubetown_autorunner_params.yaml root@192.168.0.8:/var/lib/lxc/linux1/rootfs/home/root/rubis_ws/src/rubis_autorunner/cfg/cubetown_autorunner')
+    os.system('scp -r yaml/cubetown_autorunner_params.yaml root@192.168.0.11:/var/lib/lxc/linux1/rootfs/home/root/rubis_ws/src/rubis_autorunner/cfg/cubetown_autorunner')
 
 def change_analyzer(new_str):
 
