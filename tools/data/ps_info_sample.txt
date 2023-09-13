@@ -1,0 +1,559 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root           1  0.2  0.0 157432  7140 ?        Ss   08:46   0:01 /sbin/init
+root           2  0.0  0.0      0     0 ?        S    08:46   0:00 [kthreadd]
+root           3  0.0  0.0      0     0 ?        I<   08:46   0:00 [rcu_gp]
+root           4  0.0  0.0      0     0 ?        I<   08:46   0:00 [rcu_par_gp]
+root           5  0.0  0.0      0     0 ?        I    08:46   0:00 [kworker/0:0-g3d_utilization]
+root           6  0.0  0.0      0     0 ?        I<   08:46   0:00 [kworker/0:0H-kblockd]
+root           8  0.0  0.0      0     0 ?        I<   08:46   0:00 [mm_percpu_wq]
+root           9  0.0  0.0      0     0 ?        S    08:46   0:00 [ksoftirqd/0]
+root          10  0.0  0.0      0     0 ?        I    08:46   0:00 [rcu_preempt]
+root          11  0.0  0.0      0     0 ?        S    08:46   0:00 [migration/0]
+root          13  0.0  0.0      0     0 ?        S    08:46   0:00 [cpuhp/0]
+root          14  0.0  0.0      0     0 ?        S    08:46   0:00 [cpuhp/1]
+root          15  0.0  0.0      0     0 ?        S    08:46   0:00 [migration/1]
+root          16  0.0  0.0      0     0 ?        S    08:46   0:00 [ksoftirqd/1]
+root          18  0.0  0.0      0     0 ?        I<   08:46   0:00 [kworker/1:0H-kblockd]
+root          19  0.0  0.0      0     0 ?        S    08:46   0:00 [cpuhp/2]
+root          20  0.0  0.0      0     0 ?        S    08:46   0:00 [migration/2]
+root          21  0.0  0.0      0     0 ?        S    08:46   0:00 [ksoftirqd/2]
+root          23  0.0  0.0      0     0 ?        I<   08:46   0:00 [kworker/2:0H-kblockd]
+root          24  0.0  0.0      0     0 ?        S    08:46   0:00 [cpuhp/3]
+root          25  0.0  0.0      0     0 ?        S    08:46   0:00 [migration/3]
+root          26  0.0  0.0      0     0 ?        S    08:46   0:00 [ksoftirqd/3]
+root          27  0.0  0.0      0     0 ?        I    08:46   0:00 [kworker/3:0-events]
+root          28  0.0  0.0      0     0 ?        I<   08:46   0:00 [kworker/3:0H-kblockd]
+root          29  0.0  0.0      0     0 ?        S    08:46   0:00 [cpuhp/4]
+root          30  0.0  0.0      0     0 ?        S    08:46   0:00 [migration/4]
+root          31  0.0  0.0      0     0 ?        S    08:46   0:00 [ksoftirqd/4]
+root          33  0.0  0.0      0     0 ?        I<   08:46   0:00 [kworker/4:0H-kblockd]
+root          34  0.0  0.0      0     0 ?        S    08:46   0:00 [cpuhp/5]
+root          35  0.0  0.0      0     0 ?        S    08:46   0:00 [migration/5]
+root          36  0.0  0.0      0     0 ?        S    08:46   0:00 [ksoftirqd/5]
+root          37  0.0  0.0      0     0 ?        I    08:46   0:00 [kworker/5:0-events]
+root          38  0.0  0.0      0     0 ?        I<   08:46   0:00 [kworker/5:0H-kblockd]
+root          39  0.0  0.0      0     0 ?        S    08:46   0:00 [cpuhp/6]
+root          40  0.0  0.0      0     0 ?        S    08:46   0:00 [migration/6]
+root          41  0.0  0.0      0     0 ?        S    08:46   0:00 [ksoftirqd/6]
+root          43  0.0  0.0      0     0 ?        I<   08:46   0:00 [kworker/6:0H]
+root          44  0.0  0.0      0     0 ?        S    08:46   0:00 [cpuhp/7]
+root          45  0.0  0.0      0     0 ?        S    08:46   0:00 [migration/7]
+root          46  0.0  0.0      0     0 ?        S    08:46   0:00 [ksoftirqd/7]
+root          48  0.0  0.0      0     0 ?        I<   08:46   0:00 [kworker/7:0H-kblockd]
+root          49  0.0  0.0      0     0 ?        S    08:46   0:00 [kdevtmpfs]
+root          50  0.0  0.0      0     0 ?        I<   08:46   0:00 [netns]
+root          51  0.0  0.0      0     0 ?        S    08:46   0:00 [rcu_tasks_kthre]
+root          52  0.0  0.0      0     0 ?        S    08:46   0:00 [kauditd]
+root          53  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/119-1050000]
+root          54  0.0  0.0      0     0 ?        I<   08:46   0:00 [acpm_update_log]
+root          55  0.0  0.0      0     0 ?        S    08:46   0:00 [khungtaskd]
+root          56  0.0  0.0      0     0 ?        S    08:46   0:00 [oom_reaper]
+root          57  0.0  0.0      0     0 ?        I<   08:46   0:00 [writeback]
+root          58  0.0  0.0      0     0 ?        S    08:46   0:00 [kcompactd0]
+root          59  0.0  0.0      0     0 ?        SN   08:46   0:00 [ksmd]
+root          66  0.0  0.0      0     0 ?        I<   08:46   0:00 [cryptd]
+root          73  0.0  0.0      0     0 ?        I<   08:46   0:00 [kintegrityd]
+root          74  0.0  0.0      0     0 ?        I<   08:46   0:00 [kblockd]
+root          75  0.0  0.0      0     0 ?        S    08:46   0:00 [spi1]
+root          76  0.0  0.0      0     0 ?        S    08:46   0:00 [spi9]
+root          77  0.0  0.0      0     0 ?        I    08:46   0:00 [kworker/1:1-mm_percpu_wq]
+root          78  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/229-s2vps01]
+root          79  0.0  0.0      0     0 ?        I    08:46   0:00 [kworker/2:1-events]
+root          80  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/243-s2vps01]
+root          81  0.0  0.0      0     0 ?        I<   08:46   0:00 [devfreq_wq]
+root          82  0.0  0.0      0     0 ?        S    08:46   0:00 [watchdogd]
+root          83  0.0  0.0      0     0 ?        I<   08:46   0:00 [rpciod]
+root          84  0.0  0.0      0     0 ?        I<   08:46   0:00 [kworker/u17:0-kbase_pm_poweroff_wait]
+root          85  0.0  0.0      0     0 ?        I<   08:46   0:00 [xprtiod]
+root          86  0.0  0.0      0     0 ?        S    08:46   0:00 [kswapd0]
+root          87  0.0  0.0      0     0 ?        I<   08:46   0:00 [nfsiod]
+root          88  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/244-aerdrv]
+root          89  0.0  0.0      0     0 ?        I<   08:46   0:00 [pcie_wq]
+root          90  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/245-aerdrv]
+root          91  0.0  0.0      0     0 ?        I<   08:46   0:00 [pcie_wq]
+root          92  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/246-aerdrv]
+root          93  0.0  0.0      0     0 ?        I<   08:46   0:00 [pcie_wq]
+root          94  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/46-104c0000]
+root          95  0.0  0.0      0     0 ?        I    08:46   0:00 [kworker/4:1-mm_percpu_wq]
+root          96  0.0  0.0      0     0 ?        I    08:46   0:00 [kworker/6:1-mm_percpu_wq]
+root          97  0.0  0.0      0     0 ?        I    08:46   0:00 [kworker/7:1-events]
+root          98  0.0  0.0      0     0 ?        S    08:46   0:00 [hwrng]
+root          99  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/6-18c80000.]
+root         100  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/6-18c80000.]
+root         101  0.0  0.0      0     0 ?        I    08:46   0:00 [kworker/u16:1-flush-8:0]
+root         102  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/6-18c90000.]
+root         103  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/6-18c90000.]
+root         104  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/6-18ca0000.]
+root         105  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/6-18ca0000.]
+root         106  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/6-18cb0000.]
+root         107  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/6-18cb0000.]
+root         108  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/6-1aa80000.]
+root         109  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/6-1aa80000.]
+root         110  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/6-1aa90000.]
+root         111  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/6-1aa90000.]
+root         112  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/6-1aaa0000.]
+root         113  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/6-1aaa0000.]
+root         114  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/6-1aab0000.]
+root         115  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/6-1aab0000.]
+root         116  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/6-1ac80000.]
+root         117  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/6-1ac80000.]
+root         118  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/6-1ac90000.]
+root         119  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/6-1ac90000.]
+root         120  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/6-1aca0000.]
+root         121  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/6-1aca0000.]
+root         122  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/6-1acb0000.]
+root         123  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/6-1acb0000.]
+root         124  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/6-19e00000.]
+root         125  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/6-19e00000.]
+root         126  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/6-19a60000.]
+root         127  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/6-19a60000.]
+root         128  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/6-19a90000.]
+root         129  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/6-19a90000.]
+root         130  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/6-19b90000.]
+root         131  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/6-19b90000.]
+root         132  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/6-19880000.]
+root         133  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/6-19880000.]
+root         134  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/6-198b0000.]
+root         135  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/6-198b0000.]
+root         136  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/6-18050000.]
+root         137  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/6-18050000.]
+root         138  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/6-18250000.]
+root         139  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/6-18250000.]
+root         140  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/6-1a9d0000.]
+root         141  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/6-1a9d0000.]
+root         142  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/6-1a8d0000.]
+root         143  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/6-1a8d0000.]
+root         144  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/6-1a080000.]
+root         145  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/6-1a080000.]
+root         146  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/6-1a280000.]
+root         147  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/6-1a280000.]
+root         148  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/7-1d800000.]
+root         149  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/7-1d800000.]
+root         150  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/7-1d830000.]
+root         151  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/7-1d830000.]
+root         152  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/7-1d890000.]
+root         153  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/7-1d890000.]
+root         154  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/7-1d900000.]
+root         155  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/7-1d900000.]
+root         156  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/7-1d860000.]
+root         157  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/7-1d860000.]
+root         158  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/7-1d8c0000.]
+root         159  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/7-1d8c0000.]
+root         160  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/7-1d930000.]
+root         161  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/7-1d930000.]
+root         162  0.0  0.0      0     0 ?        I    08:46   0:00 [kworker/u16:2-flush-8:0]
+root         164  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/72-DPUM_DEC]
+root         165  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/77-DPUM_DEC]
+root         166  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/88-DPUS0_DE]
+root         167  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/93-DPUS0_DE]
+root         168  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/103-DPUS1_D]
+root         169  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/108-DPUS1_D]
+root         170  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/82-18e40000]
+root         171  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/83-18e50000]
+root         172  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/249-18a8000]
+root         173  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/98-18a80000]
+root         174  0.0  0.0      0     0 ?        I<   08:46   0:00 [18a80000.dp_tx]
+root         175  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/250-18a9000]
+root         176  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/113-18a9000]
+root         177  0.0  0.0      0     0 ?        I<   08:46   0:00 [18a90000.dp_tx]
+root         178  0.0  0.0      0     0 ?        I<   08:46   0:00 [g3d_utilization]
+root         179  0.0  0.0      0     0 ?        I<   08:46   0:00 [kworker/u17:1]
+root         180  0.0  0.0      0     0 ?        I<   08:46   0:00 [kbase_job_fault]
+root         181  0.0  0.0      0     0 ?        I<   08:46   0:00 [g3d_utilization]
+root         182  0.0  0.0      0     0 ?        I<   08:46   0:00 [kbase_job_fault]
+root         183  0.0  0.0      0     0 ?        I<   08:46   0:00 [g3d_utilization]
+root         184  0.0  0.0      0     0 ?        I<   08:46   0:00 [kbase_job_fault]
+root         185  0.0  0.0      0     0 ?        I<   08:46   0:00 [g2dscheduler]
+root         186  0.0  0.0      0     0 ?        S    08:46   0:00 [scsi_eh_0]
+root         187  0.0  0.0      0     0 ?        I<   08:46   0:00 [scsi_tmf_0]
+root         188  0.0  0.0      0     0 ?        I<   08:46   0:00 [ufs_eh_wq_0]
+root         189  0.0  0.0      0     0 ?        I<   08:46   0:00 [srpmb_wq]
+root         190  0.0  0.0      0     0 ?        I<   08:46   0:00 [seqos_wq]
+root         192  0.0  0.0      0     0 ?        I<   08:46   0:00 [seqos_wq]
+root         193  0.0  0.0      0     0 ?        I<   08:46   0:00 [mfc/watchdog]
+root         194  0.0  0.0      0     0 ?        I<   08:46   0:00 [mfc/butler]
+root         196  0.0  0.0      0     0 ?        S    08:46   0:00 [ion_system_heap]
+root         197  0.0  0.0      0     0 ?        S    08:46   0:00 [vendor_system_h]
+root         198  0.0  0.0      0     0 ?        S    08:46   0:00 [tee_log]
+root         199  0.0  0.0      0     0 ?        D    08:46   0:00 [tee_irq_bh]
+root         200  0.0  0.0      0     0 ?        S    08:46   0:00 [tee_worker/0]
+root         201  0.0  0.0      0     0 ?        S    08:46   0:00 [tee_worker/1]
+root         202  0.0  0.0      0     0 ?        S    08:46   0:00 [tee_worker/2]
+root         203  0.0  0.0      0     0 ?        S    08:46   0:00 [tee_worker/3]
+root         204  0.0  0.0      0     0 ?        I<   08:46   0:00 [abox_ipc]
+root         205  0.0  0.0      0     0 ?        I<   08:46   0:00 [ipv6_addrconf]
+root         207  0.0  0.0      0     0 ?        I<   08:46   0:00 [kworker/7:1H-kblockd]
+root         208  0.0  0.0      0     0 ?        I<   08:46   0:00 [kworker/2:1H-kblockd]
+root         209  0.0  0.0      0     0 ?        I<   08:46   0:00 [kworker/5:1H-kblockd]
+root         210  0.0  0.0      0     0 ?        I<   08:46   0:00 [Print0_CR52]
+root         211  0.0  0.0      0     0 ?        I<   08:46   0:00 [Print1_CR52]
+root         213  0.0  0.0      0     0 ?        I<   08:46   0:00 [kworker/3:1H-kblockd]
+root         214  0.0  0.0      0     0 ?        I<   08:46   0:00 [kworker/0:1H-kblockd]
+root         215  0.0  0.0      0     0 ?        S    08:46   0:00 [jbd2/sda21-8]
+root         216  0.0  0.0      0     0 ?        I<   08:46   0:00 [ext4-rsv-conver]
+root         227  0.0  0.0      0     0 ?        I<   08:46   0:00 [kworker/1:1H-kblockd]
+root         228  0.0  0.0      0     0 ?        I<   08:46   0:00 [kworker/6:1H-kblockd]
+root         232  0.0  0.0 298356   980 ?        Ssl  08:46   0:00 /usr/sbin/rngd -f -r /dev/hwrng
+root         232  0.5  0.0 298356   980 ?        Ssl  08:46   0:03 /usr/sbin/rngd -f -r /dev/hwrng
+root         232  0.7  0.0 298356   980 ?        Ssl  08:46   0:05 /usr/sbin/rngd -f -r /dev/hwrng
+root         232  0.7  0.0 298356   980 ?        Ssl  08:46   0:05 /usr/sbin/rngd -f -r /dev/hwrng
+root         232  0.7  0.0 298356   980 ?        Ssl  08:46   0:05 /usr/sbin/rngd -f -r /dev/hwrng
+rpc          233  0.0  0.0   3692  2252 ?        Ss   08:46   0:00 /usr/sbin/rpcbind -w -f
+root         240  0.0  0.0  41928  5604 ?        Ss   08:46   0:00 /lib/systemd/systemd-journald
+root         241  0.0  0.0      0     0 ?        I<   08:46   0:00 [kworker/4:1H-kblockd]
+root         254  0.0  0.0      0     0 ?        I    08:46   0:00 [kworker/7:2-events]
+root         256  0.1  0.0  13504  3956 ?        Ss   08:46   0:00 /lib/systemd/systemd-udevd
+root         303  0.0  0.0      0     0 ?        I    08:46   0:00 [kworker/6:2-events]
+systemd+     352  0.0  0.0  81132  2080 ?        Ssl  08:46   0:00 /lib/systemd/systemd-timesyncd
+systemd+     352  0.0  0.0  81132  2080 ?        Ssl  08:46   0:00 /lib/systemd/systemd-timesyncd
+root         363  0.0  0.0      0     0 ?        I    08:46   0:00 [kworker/4:2-events]
+root         408  0.0  0.0   3196   684 ?        Ss   08:46   0:00 /sbin/klogd -n
+root         409  0.0  0.0   3196   704 ?        Ss   08:46   0:00 /sbin/syslogd -n
+root         410  0.0  0.0   2448   580 ?        Ss   08:46   0:00 /usr/sbin/crond -n
+message+     411  0.0  0.0   4468  2952 ?        Ss   08:46   0:00 /usr/bin/dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+root         412  0.0  0.0   5012  1416 tty1     Ss+  08:46   0:00 /sbin/agetty -o -p -- \u --noclear tty1 linux
+root         415  0.0  0.0   8520  5080 ?        Ss   08:46   0:00 /usr/sbin/ofonod -n
+root         417  0.0  0.0   3420  2456 ?        Ss   08:46   0:00 /bin/sh /usr/bin/pstore-journal.sh
+root         421  0.0  0.0   4564  3844 ttySAC0  Ss+  08:46   0:00 -sh
+root         422  0.0  0.0  39544  4600 ?        S    08:46   0:00 journalctl -b -f
+root         425  0.0  0.0   7068  3920 ?        Ss   08:46   0:00 /lib/systemd/systemd-logind
+systemd+     431  0.0  0.0   7660  3244 ?        Ss   08:46   0:00 /lib/systemd/systemd-networkd
+root         433  0.0  0.1 285656 30176 tty2     Ssl+ 08:46   0:00 /usr/bin/weston --config=/usr/lib/weston.ini --idle-time=0 --log=/var/log/weston.log
+root         433  0.0  0.1 285656 30176 tty2     Ssl+ 08:46   0:00 /usr/bin/weston --config=/usr/lib/weston.ini --idle-time=0 --log=/var/log/weston.log
+root         433  0.0  0.1 285656 30176 tty2     Ssl+ 08:46   0:00 /usr/bin/weston --config=/usr/lib/weston.ini --idle-time=0 --log=/var/log/weston.log
+root         433  0.0  0.1 285656 30176 tty2     Ssl+ 08:46   0:00 /usr/bin/weston --config=/usr/lib/weston.ini --idle-time=0 --log=/var/log/weston.log
+root         433  0.0  0.1 285656 30176 tty2     Ssl+ 08:46   0:00 /usr/bin/weston --config=/usr/lib/weston.ini --idle-time=0 --log=/var/log/weston.log
+root         433  0.0  0.1 285656 30176 tty2     Ssl+ 08:46   0:00 /usr/bin/weston --config=/usr/lib/weston.ini --idle-time=0 --log=/var/log/weston.log
+root         433  0.0  0.1 285656 30176 tty2     Ssl+ 08:46   0:00 /usr/bin/weston --config=/usr/lib/weston.ini --idle-time=0 --log=/var/log/weston.log
+root         433  0.0  0.1 285656 30176 tty2     Ssl+ 08:46   0:00 /usr/bin/weston --config=/usr/lib/weston.ini --idle-time=0 --log=/var/log/weston.log
+root         433  0.0  0.1 285656 30176 tty2     Ssl+ 08:46   0:00 /usr/bin/weston --config=/usr/lib/weston.ini --idle-time=0 --log=/var/log/weston.log
+root         433  0.0  0.1 285656 30176 tty2     Ssl+ 08:46   0:00 /usr/bin/weston --config=/usr/lib/weston.ini --idle-time=0 --log=/var/log/weston.log
+root         433  0.0  0.1 285656 30176 tty2     Ssl+ 08:46   0:00 /usr/bin/weston --config=/usr/lib/weston.ini --idle-time=0 --log=/var/log/weston.log
+root         433  0.0  0.1 285656 30176 tty2     Ssl+ 08:46   0:00 /usr/bin/weston --config=/usr/lib/weston.ini --idle-time=0 --log=/var/log/weston.log
+systemd+     435  0.0  0.0   7196  3264 ?        Ss   08:46   0:00 /lib/systemd/systemd-resolved
+root         436  0.0  0.0      0     0 ?        I<   08:46   0:00 [kbase_event]
+root         448  0.0  0.0  13500  8072 tty2     S+   08:46   0:00 /usr/libexec/weston-keyboard
+root         449  0.0  0.0  12032  5940 tty2     S+   08:46   0:00 /usr/libexec/weston-desktop-shell
+avahi        450  0.0  0.0   4848  2364 ?        Ss   08:46   0:00 avahi-daemon: running [euto-v9-discovery.local]
+avahi        451  0.0  0.0   4716   252 ?        S    08:46   0:00 avahi-daemon: chroot helper
+nobody       455  0.0  0.0   2308   136 ?        S    08:46   0:00 /usr/bin/dnsmasq -x /run/dnsmasq.pid -7 /etc/dnsmasq.d --local-service
+root         457  0.0  0.0      0     0 ?        S    08:46   0:00 [irq/17-10300000]
+root         462  0.0  0.0      0     0 ?        S    08:46   0:00 [jbd2/sda71-8]
+root         463  0.0  0.0      0     0 ?        I<   08:46   0:00 [ext4-rsv-conver]
+root         468  0.0  0.0      0     0 ?        S<   08:46   0:00 [loop0]
+root         469  0.0  0.0      0     0 ?        S    08:46   0:00 [jbd2/loop0-8]
+root         470  0.0  0.0      0     0 ?        I<   08:46   0:00 [ext4-rsv-conver]
+root         475  0.0  0.0   7012  2808 ?        Ss   08:46   0:00 /usr/bin/lxc-start -n linux1
+root         476  0.0  0.0  12264  6844 ?        Ss   08:46   0:00 /sbin/init
+root         492  0.0  0.0 150892   924 ?        Ssl  08:46   0:00 /usr/sbin/rngd -f -r /dev/hwrng
+root         492  0.7  0.0 150892   924 ?        Ssl  08:46   0:05 /usr/sbin/rngd -f -r /dev/hwrng
+root         492  0.7  0.0 150892   924 ?        Ssl  08:46   0:05 /usr/sbin/rngd -f -r /dev/hwrng
+root         493  0.0  0.0  43812  4980 ?        Ss   08:46   0:00 /lib/systemd/systemd-journald
+root         506  0.0  0.0      0     0 ?        S<   08:46   0:00 [loop1]
+root         507  0.0  0.0      0     0 ?        S    08:46   0:00 [jbd2/loop1-8]
+root         508  0.0  0.0      0     0 ?        I<   08:46   0:00 [ext4-rsv-conver]
+root         513  0.0  0.0   7012  2916 ?        Ss   08:46   0:00 /usr/bin/lxc-start -n linux2
+root         514  0.2  0.0   7896  5908 ?        Ss   08:46   0:01 /sbin/init
+root         533  0.3  0.0  30380  9184 ?        Ss   08:46   0:02 /lib/systemd/systemd-journald
+root         535  0.3  0.0  16452  5336 ?        Ss   08:46   0:02 /lib/systemd/systemd-udevd
+root         541  0.0  0.0  14536  4176 ?        Ss   08:46   0:00 /lib/systemd/systemd-udevd
+root         557  0.0  0.0      0     0 ?        I    08:47   0:00 [kworker/3:2-events]
+systemd+     602  0.0  0.0   6224  2812 ?        Ss   08:47   0:00 /lib/systemd/systemd-networkd
+root         654  0.0  0.0   2036  1344 pts/2    Ss+  08:47   0:00 /sbin/agetty -o -p -- \u --noclear --keep-baud pts/2 115200,38400,9600 vt220
+root         658  0.0  0.0   2036  1296 pts/1    Ss+  08:47   0:00 /sbin/agetty -o -p -- \u --noclear --keep-baud console 115200,38400,9600 vt220
+sshd         667  0.0  0.0   5440  2864 ?        Ss   08:47   0:00 avahi-daemon: registering [euto-v9-49.local]
+root         679  0.0  0.0   2036  1308 pts/3    Ss+  08:47   0:00 /sbin/agetty -o -p -- \u --noclear --keep-baud pts/3 115200,38400,9600 vt220
+root         695  0.0  0.0   8224  4848 ?        Ss   08:47   0:00 /usr/sbin/ofonod -n
+message+     700  0.0  0.0   4940  2936 ?        Ss   08:47   0:00 /usr/bin/dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+root         716  0.0  0.0   3412   856 ?        Ss   08:47   0:00 /sbin/syslogd -n
+sshd         718  0.0  0.0   5316   288 ?        S    08:47   0:00 avahi-daemon: chroot helper
+root         721  0.0  0.0   3412   844 ?        Ss   08:47   0:00 /sbin/klogd -n
+root         727  0.0  0.0      0     0 ?        I    08:47   0:00 [kworker/4:4-events]
+root         728  0.0  0.0   2036  1356 pts/0    Ss+  08:47   0:00 /sbin/agetty -o -p -- \u --noclear --keep-baud pts/0 115200,38400,9600 vt220
+root         746  0.0  0.0   2036  1288 pts/1    Ss+  08:47   0:00 /sbin/agetty -o -p -- \u --noclear --keep-baud pts/1 115200,38400,9600 vt220
+root         804  0.0  0.0      0     0 ?        I    08:47   0:00 [kworker/5:3-mm_percpu_wq]
+root         806  0.0  0.0      0     0 ?        I    08:47   0:00 [kworker/2:2-mm_percpu_wq]
+root         814  0.0  0.0 158980  5512 ?        S<sl 08:47   0:00 /usr/bin/pulseaudio --start --daemonize=no --exit-idle-time=-1 --log-target=syslog
+root         814  0.0  0.0 158980  5512 ?        S<sl 08:47   0:00 /usr/bin/pulseaudio --start --daemonize=no --exit-idle-time=-1 --log-target=syslog
+root         825  0.0  0.0 1201316 9164 ?        Sl   08:47   0:00 /usr/sbin/libvirtd --listen --daemon
+root         825  0.0  0.0 1201316 9164 ?        Sl   08:47   0:00 /usr/sbin/libvirtd --listen --daemon
+root         825  0.0  0.0 1201316 9164 ?        Sl   08:47   0:00 /usr/sbin/libvirtd --listen --daemon
+root         825  0.0  0.0 1201316 9164 ?        Sl   08:47   0:00 /usr/sbin/libvirtd --listen --daemon
+root         825  0.0  0.0 1201316 9164 ?        Sl   08:47   0:00 /usr/sbin/libvirtd --listen --daemon
+root         825  0.0  0.0 1201316 9164 ?        Sl   08:47   0:00 /usr/sbin/libvirtd --listen --daemon
+root         825  0.0  0.0 1201316 9164 ?        Sl   08:47   0:00 /usr/sbin/libvirtd --listen --daemon
+root         825  0.0  0.0 1201316 9164 ?        Sl   08:47   0:00 /usr/sbin/libvirtd --listen --daemon
+root         825  0.0  0.0 1201316 9164 ?        Sl   08:47   0:00 /usr/sbin/libvirtd --listen --daemon
+root         825  0.0  0.0 1201316 9164 ?        Sl   08:47   0:00 /usr/sbin/libvirtd --listen --daemon
+root         825  0.0  0.0 1201316 9164 ?        Sl   08:47   0:00 /usr/sbin/libvirtd --listen --daemon
+root         825  0.0  0.0 1201316 9164 ?        Sl   08:47   0:00 /usr/sbin/libvirtd --listen --daemon
+root         825  0.0  0.0 1201316 9164 ?        Sl   08:47   0:00 /usr/sbin/libvirtd --listen --daemon
+root         825  0.0  0.0 1201316 9164 ?        Sl   08:47   0:00 /usr/sbin/libvirtd --listen --daemon
+root         825  0.0  0.0 1201316 9164 ?        Sl   08:47   0:00 /usr/sbin/libvirtd --listen --daemon
+root         825  0.0  0.0 1201316 9164 ?        Sl   08:47   0:00 /usr/sbin/libvirtd --listen --daemon
+root         839  0.0  0.0   3448  2440 ?        Ss   08:47   0:00 bash /opt/screendetect/screen_detect.sh
+root         857  0.7  0.0   3580  2556 ?        S    08:47   0:04 /bin/bash /opt/profile/led_indicator.sh g3d1
+avahi       1082  0.0  0.0   4848  2324 ?        Ss   08:47   0:00 avahi-daemon: running [euto-v9-discovery.local]
+root        1084  0.0  0.0   3212   724 ?        Ss   08:47   0:00 /sbin/klogd -n
+root        1087  0.0  0.0   3212   772 ?        Ss   08:47   0:00 /sbin/syslogd -n
+root        1088  0.0  0.0   2040  1376 pts/0    Ss+  08:47   0:00 /sbin/agetty -o -p -- \u --noclear --keep-baud console 115200,38400,9600 vt220
+root        1090  0.0  0.0   2040  1424 pts/0    Ss+  08:47   0:00 /sbin/agetty -o -p -- \u --noclear --keep-baud pts/0 115200,38400,9600 vt220
+root        1091  0.0  0.0   2040  1404 pts/1    Ss+  08:47   0:00 /sbin/agetty -o -p -- \u --noclear --keep-baud pts/1 115200,38400,9600 vt220
+root        1092  0.0  0.0   2040  1376 pts/2    Ss+  08:47   0:00 /sbin/agetty -o -p -- \u --noclear --keep-baud pts/2 115200,38400,9600 vt220
+root        1093  0.0  0.0   2040  1416 pts/3    Ss+  08:47   0:00 /sbin/agetty -o -p -- \u --noclear --keep-baud pts/3 115200,38400,9600 vt220
+root        1095  0.0  0.0   2448   628 ?        Ss   08:47   0:00 /usr/sbin/crond -n
+message+    1096  0.0  0.0   4344  2848 ?        Ss   08:47   0:00 /usr/bin/dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+avahi       1099  0.0  0.0   4716   248 ?        S    08:47   0:00 avahi-daemon: chroot helper
+root        1102  0.0  0.0   8484  4908 ?        Ss   08:47   0:00 /usr/sbin/ofonod -n
+root        1103  0.0  0.0   3420  2456 ?        Ss   08:47   0:00 /bin/sh /usr/bin/pstore-journal.sh
+root        1119  0.0  0.0  31352  3916 ?        S    08:47   0:00 journalctl -b -f
+root        1130  0.0  0.0      0     0 ?        I    08:47   0:00 [kworker/1:2-memcg_kmem_cache]
+root        1477  0.0  0.0   3196    88 ?        Ss   08:47   0:00 udhcpc -R -b -p /var/run/udhcpc.eth0.pid -i eth0
+root        1697  0.0  0.0   6324  4512 ?        Ss   08:47   0:00 sshd: root@pts/2
+root        1703  0.0  0.0   4568  3844 pts/2    Ss   08:47   0:00 -sh
+root        1803  0.0  0.0   7020  3580 pts/2    S+   08:47   0:00 lxc-attach -n linux1 -- bash
+root        1806  0.0  0.0   4340  3472 pts/3    Ss   08:47   0:00 bash
+root        1882  0.0  0.1 270572 37816 pts/3    Sl+  08:47   0:00 python /opt/ros/melodic/bin/roscore
+root        1882  0.0  0.1 270572 37816 pts/3    Sl+  08:47   0:00 python /opt/ros/melodic/bin/roscore
+root        1882  0.0  0.1 270572 37816 pts/3    Sl+  08:47   0:00 python /opt/ros/melodic/bin/roscore
+root        1918  0.0  0.1 2258700 37316 ?       Ssl  08:47   0:00 python /opt/ros/melodic/bin/rosmaster --core -p 11311 -w 3 __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/master.log
+root        1918  0.0  0.1 2258700 37316 ?       Ssl  08:47   0:00 python /opt/ros/melodic/bin/rosmaster --core -p 11311 -w 3 __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/master.log
+root        1918  0.0  0.1 2258700 37316 ?       Ssl  08:47   0:00 python /opt/ros/melodic/bin/rosmaster --core -p 11311 -w 3 __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/master.log
+root        1918  0.0  0.1 2258700 37316 ?       Ssl  08:47   0:00 python /opt/ros/melodic/bin/rosmaster --core -p 11311 -w 3 __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/master.log
+root        1918  0.0  0.1 2258700 37316 ?       Ssl  08:47   0:00 python /opt/ros/melodic/bin/rosmaster --core -p 11311 -w 3 __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/master.log
+root        1918  0.0  0.1 2258700 37316 ?       Ssl  08:47   0:00 python /opt/ros/melodic/bin/rosmaster --core -p 11311 -w 3 __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/master.log
+root        1918  0.0  0.1 2258700 37316 ?       Ssl  08:47   0:00 python /opt/ros/melodic/bin/rosmaster --core -p 11311 -w 3 __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/master.log
+root        1918  0.0  0.1 2258700 37316 ?       Ssl  08:47   0:00 python /opt/ros/melodic/bin/rosmaster --core -p 11311 -w 3 __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/master.log
+root        1918  0.0  0.1 2258700 37316 ?       Ssl  08:49   0:00 python /opt/ros/melodic/bin/rosmaster --core -p 11311 -w 3 __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/master.log
+root        1918  0.0  0.1 2258700 37316 ?       Ssl  08:49   0:00 python /opt/ros/melodic/bin/rosmaster --core -p 11311 -w 3 __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/master.log
+root        1918  0.0  0.1 2258700 37316 ?       Ssl  08:49   0:00 python /opt/ros/melodic/bin/rosmaster --core -p 11311 -w 3 __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/master.log
+root        1918  0.0  0.1 2258700 37316 ?       Ssl  08:49   0:00 python /opt/ros/melodic/bin/rosmaster --core -p 11311 -w 3 __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/master.log
+root        1918  0.0  0.1 2258700 37316 ?       Ssl  08:49   0:00 python /opt/ros/melodic/bin/rosmaster --core -p 11311 -w 3 __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/master.log
+root        1918  0.0  0.1 2258700 37316 ?       Ssl  08:49   0:00 python /opt/ros/melodic/bin/rosmaster --core -p 11311 -w 3 __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/master.log
+root        1918  0.0  0.1 2258700 37316 ?       Ssl  08:49   0:00 python /opt/ros/melodic/bin/rosmaster --core -p 11311 -w 3 __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/master.log
+root        1918  0.0  0.1 2258700 37316 ?       Ssl  08:49   0:00 python /opt/ros/melodic/bin/rosmaster --core -p 11311 -w 3 __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/master.log
+root        1918  0.0  0.1 2258700 37316 ?       Ssl  08:49   0:00 python /opt/ros/melodic/bin/rosmaster --core -p 11311 -w 3 __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/master.log
+root        1918  0.0  0.1 2258700 37316 ?       Ssl  08:49   0:00 python /opt/ros/melodic/bin/rosmaster --core -p 11311 -w 3 __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/master.log
+root        1918  0.0  0.1 2258700 37316 ?       Ssl  08:49   0:00 python /opt/ros/melodic/bin/rosmaster --core -p 11311 -w 3 __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/master.log
+root        1918  0.0  0.1 2258700 37316 ?       Ssl  08:49   0:00 python /opt/ros/melodic/bin/rosmaster --core -p 11311 -w 3 __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/master.log
+root        1918  0.0  0.1 2258700 37316 ?       Ssl  08:49   0:00 python /opt/ros/melodic/bin/rosmaster --core -p 11311 -w 3 __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/master.log
+root        1918  0.0  0.1 2258700 37316 ?       Ssl  08:49   0:00 python /opt/ros/melodic/bin/rosmaster --core -p 11311 -w 3 __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/master.log
+root        1918  0.0  0.1 2258700 37316 ?       Ssl  08:49   0:00 python /opt/ros/melodic/bin/rosmaster --core -p 11311 -w 3 __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/master.log
+root        1918  0.0  0.1 2258700 37316 ?       Ssl  08:50   0:00 python /opt/ros/melodic/bin/rosmaster --core -p 11311 -w 3 __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/master.log
+root        1918  0.0  0.1 2258700 37316 ?       Ssl  08:50   0:00 python /opt/ros/melodic/bin/rosmaster --core -p 11311 -w 3 __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/master.log
+root        1918  0.0  0.1 2258700 37316 ?       Ssl  08:50   0:00 python /opt/ros/melodic/bin/rosmaster --core -p 11311 -w 3 __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/master.log
+root        1918  3.0  0.1 2258700 37316 ?       Ssl  08:50   0:14 python /opt/ros/melodic/bin/rosmaster --core -p 11311 -w 3 __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/master.log
+root        1918  0.0  0.1 2258700 37316 ?       Ssl  08:50   0:00 python /opt/ros/melodic/bin/rosmaster --core -p 11311 -w 3 __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/master.log
+root        1918  0.0  0.1 2258700 37316 ?       Ssl  08:50   0:00 python /opt/ros/melodic/bin/rosmaster --core -p 11311 -w 3 __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/master.log
+root        1918  0.0  0.1 2258700 37316 ?       Ssl  08:50   0:00 python /opt/ros/melodic/bin/rosmaster --core -p 11311 -w 3 __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/master.log
+root        1918  1.6  0.1 2258700 37316 ?       Ssl  08:50   0:07 python /opt/ros/melodic/bin/rosmaster --core -p 11311 -w 3 __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/master.log
+root        1941  0.0  0.0 246108 11480 ?        Ssl  08:47   0:00 /opt/ros/melodic/lib/rosout/rosout __name:=rosout __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/rosout-1.log
+root        1941  0.0  0.0 246108 11480 ?        Ssl  08:47   0:00 /opt/ros/melodic/lib/rosout/rosout __name:=rosout __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/rosout-1.log
+root        1941  0.0  0.0 246108 11480 ?        Ssl  08:47   0:00 /opt/ros/melodic/lib/rosout/rosout __name:=rosout __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/rosout-1.log
+root        1941  0.0  0.0 246108 11480 ?        Ssl  08:47   0:00 /opt/ros/melodic/lib/rosout/rosout __name:=rosout __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/rosout-1.log
+root        1941  0.0  0.0 246108 11480 ?        Ssl  08:50   0:00 /opt/ros/melodic/lib/rosout/rosout __name:=rosout __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/rosout-1.log
+root        6490  0.0  0.0   6324  4544 ?        Ss   08:49   0:00 sshd: root@notty
+root        6607  0.0  0.0 311792  5612 ?        S    08:49   0:00 /opt/ros/melodic/lib/rubis_autorunner/cubetown_full_autorunner __name:=cubetown_full_autorunner __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/cubetown_full_autorunner-1.log
+root        6608  0.1  0.1 271268 38380 ?        Sl   08:49   0:00 python /opt/ros/melodic/bin/roslaunch rubis_autorunner _cubetown_autorunner_1_sensing.launch
+root        6608  0.1  0.1 271268 38380 ?        Sl   08:49   0:00 python /opt/ros/melodic/bin/roslaunch rubis_autorunner _cubetown_autorunner_1_sensing.launch
+root        6608  0.0  0.1 271268 38380 ?        Sl   08:49   0:00 python /opt/ros/melodic/bin/roslaunch rubis_autorunner _cubetown_autorunner_1_sensing.launch
+root        6669  0.0  0.0 247544 12552 ?        Ssl  08:49   0:00 /opt/ros/melodic/lib/tf/static_transform_publisher 0.0001 0 0 0 0 0 /world /map 100 __name:=world_to_map __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/world_to_map-1.log
+root        6669  0.1  0.0 247544 12552 ?        Ssl  08:49   0:00 /opt/ros/melodic/lib/tf/static_transform_publisher 0.0001 0 0 0 0 0 /world /map 100 __name:=world_to_map __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/world_to_map-1.log
+root        6669  0.0  0.0 247544 12552 ?        Ssl  08:49   0:00 /opt/ros/melodic/lib/tf/static_transform_publisher 0.0001 0 0 0 0 0 /world /map 100 __name:=world_to_map __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/world_to_map-1.log
+root        6669  0.0  0.0 247544 12552 ?        Ssl  08:49   0:00 /opt/ros/melodic/lib/tf/static_transform_publisher 0.0001 0 0 0 0 0 /world /map 100 __name:=world_to_map __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/world_to_map-1.log
+root        6669  0.0  0.0 247544 12552 ?        Ssl  08:49   0:00 /opt/ros/melodic/lib/tf/static_transform_publisher 0.0001 0 0 0 0 0 /world /map 100 __name:=world_to_map __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/world_to_map-1.log
+root        6670  0.0  0.0 247544 12544 ?        Ssl  08:49   0:00 /opt/ros/melodic/lib/tf/static_transform_publisher 0 0 0 0 0 0 /map /mobility 100 __name:=map_to_mobility __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/map_to_mobility-2.log
+root        6670  0.1  0.0 247544 12544 ?        Ssl  08:49   0:00 /opt/ros/melodic/lib/tf/static_transform_publisher 0 0 0 0 0 0 /map /mobility 100 __name:=map_to_mobility __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/map_to_mobility-2.log
+root        6670  0.0  0.0 247544 12544 ?        Ssl  08:49   0:00 /opt/ros/melodic/lib/tf/static_transform_publisher 0 0 0 0 0 0 /map /mobility 100 __name:=map_to_mobility __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/map_to_mobility-2.log
+root        6670  0.0  0.0 247544 12544 ?        Ssl  08:49   0:00 /opt/ros/melodic/lib/tf/static_transform_publisher 0 0 0 0 0 0 /map /mobility 100 __name:=map_to_mobility __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/map_to_mobility-2.log
+root        6670  0.0  0.0 247544 12544 ?        Ssl  08:49   0:00 /opt/ros/melodic/lib/tf/static_transform_publisher 0 0 0 0 0 0 /map /mobility 100 __name:=map_to_mobility __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/map_to_mobility-2.log
+root        6671  0.0  0.0 318956 15152 ?        Ssl  08:49   0:00 /opt/ros/melodic/lib/map_file/vector_map_loader /home/root/autoware.ai/autoware_files/vector_map/cubetown_circle/dtlane.csv /home/root/autoware.ai/autoware_files/vector_map/cubetown_circle/idx.csv /home/root/autoware.ai/autoware_files/vector_map/cubetown_circle/lane.csv /home/root/autoware.ai/autoware_files/vector_map/cubetown_circle/node.csv /home/root/autoware.ai/autoware_files/vector_map/cubetown_circle/point.csv __name:=vector_map_loader __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/vector_map_loader-3.log
+root        6671  0.0  0.0 318956 15152 ?        Ssl  08:49   0:00 /opt/ros/melodic/lib/map_file/vector_map_loader /home/root/autoware.ai/autoware_files/vector_map/cubetown_circle/dtlane.csv /home/root/autoware.ai/autoware_files/vector_map/cubetown_circle/idx.csv /home/root/autoware.ai/autoware_files/vector_map/cubetown_circle/lane.csv /home/root/autoware.ai/autoware_files/vector_map/cubetown_circle/node.csv /home/root/autoware.ai/autoware_files/vector_map/cubetown_circle/point.csv __name:=vector_map_loader __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/vector_map_loader-3.log
+root        6671  0.0  0.0 318956 15152 ?        Ssl  08:49   0:00 /opt/ros/melodic/lib/map_file/vector_map_loader /home/root/autoware.ai/autoware_files/vector_map/cubetown_circle/dtlane.csv /home/root/autoware.ai/autoware_files/vector_map/cubetown_circle/idx.csv /home/root/autoware.ai/autoware_files/vector_map/cubetown_circle/lane.csv /home/root/autoware.ai/autoware_files/vector_map/cubetown_circle/node.csv /home/root/autoware.ai/autoware_files/vector_map/cubetown_circle/point.csv __name:=vector_map_loader __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/vector_map_loader-3.log
+root        6671  0.0  0.0 318956 15152 ?        Ssl  08:49   0:00 /opt/ros/melodic/lib/map_file/vector_map_loader /home/root/autoware.ai/autoware_files/vector_map/cubetown_circle/dtlane.csv /home/root/autoware.ai/autoware_files/vector_map/cubetown_circle/idx.csv /home/root/autoware.ai/autoware_files/vector_map/cubetown_circle/lane.csv /home/root/autoware.ai/autoware_files/vector_map/cubetown_circle/node.csv /home/root/autoware.ai/autoware_files/vector_map/cubetown_circle/point.csv __name:=vector_map_loader __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/vector_map_loader-3.log
+root        6671  0.0  0.0 318956 15152 ?        Ssl  08:49   0:00 /opt/ros/melodic/lib/map_file/vector_map_loader /home/root/autoware.ai/autoware_files/vector_map/cubetown_circle/dtlane.csv /home/root/autoware.ai/autoware_files/vector_map/cubetown_circle/idx.csv /home/root/autoware.ai/autoware_files/vector_map/cubetown_circle/lane.csv /home/root/autoware.ai/autoware_files/vector_map/cubetown_circle/node.csv /home/root/autoware.ai/autoware_files/vector_map/cubetown_circle/point.csv __name:=vector_map_loader __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/vector_map_loader-3.log
+root        6673  0.0  0.0 258052 18304 ?        Ssl  08:49   0:00 /opt/ros/melodic/lib/map_file/points_map_loader __name:=points_map_loader __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/points_map_loader-4.log
+root        6673  0.0  0.0 258052 18304 ?        Ssl  08:49   0:00 /opt/ros/melodic/lib/map_file/points_map_loader __name:=points_map_loader __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/points_map_loader-4.log
+root        6673  0.0  0.0 258052 18304 ?        Ssl  08:49   0:00 /opt/ros/melodic/lib/map_file/points_map_loader __name:=points_map_loader __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/points_map_loader-4.log
+root        6673  0.0  0.0 258052 18304 ?        Ssl  08:49   0:00 /opt/ros/melodic/lib/map_file/points_map_loader __name:=points_map_loader __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/points_map_loader-4.log
+root        6673  0.0  0.0 258052 18304 ?        Ssl  08:49   0:00 /opt/ros/melodic/lib/map_file/points_map_loader __name:=points_map_loader __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/points_map_loader-4.log
+root        6683  0.2  0.0 247024 13652 ?        Ssl  08:49   0:01 /opt/ros/melodic/lib/svl_pkg/svl_sensing __name:=svl_sensing __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/svl_sensing-5.log
+root        6683  0.5  0.0 247024 13652 ?        Ssl  08:49   0:02 /opt/ros/melodic/lib/svl_pkg/svl_sensing __name:=svl_sensing __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/svl_sensing-5.log
+root        6683  0.0  0.0 247024 13652 ?        Ssl  08:49   0:00 /opt/ros/melodic/lib/svl_pkg/svl_sensing __name:=svl_sensing __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/svl_sensing-5.log
+root        6683  0.0  0.0 247024 13652 ?        Ssl  08:49   0:00 /opt/ros/melodic/lib/svl_pkg/svl_sensing __name:=svl_sensing __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/svl_sensing-5.log
+root        6683  0.0  0.0 247024 13652 ?        Ssl  08:49   0:00 /opt/ros/melodic/lib/svl_pkg/svl_sensing __name:=svl_sensing __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/svl_sensing-5.log
+root        6685  0.2  0.0 247544 12620 ?        Ssl  08:49   0:01 /opt/ros/melodic/lib/tf/static_transform_publisher 1.2 0 2.0 0 0 0 base_link velodyne 10 __name:=base_link_to_velodyne __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/base_link_to_velodyne-6.log
+root        6685  1.1  0.0 247544 12620 ?        Ssl  08:49   0:06 /opt/ros/melodic/lib/tf/static_transform_publisher 1.2 0 2.0 0 0 0 base_link velodyne 10 __name:=base_link_to_velodyne __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/base_link_to_velodyne-6.log
+root        6685  0.0  0.0 247544 12620 ?        Ssl  08:49   0:00 /opt/ros/melodic/lib/tf/static_transform_publisher 1.2 0 2.0 0 0 0 base_link velodyne 10 __name:=base_link_to_velodyne __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/base_link_to_velodyne-6.log
+root        6685  0.0  0.0 247544 12620 ?        Ssl  08:49   0:00 /opt/ros/melodic/lib/tf/static_transform_publisher 1.2 0 2.0 0 0 0 base_link velodyne 10 __name:=base_link_to_velodyne __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/base_link_to_velodyne-6.log
+root        6685  0.0  0.0 247544 12620 ?        Ssl  08:49   0:00 /opt/ros/melodic/lib/tf/static_transform_publisher 1.2 0 2.0 0 0 0 base_link velodyne 10 __name:=base_link_to_velodyne __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/base_link_to_velodyne-6.log
+root        6687  0.2  0.0 247544 12580 ?        Ssl  08:49   0:01 /opt/ros/melodic/lib/tf/static_transform_publisher 0.029 -0.574 -1.820 4.712 0.009 -1.883 velodyne camera 10 __name:=lidar_to_camera __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/lidar_to_camera-7.log
+root        6687  1.1  0.0 247544 12580 ?        Ssl  08:49   0:06 /opt/ros/melodic/lib/tf/static_transform_publisher 0.029 -0.574 -1.820 4.712 0.009 -1.883 velodyne camera 10 __name:=lidar_to_camera __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/lidar_to_camera-7.log
+root        6687  0.0  0.0 247544 12580 ?        Ssl  08:49   0:00 /opt/ros/melodic/lib/tf/static_transform_publisher 0.029 -0.574 -1.820 4.712 0.009 -1.883 velodyne camera 10 __name:=lidar_to_camera __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/lidar_to_camera-7.log
+root        6687  0.0  0.0 247544 12580 ?        Ssl  08:49   0:00 /opt/ros/melodic/lib/tf/static_transform_publisher 0.029 -0.574 -1.820 4.712 0.009 -1.883 velodyne camera 10 __name:=lidar_to_camera __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/lidar_to_camera-7.log
+root        6687  0.0  0.0 247544 12580 ?        Ssl  08:49   0:00 /opt/ros/melodic/lib/tf/static_transform_publisher 0.029 -0.574 -1.820 4.712 0.009 -1.883 velodyne camera 10 __name:=lidar_to_camera __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/lidar_to_camera-7.log
+root        6781  0.0  0.0 312060  6120 ?        S    08:49   0:00 /opt/ros/melodic/lib/rubis_autorunner/cubetown_full_autorunner __name:=cubetown_full_autorunner __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/cubetown_full_autorunner-1.log
+root        6782  0.1  0.1 271428 38376 ?        Sl   08:49   0:00 python /opt/ros/melodic/bin/roslaunch rubis_autorunner _cubetown_autorunner_2_localization.launch
+root        6782  0.0  0.1 271428 38376 ?        Sl   08:49   0:00 python /opt/ros/melodic/bin/roslaunch rubis_autorunner _cubetown_autorunner_2_localization.launch
+root        6782  0.0  0.1 271428 38376 ?        Sl   08:49   0:00 python /opt/ros/melodic/bin/roslaunch rubis_autorunner _cubetown_autorunner_2_localization.launch
+root        6838  1.1  0.1 326164 42492 ?        Ssl  08:49   0:05 /opt/ros/melodic/lib/points_downsampler/voxel_grid_filter __name:=voxel_grid_filter __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/voxel_grid_filter-1.log
+root        6838  0.3  0.1 326164 42492 ?        Ssl  08:49   0:01 /opt/ros/melodic/lib/points_downsampler/voxel_grid_filter __name:=voxel_grid_filter __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/voxel_grid_filter-1.log
+root        6838  0.0  0.1 326164 42492 ?        Ssl  08:49   0:00 /opt/ros/melodic/lib/points_downsampler/voxel_grid_filter __name:=voxel_grid_filter __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/voxel_grid_filter-1.log
+root        6838  0.0  0.1 326164 42492 ?        Ssl  08:49   0:00 /opt/ros/melodic/lib/points_downsampler/voxel_grid_filter __name:=voxel_grid_filter __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/voxel_grid_filter-1.log
+root        6838  0.0  0.1 326164 42492 ?        Ssl  08:49   0:00 /opt/ros/melodic/lib/points_downsampler/voxel_grid_filter __name:=voxel_grid_filter __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/voxel_grid_filter-1.log
+root        6839 90.1  0.3 597816 106172 ?       Rsl  08:49   7:53 /home/root/autoware.ai/devel/lib/lidar_localizer/ndt_matching __name:=ndt_matching __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/ndt_matching-2.log
+root        6839  0.6  0.3 597816 106172 ?       Ssl  08:49   0:03 /home/root/autoware.ai/devel/lib/lidar_localizer/ndt_matching __name:=ndt_matching __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/ndt_matching-2.log
+root        6839  0.1  0.3 597816 106172 ?       Ssl  08:49   0:00 /home/root/autoware.ai/devel/lib/lidar_localizer/ndt_matching __name:=ndt_matching __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/ndt_matching-2.log
+root        6839  0.0  0.3 597816 106172 ?       Ssl  08:49   0:00 /home/root/autoware.ai/devel/lib/lidar_localizer/ndt_matching __name:=ndt_matching __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/ndt_matching-2.log
+root        6839  0.0  0.3 597816 106172 ?       Ssl  08:49   0:00 /home/root/autoware.ai/devel/lib/lidar_localizer/ndt_matching __name:=ndt_matching __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/ndt_matching-2.log
+root        6839  0.0  0.3 597816 106172 ?       Ssl  08:49   0:00 /home/root/autoware.ai/devel/lib/lidar_localizer/ndt_matching __name:=ndt_matching __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/ndt_matching-2.log
+root        6839  0.0  0.3 597816 106172 ?       Ssl  08:50   0:00 /home/root/autoware.ai/devel/lib/lidar_localizer/ndt_matching __name:=ndt_matching __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/ndt_matching-2.log
+root        6840  0.0  0.1 357084 42084 ?        Ssl  08:49   0:00 python /opt/ros/melodic/lib/rostopic/rostopic pub /config/ndt autoware_config_msgs/ConfigNDT {header: {seq: 8, stamp: {secs: 0, nsecs: 0}, frame_id: },     init_pos_gnss: 0,     x: 57.1,     y: 1.38,     z: 0.48,     roll: 0.0,      pitch: 0.0,     yaw: 1.57,     use_predict_pose: 1,     error_threshold: 0.05,     resolution: 1.0,     step_size: 0.5,     trans_epsilon: 0.01,     max_iterations: 2}    __name:=config_ndt __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/config_ndt-3.log
+root        6840  0.0  0.1 357084 42084 ?        Ssl  08:49   0:00 python /opt/ros/melodic/lib/rostopic/rostopic pub /config/ndt autoware_config_msgs/ConfigNDT {header: {seq: 8, stamp: {secs: 0, nsecs: 0}, frame_id: },     init_pos_gnss: 0,     x: 57.1,     y: 1.38,     z: 0.48,     roll: 0.0,      pitch: 0.0,     yaw: 1.57,     use_predict_pose: 1,     error_threshold: 0.05,     resolution: 1.0,     step_size: 0.5,     trans_epsilon: 0.01,     max_iterations: 2}    __name:=config_ndt __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/config_ndt-3.log
+root        6840  0.1  0.1 357084 42084 ?        Ssl  08:49   0:00 python /opt/ros/melodic/lib/rostopic/rostopic pub /config/ndt autoware_config_msgs/ConfigNDT {header: {seq: 8, stamp: {secs: 0, nsecs: 0}, frame_id: },     init_pos_gnss: 0,     x: 57.1,     y: 1.38,     z: 0.48,     roll: 0.0,      pitch: 0.0,     yaw: 1.57,     use_predict_pose: 1,     error_threshold: 0.05,     resolution: 1.0,     step_size: 0.5,     trans_epsilon: 0.01,     max_iterations: 2}    __name:=config_ndt __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/config_ndt-3.log
+root        6840  0.0  0.1 357084 42084 ?        Ssl  08:49   0:00 python /opt/ros/melodic/lib/rostopic/rostopic pub /config/ndt autoware_config_msgs/ConfigNDT {header: {seq: 8, stamp: {secs: 0, nsecs: 0}, frame_id: },     init_pos_gnss: 0,     x: 57.1,     y: 1.38,     z: 0.48,     roll: 0.0,      pitch: 0.0,     yaw: 1.57,     use_predict_pose: 1,     error_threshold: 0.05,     resolution: 1.0,     step_size: 0.5,     trans_epsilon: 0.01,     max_iterations: 2}    __name:=config_ndt __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/config_ndt-3.log
+root        6840  0.0  0.1 357084 42084 ?        Ssl  08:49   0:00 python /opt/ros/melodic/lib/rostopic/rostopic pub /config/ndt autoware_config_msgs/ConfigNDT {header: {seq: 8, stamp: {secs: 0, nsecs: 0}, frame_id: },     init_pos_gnss: 0,     x: 57.1,     y: 1.38,     z: 0.48,     roll: 0.0,      pitch: 0.0,     yaw: 1.57,     use_predict_pose: 1,     error_threshold: 0.05,     resolution: 1.0,     step_size: 0.5,     trans_epsilon: 0.01,     max_iterations: 2}    __name:=config_ndt __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/config_ndt-3.log
+root        7059  0.0  0.0 312060  6128 ?        S    08:49   0:00 /opt/ros/melodic/lib/rubis_autorunner/cubetown_full_autorunner __name:=cubetown_full_autorunner __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/cubetown_full_autorunner-1.log
+root        7061  0.1  0.1 271580 38792 ?        Sl   08:49   0:00 python /opt/ros/melodic/bin/roslaunch rubis_autorunner _cubetown_autorunner_3_detection.launch
+root        7061  0.0  0.1 271580 38792 ?        Sl   08:49   0:00 python /opt/ros/melodic/bin/roslaunch rubis_autorunner _cubetown_autorunner_3_detection.launch
+root        7061  0.0  0.1 271580 38792 ?        Sl   08:49   0:00 python /opt/ros/melodic/bin/roslaunch rubis_autorunner _cubetown_autorunner_3_detection.launch
+root        7114  2.9  0.1 488304 56960 ?        Ssl  08:49   0:15 /opt/ros/melodic/lib/points_preprocessor/ray_ground_filter __name:=ray_ground_filter_center __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/ray_ground_filter_center-1.log
+root        7114  1.0  0.1 488304 56960 ?        Ssl  08:49   0:05 /opt/ros/melodic/lib/points_preprocessor/ray_ground_filter __name:=ray_ground_filter_center __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/ray_ground_filter_center-1.log
+root        7114  0.0  0.1 488304 56960 ?        Ssl  08:49   0:00 /opt/ros/melodic/lib/points_preprocessor/ray_ground_filter __name:=ray_ground_filter_center __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/ray_ground_filter_center-1.log
+root        7114  0.0  0.1 488304 56960 ?        Ssl  08:49   0:00 /opt/ros/melodic/lib/points_preprocessor/ray_ground_filter __name:=ray_ground_filter_center __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/ray_ground_filter_center-1.log
+root        7114  0.0  0.1 488304 56960 ?        Ssl  08:49   0:00 /opt/ros/melodic/lib/points_preprocessor/ray_ground_filter __name:=ray_ground_filter_center __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/ray_ground_filter_center-1.log
+root        7114  0.4  0.1 488304 56960 ?        Ssl  08:49   0:02 /opt/ros/melodic/lib/points_preprocessor/ray_ground_filter __name:=ray_ground_filter_center __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/ray_ground_filter_center-1.log
+root        7115  7.0  0.1 553340 55876 ?        Ssl  08:49   0:36 /opt/ros/melodic/lib/lidar_euclidean_cluster_detect/lidar_euclidean_cluster_detect __name:=lidar_euclidean_cluster_detect_center __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/lidar_euclidean_cluster_detect_center-2.log
+root        7115  1.1  0.1 553340 55876 ?        Ssl  08:49   0:05 /opt/ros/melodic/lib/lidar_euclidean_cluster_detect/lidar_euclidean_cluster_detect __name:=lidar_euclidean_cluster_detect_center __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/lidar_euclidean_cluster_detect_center-2.log
+root        7115  0.0  0.1 553340 55876 ?        Ssl  08:49   0:00 /opt/ros/melodic/lib/lidar_euclidean_cluster_detect/lidar_euclidean_cluster_detect __name:=lidar_euclidean_cluster_detect_center __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/lidar_euclidean_cluster_detect_center-2.log
+root        7115  0.0  0.1 553340 55876 ?        Ssl  08:49   0:00 /opt/ros/melodic/lib/lidar_euclidean_cluster_detect/lidar_euclidean_cluster_detect __name:=lidar_euclidean_cluster_detect_center __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/lidar_euclidean_cluster_detect_center-2.log
+root        7115  0.0  0.1 553340 55876 ?        Ssl  08:49   0:00 /opt/ros/melodic/lib/lidar_euclidean_cluster_detect/lidar_euclidean_cluster_detect __name:=lidar_euclidean_cluster_detect_center __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/lidar_euclidean_cluster_detect_center-2.log
+root        7115  0.4  0.1 553340 55876 ?        Ssl  08:49   0:02 /opt/ros/melodic/lib/lidar_euclidean_cluster_detect/lidar_euclidean_cluster_detect __name:=lidar_euclidean_cluster_detect_center __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/lidar_euclidean_cluster_detect_center-2.log
+root        7115  0.3  0.1 553340 55876 ?        Ssl  08:49   0:01 /opt/ros/melodic/lib/lidar_euclidean_cluster_detect/lidar_euclidean_cluster_detect __name:=lidar_euclidean_cluster_detect_center __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/lidar_euclidean_cluster_detect_center-2.log
+root        7116  0.2  0.0 312032 12744 ?        Ssl  08:49   0:01 /opt/ros/melodic/lib/detected_objects_visualizer/visualize_detected_objects __name:=cluster_detect_visualization_center __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/detection-lidar_detector-cluster_detect_visualization_center-3.log
+root        7116  0.0  0.0 312032 12744 ?        Ssl  08:49   0:00 /opt/ros/melodic/lib/detected_objects_visualizer/visualize_detected_objects __name:=cluster_detect_visualization_center __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/detection-lidar_detector-cluster_detect_visualization_center-3.log
+root        7116  0.0  0.0 312032 12744 ?        Ssl  08:49   0:00 /opt/ros/melodic/lib/detected_objects_visualizer/visualize_detected_objects __name:=cluster_detect_visualization_center __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/detection-lidar_detector-cluster_detect_visualization_center-3.log
+root        7116  0.0  0.0 312032 12744 ?        Ssl  08:49   0:00 /opt/ros/melodic/lib/detected_objects_visualizer/visualize_detected_objects __name:=cluster_detect_visualization_center __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/detection-lidar_detector-cluster_detect_visualization_center-3.log
+root        7116  0.0  0.0 312032 12744 ?        Ssl  08:49   0:00 /opt/ros/melodic/lib/detected_objects_visualizer/visualize_detected_objects __name:=cluster_detect_visualization_center __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/detection-lidar_detector-cluster_detect_visualization_center-3.log
+root        7922  0.0  0.0 312060  6132 ?        S    08:50   0:00 /opt/ros/melodic/lib/rubis_autorunner/cubetown_full_autorunner __name:=cubetown_full_autorunner __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/cubetown_full_autorunner-1.log
+root        7923  0.1  0.1 272568 39708 ?        Sl   08:50   0:00 python /opt/ros/melodic/bin/roslaunch rubis_autorunner _cubetown_autorunner_4_planning.launch
+root        7923  0.0  0.1 272568 39708 ?        Sl   08:50   0:00 python /opt/ros/melodic/bin/roslaunch rubis_autorunner _cubetown_autorunner_4_planning.launch
+root        7923  0.0  0.1 272568 39708 ?        Sl   08:50   0:00 python /opt/ros/melodic/bin/roslaunch rubis_autorunner _cubetown_autorunner_4_planning.launch
+root        7992  0.2  0.0 335116 18476 ?        Ssl  08:50   0:01 /opt/ros/melodic/lib/op_global_planner/op_global_planner __name:=op_global_planner __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/op_global_planner-1.log
+root        7992  0.9  0.0 335116 18476 ?        Ssl  08:50   0:04 /opt/ros/melodic/lib/op_global_planner/op_global_planner __name:=op_global_planner __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/op_global_planner-1.log
+root        7992  0.0  0.0 335116 18476 ?        Ssl  08:50   0:00 /opt/ros/melodic/lib/op_global_planner/op_global_planner __name:=op_global_planner __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/op_global_planner-1.log
+root        7992  0.0  0.0 335116 18476 ?        Ssl  08:50   0:00 /opt/ros/melodic/lib/op_global_planner/op_global_planner __name:=op_global_planner __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/op_global_planner-1.log
+root        7992  0.0  0.0 335116 18476 ?        Ssl  08:50   0:00 /opt/ros/melodic/lib/op_global_planner/op_global_planner __name:=op_global_planner __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/op_global_planner-1.log
+root        7992  0.4  0.0 335116 18476 ?        Ssl  08:50   0:02 /opt/ros/melodic/lib/op_global_planner/op_global_planner __name:=op_global_planner __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/op_global_planner-1.log
+root        7992  0.0  0.0 335116 18476 ?        Ssl  08:50   0:00 /opt/ros/melodic/lib/op_global_planner/op_global_planner __name:=op_global_planner __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/op_global_planner-1.log
+root        7999  0.0  0.0 246500 12148 ?        Ssl  08:50   0:00 /opt/ros/melodic/lib/op_local_planner/op_common_params __name:=op_common_params __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/op_common_params-2.log
+root        7999  0.0  0.0 246500 12148 ?        Ssl  08:50   0:00 /opt/ros/melodic/lib/op_local_planner/op_common_params __name:=op_common_params __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/op_common_params-2.log
+root        7999  0.0  0.0 246500 12148 ?        Ssl  08:50   0:00 /opt/ros/melodic/lib/op_local_planner/op_common_params __name:=op_common_params __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/op_common_params-2.log
+root        7999  0.0  0.0 246500 12148 ?        Ssl  08:50   0:00 /opt/ros/melodic/lib/op_local_planner/op_common_params __name:=op_common_params __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/op_common_params-2.log
+root        7999  0.0  0.0 246500 12148 ?        Ssl  08:50   0:00 /opt/ros/melodic/lib/op_local_planner/op_common_params __name:=op_common_params __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/op_common_params-2.log
+root        8003  0.7  0.0 333428 16900 ?        Ssl  08:50   0:03 /opt/ros/melodic/lib/op_local_planner/op_trajectory_generator __name:=op_trajectory_generator __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/op_trajectory_generator-3.log
+root        8003  1.0  0.0 333428 16900 ?        Ssl  08:50   0:05 /opt/ros/melodic/lib/op_local_planner/op_trajectory_generator __name:=op_trajectory_generator __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/op_trajectory_generator-3.log
+root        8003  0.0  0.0 333428 16900 ?        Ssl  08:50   0:00 /opt/ros/melodic/lib/op_local_planner/op_trajectory_generator __name:=op_trajectory_generator __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/op_trajectory_generator-3.log
+root        8003  0.0  0.0 333428 16900 ?        Ssl  08:50   0:00 /opt/ros/melodic/lib/op_local_planner/op_trajectory_generator __name:=op_trajectory_generator __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/op_trajectory_generator-3.log
+root        8003  0.0  0.0 333428 16900 ?        Ssl  08:50   0:00 /opt/ros/melodic/lib/op_local_planner/op_trajectory_generator __name:=op_trajectory_generator __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/op_trajectory_generator-3.log
+root        8003  0.4  0.0 333428 16900 ?        Ssl  08:50   0:02 /opt/ros/melodic/lib/op_local_planner/op_trajectory_generator __name:=op_trajectory_generator __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/op_trajectory_generator-3.log
+root        8003  0.0  0.0 333428 16900 ?        Ssl  08:50   0:00 /opt/ros/melodic/lib/op_local_planner/op_trajectory_generator __name:=op_trajectory_generator __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/op_trajectory_generator-3.log
+root        8009  2.6  0.0 474456 18844 ?        Ssl  08:50   0:12 /opt/ros/melodic/lib/op_local_planner/op_trajectory_evaluator __name:=op_trajectory_evaluator __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/op_trajectory_evaluator-4.log
+root        8009  1.1  0.0 474456 18844 ?        Ssl  08:50   0:05 /opt/ros/melodic/lib/op_local_planner/op_trajectory_evaluator __name:=op_trajectory_evaluator __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/op_trajectory_evaluator-4.log
+root        8009  0.0  0.0 474456 18844 ?        Ssl  08:50   0:00 /opt/ros/melodic/lib/op_local_planner/op_trajectory_evaluator __name:=op_trajectory_evaluator __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/op_trajectory_evaluator-4.log
+root        8009  0.0  0.0 474456 18844 ?        Ssl  08:50   0:00 /opt/ros/melodic/lib/op_local_planner/op_trajectory_evaluator __name:=op_trajectory_evaluator __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/op_trajectory_evaluator-4.log
+root        8009  0.0  0.0 474456 18844 ?        Ssl  08:50   0:00 /opt/ros/melodic/lib/op_local_planner/op_trajectory_evaluator __name:=op_trajectory_evaluator __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/op_trajectory_evaluator-4.log
+root        8009  0.4  0.0 474456 18844 ?        Ssl  08:50   0:02 /opt/ros/melodic/lib/op_local_planner/op_trajectory_evaluator __name:=op_trajectory_evaluator __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/op_trajectory_evaluator-4.log
+root        8009  0.3  0.0 474456 18844 ?        Ssl  08:50   0:01 /opt/ros/melodic/lib/op_local_planner/op_trajectory_evaluator __name:=op_trajectory_evaluator __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/op_trajectory_evaluator-4.log
+root        8009  0.3  0.0 474456 18844 ?        Ssl  08:50   0:01 /opt/ros/melodic/lib/op_local_planner/op_trajectory_evaluator __name:=op_trajectory_evaluator __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/op_trajectory_evaluator-4.log
+root        8012  0.6  0.0 403924 21756 ?        Ssl  08:50   0:03 /opt/ros/melodic/lib/op_local_planner/op_behavior_selector __name:=op_behavior_selector __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/op_behavior_selector-5.log
+root        8012  1.0  0.0 403924 21756 ?        Ssl  08:50   0:05 /opt/ros/melodic/lib/op_local_planner/op_behavior_selector __name:=op_behavior_selector __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/op_behavior_selector-5.log
+root        8012  0.0  0.0 403924 21756 ?        Ssl  08:50   0:00 /opt/ros/melodic/lib/op_local_planner/op_behavior_selector __name:=op_behavior_selector __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/op_behavior_selector-5.log
+root        8012  0.0  0.0 403924 21756 ?        Ssl  08:50   0:00 /opt/ros/melodic/lib/op_local_planner/op_behavior_selector __name:=op_behavior_selector __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/op_behavior_selector-5.log
+root        8012  0.0  0.0 403924 21756 ?        Ssl  08:50   0:00 /opt/ros/melodic/lib/op_local_planner/op_behavior_selector __name:=op_behavior_selector __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/op_behavior_selector-5.log
+root        8012  0.4  0.0 403924 21756 ?        Ssl  08:50   0:02 /opt/ros/melodic/lib/op_local_planner/op_behavior_selector __name:=op_behavior_selector __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/op_behavior_selector-5.log
+root        8012  0.3  0.0 403924 21756 ?        Ssl  08:50   0:01 /opt/ros/melodic/lib/op_local_planner/op_behavior_selector __name:=op_behavior_selector __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/op_behavior_selector-5.log
+root        8210  0.0  0.0 312060  6136 ?        S    08:50   0:00 /opt/ros/melodic/lib/rubis_autorunner/cubetown_full_autorunner __name:=cubetown_full_autorunner __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/cubetown_full_autorunner-1.log
+root        8211  0.1  0.1 271088 38244 ?        Sl   08:50   0:00 python /opt/ros/melodic/bin/roslaunch rubis_autorunner _cubetown_autorunner_5_control.launch
+root        8211  0.0  0.1 271088 38244 ?        Sl   08:50   0:00 python /opt/ros/melodic/bin/roslaunch rubis_autorunner _cubetown_autorunner_5_control.launch
+root        8211  0.0  0.1 271088 38244 ?        Sl   08:50   0:00 python /opt/ros/melodic/bin/roslaunch rubis_autorunner _cubetown_autorunner_5_control.launch
+root        8292  0.3  0.0 247072 13584 ?        Ssl  08:50   0:01 /opt/ros/melodic/lib/pure_pursuit/pure_pursuit __name:=pure_pursuit __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/pure_pursuit-1.log
+root        8292  0.1  0.0 247072 13584 ?        Ssl  08:50   0:00 /opt/ros/melodic/lib/pure_pursuit/pure_pursuit __name:=pure_pursuit __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/pure_pursuit-1.log
+root        8292  0.0  0.0 247072 13584 ?        Ssl  08:50   0:00 /opt/ros/melodic/lib/pure_pursuit/pure_pursuit __name:=pure_pursuit __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/pure_pursuit-1.log
+root        8292  0.0  0.0 247072 13584 ?        Ssl  08:50   0:00 /opt/ros/melodic/lib/pure_pursuit/pure_pursuit __name:=pure_pursuit __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/pure_pursuit-1.log
+root        8292  0.0  0.0 247072 13584 ?        Ssl  08:50   0:00 /opt/ros/melodic/lib/pure_pursuit/pure_pursuit __name:=pure_pursuit __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/pure_pursuit-1.log
+root        8293  0.0  0.0 246348 12220 ?        Ssl  08:50   0:00 /opt/ros/melodic/lib/twist_filter/twist_filter __name:=twist_filter __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/twist_filter-2.log
+root        8293  0.1  0.0 246348 12220 ?        Ssl  08:50   0:00 /opt/ros/melodic/lib/twist_filter/twist_filter __name:=twist_filter __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/twist_filter-2.log
+root        8293  0.0  0.0 246348 12220 ?        Ssl  08:50   0:00 /opt/ros/melodic/lib/twist_filter/twist_filter __name:=twist_filter __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/twist_filter-2.log
+root        8293  0.0  0.0 246348 12220 ?        Ssl  08:50   0:00 /opt/ros/melodic/lib/twist_filter/twist_filter __name:=twist_filter __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/twist_filter-2.log
+root        8293  0.0  0.0 246348 12220 ?        Ssl  08:50   0:00 /opt/ros/melodic/lib/twist_filter/twist_filter __name:=twist_filter __log:=/home/root/.ros/log/9e1182fc-d62a-11e7-adb2-001234567890/twist_filter-2.log
+root        8504  0.0  0.0   6324  4512 ?        Ss   08:50   0:00 sshd: root@pts/4
+root        8507  0.0  0.0   4700  3936 pts/4    Ss   08:50   0:00 -sh
+root        9315  0.0  0.0   6324  4420 ?        Ss   08:50   0:00 sshd: root@notty
+root        9316  0.0  0.0   6320  4500 ?        Ss   08:50   0:00 sshd: root@notty
+root        9319  0.0  0.0   3420   896 ?        Ss   08:50   0:00 sh -c perf stat -e l3d_cache_refill -C 4-6 &> /home/root/perf_ADAS_output.txt
+root        9320  0.0  0.0  19588  6760 ?        S    08:50   0:00 perf stat -e l3d_cache_refill -C 4-6
+root        9321  0.0  0.0   3420   888 ?        Ss   08:50   0:00 sh -c perf stat -e l3d_cache_refill -C 0-7 &> /home/root/perf_output.txt
+root        9322  0.0  0.0  19588  6860 ?        S    08:50   0:00 perf stat -e l3d_cache_refill -C 0-7
+root       13177  0.0  0.0      0     0 ?        I    08:52   0:00 [kworker/0:1-g3d_utilization]
+root       14772  0.0  0.0      0     0 ?        I    08:53   0:00 [kworker/5:2-events]
+root       17207  0.0  0.0      0     0 ?        I    08:54   0:00 [kworker/2:0-mm_percpu_wq]
+root       18271  0.0  0.0      0     0 ?        I    08:54   0:00 [kworker/4:0-mm_percpu_wq]
+root       20420  0.0  0.0      0     0 ?        I    08:55   0:00 [kworker/u16:0-events_unbound]
+root       24845  0.0  0.0      0     0 ?        I    08:57   0:00 [kworker/0:2-g3d_utilization]
+root       25141  0.0  0.0   6488  4676 ?        Ss   08:57   0:00 sshd: root@notty
+root       25144  0.0  0.0   3520  2560 ?        Ss   08:57   0:00 -sh
+root       25152  0.0  0.0      0     0 ?        I    08:57   0:00 [kworker/u16:3-flush-8:0]
+root       25175  0.0  0.0   3948  3108 ?        S    08:57   0:00 bash
+root       25221  0.0  0.0   3420  2304 ?        S    08:57   0:00 sh /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/bin/code-server --start-server --host=127.0.0.1 --accept-server-license-terms --enable-remote-auto-shutdown --port=0 --telemetry-level all --connection-token-file /home/root/.vscode-server/.441438abd1ac652551dbe4d408dfcec8a499b8bf.token
+root       25231  2.5  0.2 929580 69504 ?        Sl   08:57   0:01 /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/node /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/out/server-main.js --start-server --host=127.0.0.1 --accept-server-license-terms --enable-remote-auto-shutdown --port=0 --telemetry-level all --connection-token-file /home/root/.vscode-server/.441438abd1ac652551dbe4d408dfcec8a499b8bf.token
+root       25231  0.0  0.2 929580 69504 ?        Sl   08:57   0:00 /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/node /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/out/server-main.js --start-server --host=127.0.0.1 --accept-server-license-terms --enable-remote-auto-shutdown --port=0 --telemetry-level all --connection-token-file /home/root/.vscode-server/.441438abd1ac652551dbe4d408dfcec8a499b8bf.token
+root       25231  0.1  0.2 929580 69504 ?        Sl   08:57   0:00 /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/node /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/out/server-main.js --start-server --host=127.0.0.1 --accept-server-license-terms --enable-remote-auto-shutdown --port=0 --telemetry-level all --connection-token-file /home/root/.vscode-server/.441438abd1ac652551dbe4d408dfcec8a499b8bf.token
+root       25231  0.2  0.2 929580 69504 ?        Sl   08:57   0:00 /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/node /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/out/server-main.js --start-server --host=127.0.0.1 --accept-server-license-terms --enable-remote-auto-shutdown --port=0 --telemetry-level all --connection-token-file /home/root/.vscode-server/.441438abd1ac652551dbe4d408dfcec8a499b8bf.token
+root       25231  0.1  0.2 929580 69504 ?        Sl   08:57   0:00 /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/node /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/out/server-main.js --start-server --host=127.0.0.1 --accept-server-license-terms --enable-remote-auto-shutdown --port=0 --telemetry-level all --connection-token-file /home/root/.vscode-server/.441438abd1ac652551dbe4d408dfcec8a499b8bf.token
+root       25231  0.1  0.2 929580 69504 ?        Sl   08:57   0:00 /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/node /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/out/server-main.js --start-server --host=127.0.0.1 --accept-server-license-terms --enable-remote-auto-shutdown --port=0 --telemetry-level all --connection-token-file /home/root/.vscode-server/.441438abd1ac652551dbe4d408dfcec8a499b8bf.token
+root       25231  0.0  0.2 929580 69504 ?        Sl   08:57   0:00 /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/node /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/out/server-main.js --start-server --host=127.0.0.1 --accept-server-license-terms --enable-remote-auto-shutdown --port=0 --telemetry-level all --connection-token-file /home/root/.vscode-server/.441438abd1ac652551dbe4d408dfcec8a499b8bf.token
+root       25231  0.0  0.2 929580 69504 ?        Sl   08:57   0:00 /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/node /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/out/server-main.js --start-server --host=127.0.0.1 --accept-server-license-terms --enable-remote-auto-shutdown --port=0 --telemetry-level all --connection-token-file /home/root/.vscode-server/.441438abd1ac652551dbe4d408dfcec8a499b8bf.token
+root       25231  0.0  0.2 929580 69504 ?        Sl   08:57   0:00 /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/node /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/out/server-main.js --start-server --host=127.0.0.1 --accept-server-license-terms --enable-remote-auto-shutdown --port=0 --telemetry-level all --connection-token-file /home/root/.vscode-server/.441438abd1ac652551dbe4d408dfcec8a499b8bf.token
+root       25231  0.0  0.2 929580 69504 ?        Sl   08:57   0:00 /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/node /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/out/server-main.js --start-server --host=127.0.0.1 --accept-server-license-terms --enable-remote-auto-shutdown --port=0 --telemetry-level all --connection-token-file /home/root/.vscode-server/.441438abd1ac652551dbe4d408dfcec8a499b8bf.token
+root       25231  0.0  0.2 929580 69504 ?        Sl   08:57   0:00 /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/node /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/out/server-main.js --start-server --host=127.0.0.1 --accept-server-license-terms --enable-remote-auto-shutdown --port=0 --telemetry-level all --connection-token-file /home/root/.vscode-server/.441438abd1ac652551dbe4d408dfcec8a499b8bf.token
+root       25302  0.3  0.1 618928 42504 ?        Sl   08:57   0:00 /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/node /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/out/bootstrap-fork --type=ptyHost --logsPath /home/root/.vscode-server/data/logs/20230913T085730
+root       25302  0.0  0.1 618928 42504 ?        Sl   08:57   0:00 /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/node /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/out/bootstrap-fork --type=ptyHost --logsPath /home/root/.vscode-server/data/logs/20230913T085730
+root       25302  0.0  0.1 618928 42504 ?        Sl   08:57   0:00 /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/node /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/out/bootstrap-fork --type=ptyHost --logsPath /home/root/.vscode-server/data/logs/20230913T085730
+root       25302  0.0  0.1 618928 42504 ?        Sl   08:57   0:00 /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/node /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/out/bootstrap-fork --type=ptyHost --logsPath /home/root/.vscode-server/data/logs/20230913T085730
+root       25302  0.0  0.1 618928 42504 ?        Sl   08:57   0:00 /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/node /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/out/bootstrap-fork --type=ptyHost --logsPath /home/root/.vscode-server/data/logs/20230913T085730
+root       25302  0.0  0.1 618928 42504 ?        Sl   08:57   0:00 /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/node /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/out/bootstrap-fork --type=ptyHost --logsPath /home/root/.vscode-server/data/logs/20230913T085730
+root       25302  0.0  0.1 618928 42504 ?        Sl   08:57   0:00 /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/node /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/out/bootstrap-fork --type=ptyHost --logsPath /home/root/.vscode-server/data/logs/20230913T085730
+root       25302  0.0  0.1 618928 42504 ?        Sl   08:57   0:00 /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/node /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/out/bootstrap-fork --type=ptyHost --logsPath /home/root/.vscode-server/data/logs/20230913T085730
+root       25302  0.0  0.1 618928 42504 ?        Sl   08:57   0:00 /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/node /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/out/bootstrap-fork --type=ptyHost --logsPath /home/root/.vscode-server/data/logs/20230913T085730
+root       25302  0.0  0.1 618928 42504 ?        Sl   08:57   0:00 /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/node /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/out/bootstrap-fork --type=ptyHost --logsPath /home/root/.vscode-server/data/logs/20230913T085730
+root       25302  0.0  0.1 618928 42504 ?        Sl   08:57   0:00 /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/node /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/out/bootstrap-fork --type=ptyHost --logsPath /home/root/.vscode-server/data/logs/20230913T085730
+root       25355  2.0  0.2 880152 73720 ?        Sl   08:57   0:01 /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/node /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/out/bootstrap-fork --type=extensionHost --transformURIs --useHostProxy=false
+root       25355  0.0  0.2 880152 73720 ?        Sl   08:57   0:00 /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/node /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/out/bootstrap-fork --type=extensionHost --transformURIs --useHostProxy=false
+root       25355  0.0  0.2 880152 73720 ?        Sl   08:57   0:00 /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/node /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/out/bootstrap-fork --type=extensionHost --transformURIs --useHostProxy=false
+root       25355  0.0  0.2 880152 73720 ?        Sl   08:57   0:00 /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/node /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/out/bootstrap-fork --type=extensionHost --transformURIs --useHostProxy=false
+root       25355  0.0  0.2 880152 73720 ?        Sl   08:57   0:00 /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/node /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/out/bootstrap-fork --type=extensionHost --transformURIs --useHostProxy=false
+root       25355  0.0  0.2 880152 73720 ?        Sl   08:57   0:00 /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/node /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/out/bootstrap-fork --type=extensionHost --transformURIs --useHostProxy=false
+root       25355  0.0  0.2 880152 73720 ?        Sl   08:57   0:00 /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/node /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/out/bootstrap-fork --type=extensionHost --transformURIs --useHostProxy=false
+root       25355  0.0  0.2 880152 73720 ?        Sl   08:57   0:00 /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/node /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/out/bootstrap-fork --type=extensionHost --transformURIs --useHostProxy=false
+root       25355  0.0  0.2 880152 73720 ?        Sl   08:57   0:00 /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/node /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/out/bootstrap-fork --type=extensionHost --transformURIs --useHostProxy=false
+root       25355  0.0  0.2 880152 73720 ?        Sl   08:57   0:00 /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/node /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/out/bootstrap-fork --type=extensionHost --transformURIs --useHostProxy=false
+root       25355  0.0  0.2 880152 73720 ?        Sl   08:57   0:00 /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/node /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/out/bootstrap-fork --type=extensionHost --transformURIs --useHostProxy=false
+root       25355  0.0  0.2 880152 73720 ?        Sl   08:57   0:00 /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/node /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/out/bootstrap-fork --type=extensionHost --transformURIs --useHostProxy=false
+root       25380  0.3  0.1 830280 40340 ?        Sl   08:57   0:00 /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/node /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/out/bootstrap-fork --type=fileWatcher
+root       25380  0.0  0.1 830280 40340 ?        Sl   08:57   0:00 /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/node /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/out/bootstrap-fork --type=fileWatcher
+root       25380  0.0  0.1 830280 40340 ?        Sl   08:57   0:00 /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/node /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/out/bootstrap-fork --type=fileWatcher
+root       25380  0.0  0.1 830280 40340 ?        Sl   08:57   0:00 /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/node /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/out/bootstrap-fork --type=fileWatcher
+root       25380  0.0  0.1 830280 40340 ?        Sl   08:57   0:00 /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/node /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/out/bootstrap-fork --type=fileWatcher
+root       25380  0.0  0.1 830280 40340 ?        Sl   08:57   0:00 /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/node /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/out/bootstrap-fork --type=fileWatcher
+root       25380  0.0  0.1 830280 40340 ?        Sl   08:57   0:00 /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/node /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/out/bootstrap-fork --type=fileWatcher
+root       25380  0.3  0.1 830280 40340 ?        Sl   08:57   0:00 /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/node /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/out/bootstrap-fork --type=fileWatcher
+root       25380  0.0  0.1 830280 40340 ?        Sl   08:57   0:00 /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/node /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/out/bootstrap-fork --type=fileWatcher
+root       25380  0.0  0.1 830280 40340 ?        Sl   08:57   0:00 /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/node /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/out/bootstrap-fork --type=fileWatcher
+root       25380  0.0  0.1 830280 40340 ?        Sl   08:57   0:00 /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/node /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/out/bootstrap-fork --type=fileWatcher
+root       25380  0.0  0.1 830280 40340 ?        Sl   08:57   0:00 /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/node /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/out/bootstrap-fork --type=fileWatcher
+root       25380  0.0  0.1 830280 40340 ?        Sl   08:57   0:00 /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/node /home/root/.vscode-server/bin/441438abd1ac652551dbe4d408dfcec8a499b8bf/out/bootstrap-fork --type=fileWatcher
+root       25473  0.4  0.0   3520  2580 ?        Ss   08:57   0:00 /bin/sh -c while [ ! -b /dev/disk/by-path/platform-17e00000.ufs-scsi-0:0:0:0 ]; do sleep 0.1; done
+root       27475  0.0  0.0   1776   464 ?        S    08:58   0:00 sleep 1
+root       27483  0.0  0.0   3420  1028 pts/4    S+   08:58   0:00 sh get_ps_info.sh
+root       27484  0.0  0.0   4332  2040 pts/4    R+   08:58   0:00 ps auxH

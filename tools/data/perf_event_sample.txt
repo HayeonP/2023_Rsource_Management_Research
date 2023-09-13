@@ -1,0 +1,31 @@
+# started on Thu Sep  7 08:56:12 2023
+
+
+ Performance counter stats for 'system wide':
+
+       11480184050      cpu-cycles                                                    (30.25%)
+       11586311042      cycles                                                        (30.33%)
+       12955092918      instructions              #    1.12  insn per cycle           (30.41%)
+        6491025281      bus_access                                                    (30.49%)
+        3243917069      bus_access_rd                                                 (30.57%)
+        3200256733      bus_access_wr                                                 (30.64%)
+       11716048933      bus_cycles                                                    (30.72%)
+        3502600301      l1d_cache                                                     (30.79%)
+         431989825      l1d_cache_refill                                              (26.39%)
+         429665396      l1d_cache_refill_rd                                           (26.33%)
+           2202382      l1d_cache_refill_wr                                           (26.25%)
+         775558809      l1d_cache_wb                                                  (26.17%)
+        4144713319      l1i_cache                                                     (26.09%)
+           8937441      l1i_cache_refill                                              (26.01%)
+        1581297177      l2d_cache                                                     (25.93%)
+         324220378      l2d_cache_refill                                              (25.91%)
+         320475608      l2d_cache_refill_rd                                           (25.91%)
+                 0      l2d_cache_refill_wr                                           (25.92%)
+         765554344      l2d_cache_wb                                                  (25.92%)
+        1541021090      l3d_cache                                                     (25.92%)
+         777809781      l3d_cache_rd                                                  (25.92%)
+         774875338      l3d_cache_refill                                              (25.92%)
+                 0      armv8_pmuv3/l3d_cache_wb/                                     (25.92%)
+
+       5.002245502 seconds time elapsed
+
