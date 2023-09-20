@@ -1,0 +1,25 @@
+label: test
+max_iter: 1
+ssh_address: 'root@192.168.0.11'
+target_project_dir: '/home/root/sdd'
+target_tasks: [ # Autoware
+  rosmaster, #test
+  rosout,
+  rubis_autorunner,
+  static_transform_publisher,
+  vector_map_loader,
+  points_map_loader,
+  svl_sensing,
+  voxel_grid_filter,
+  ndt_matching,
+  autoware_config_msgs,
+  ray_ground_filter,
+  lidar_euclidean_cluster_detect,
+  visualize_detected_objects,
+  op_global_planner,
+  op_common_params,
+  op_trajectory_generator,
+  op_behavior_selector,
+  pure_pursuit,
+  twist_filter
+]

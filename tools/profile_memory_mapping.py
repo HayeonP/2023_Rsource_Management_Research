@@ -2,7 +2,6 @@ import os
 import time
 import datetime
 
-PS_INFO_PATH='data/a.txt' # Output of ps -eLf. LWP is tid
 SLEEP_DURATION=0.05
 
 def parse_item(line):    
@@ -26,10 +25,10 @@ def parse_ps_line(line, item_list):
         
     return output
 
-def profile_ps_info():
-    current_datetime = datetime.datetime.now().strftime('%y%m%d')
-    os.system('mkdir data/'+current_datetime)
-    path = 'data/'+current_datetime+'/ps_info.txt'
+def profile_ps_info(label):
+    output_dir = 'log/'+label
+    os.system('mkdir -p ' + output_dir)
+    path = output_dir +'/ps_info.txt'
     os.system('ps -eLF > '+path)
 
     with open(path, 'r') as f:
@@ -57,30 +56,51 @@ def get_task_info_by_name(name, ps_info):
 def sec_to_iter(sec):
     return sec / SLEEP_DURATION
 
-if __name__ == '__main__':        
-    ps_info = profile_ps_info()    
+def parse_configs(path):
+    output = {}
+    with open(path, 'r') as f:
+        raw_data = f.readlines()
     
-    name_list = [
-        'rosmaster',
-        'rosout',
-        'rubis_autorunner',
-        'static_transform_publisher',
-        'vector_map_loader',
-        'points_map_loader',
-        'svl_sensing',
-        'voxel_grid_filter',
-        'ndt_matching',
-        'autoware_config_msgs',
-        'ray_ground_filter',
-        'lidar_euclidean_cluster_detect',
-        'visualize_detected_objects',
-        'op_global_planner',
-        'op_common_params',
-        'op_trajectory_generator',
-        'op_behavior_selector',
-        'pure_pursuit',
-        'twist_filter'
-    ]
+    for i, line in enumerate(raw_data):
+        line = line.replace(' ', '')
+        line = line.split('#')[0]
+
+        if 'target_tasks:' in line:
+            target_tasks = []
+            for j in range(i, len(raw_data)):
+                if j != i and ':' in raw_data[j]: break
+                task_name = raw_data[j]
+                task_name = task_name.split(':')[-1]
+                task_name = task_name.replace(' ', '')
+                task_name = task_name.split('#')[0]                
+                task_name = task_name.replace('[', '')
+                task_name = task_name.replace(']', '')
+                task_name = task_name.replace('\n', '')
+                task_name = task_name.split(',')
+
+                task_name = [v for v in task_name if v != '']
+                target_tasks.extend(task_name)
+                
+
+            output['target_tasks'] = target_tasks
+        elif ':' in line:
+            name = line.split(':')[0]
+            name = name.replace('\"','')
+            name = name.replace('\'','')
+            value = line.split(':')[-1]
+            value = value.split('\n')[0]
+            value = value.replace('\"', '')
+            value = value.replace('\'', '')
+        output[name] = value
+
+    return output
+
+if __name__ == '__main__':
+    configs = parse_configs('configs/memory_mapping.yaml')
+
+    ps_info = profile_ps_info(configs['label'])    
+    
+    name_list = configs['target_tasks']
 
     task_info = {}
     for name in name_list:
@@ -93,21 +113,20 @@ if __name__ == '__main__':
             if info['PID'] not in pid_list: pid_list.append(info['PID'])
             if info['TID'] not in tid_list: tid_list.append(info['TID'])
 
-    current_datetime = datetime.datetime.now().strftime('%y%m%d')
     os.system('rm -r pmap_log/*')
-    os.system('mkdir -p pmap_log/' + str(current_datetime))
+    os.system('mkdir -p pmap_log/' + configs['label'])
     
     iter = 0
-    max_iter = sec_to_iter(5)
+    max_iter = int(configs['max_iter'])
     start_time = time.time()
     while True:
         for pid in pid_list:
-            path = 'pmap_log/' + current_datetime + '/pid-' + str(pid) + '_iter-' + str(iter) + '.txt'
+            path = 'pmap_log/' + configs['label'] + '/pid-' + str(pid) + '_iter-' + str(iter) + '.txt'
             with open(path, 'w') as f:                
                 f.write(str(time.time()) + '\n')    
             os.system('pmap -X ' + str(pid) + ' >> ' + path + '&')
         for tid in tid_list:
-            path = 'pmap_log/' + current_datetime + '/tid-' + str(tid) + '_iter-' + str(iter) + '.txt'
+            path = 'pmap_log/' + configs['label'] + '/tid-' + str(tid) + '_iter-' + str(iter) + '.txt'
             with open(path, 'w') as f:                
                 f.write(str(time.time()) + '\n')
             os.system('pmap -X ' + str(tid) + ' >> ' + path + '&')
@@ -118,5 +137,4 @@ if __name__ == '__main__':
         if iter >= max_iter: break
     end_time = time.time()
 
-    print('Profiling duration:',end_time - start_time)
-
+    print('# Profiling duration:',end_time - start_time)

@@ -166,45 +166,27 @@ def analyze_pmap_from_tid(log_dir):
     return output
 
 if __name__ == '__main__':
+    with open('configs/memory_mapping.yaml', 'r') as f:
+        configs = yaml.safe_load(f)
 
     ## TODO: Setup input file paths
-    label = '230915'
+    label = configs['label']
     ps_info_path = 'data/'+label+'/ps_info.txt'
     log_dir = 'pmap_log/'+label
 
     if not os.path.exists(ps_info_path):
         os.system('mkdir data/'+label)        
-        os.system('scp root@192.168.0.11:/home/root/sdd/profile_memory_mapping/data/'+label+'/ps_info.txt '+ps_info_path)
+        os.system('scp '+configs['ssh_address']+':'+configs['target_project_dir']+'/log/'+label+'/ps_info.txt '+ps_info_path)
     if not os.path.exists(log_dir):
         os.system('mkdir '+log_dir)
-        os.system('scp root@192.168.0.11:/home/root/sdd/profile_memory_mapping/pmap_log/'+label+'/* '+log_dir)   
+        os.system('scp '+configs['ssh_address']+':'+configs['target_project_dir']+'/pmap_log/'+label+'/* '+log_dir)   
 
-    name_list = [
-        'rosmaster',
-        'rosout',
-        'rubis_autorunner',
-        'static_transform_publisher',
-        'vector_map_loader',
-        'points_map_loader',
-        'svl_sensing',
-        'voxel_grid_filter',
-        'ndt_matching',
-        'autoware_config_msgs',
-        'ray_ground_filter',
-        'lidar_euclidean_cluster_detect',
-        'visualize_detected_objects',
-        'op_global_planner',
-        'op_common_params',
-        'op_trajectory_generator',
-        'op_behavior_selector',
-        'pure_pursuit',
-        'twist_filter'
-    ]
+    target_tasks = configs['target_tasks']
 
     ps_info = profile_ps_info(ps_info_path)
 
     task_info = {}
-    for name in name_list:
+    for name in target_tasks:
         task_info[name] = get_task_info_by_name(name, ps_info)
 
     pid_name_mapping = get_pid_name_mapping_from_task_info(task_info)
