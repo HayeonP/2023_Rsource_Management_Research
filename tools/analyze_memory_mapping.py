@@ -178,8 +178,8 @@ if __name__ == '__main__':
         os.system('mkdir data/'+label)        
         os.system('scp '+configs['ssh_address']+':'+configs['target_project_dir']+'/log/'+label+'/ps_info.txt '+ps_info_path)
     if not os.path.exists(log_dir):
-        os.system('mkdir '+log_dir)
-        os.system('scp '+configs['ssh_address']+':'+configs['target_project_dir']+'/pmap_log/'+label+'/* '+log_dir)   
+        os.system('mkdir -p '+log_dir)
+        os.system('scp '+configs['ssh_address']+':'+configs['target_project_dir']+'/pmap_log/'+label+'/* '+log_dir) 
 
     target_tasks = configs['target_tasks']
 

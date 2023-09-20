@@ -1,6 +1,7 @@
 import os
 import time
 import datetime
+import yaml
 
 SLEEP_DURATION=0.05
 
@@ -96,9 +97,11 @@ def parse_configs(path):
     return output
 
 if __name__ == '__main__':
-    configs = parse_configs('configs/memory_mapping.yaml')
+    with open('configs/memory_mapping.yaml', 'r') as f:
+        configs = yaml.safe_load(f)
+    # configs = parse_configs('configs/memory_mapping.yaml')
 
-    ps_info = profile_ps_info(configs['label'])    
+    ps_info = profile_ps_info(configs['label'])
     
     name_list = configs['target_tasks']
 
