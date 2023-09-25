@@ -60,22 +60,62 @@ if __name__ == '__main__':
 
     result = {}
 
+    
     try:
         result['l1d_hit_ratio'] = (data['l1d_cache'] - data['l1d_cache_refill']) / data['l1d_cache']
+    except: pass
+    try:
         result['l1i_hit_ratio'] = (data['l1i_cache'] - data['l1i_cache_refill']) / data['l1i_cache']
+    except: pass
+    try:
         result['l2d_hit_ratio'] = (data['l2d_cache'] - data['l2d_cache_refill']) / data['l2d_cache']
-        result['l3d_hit_ratio'] = (data['l3d_cache'] - data['l3d_cache_refill']) / data['l3d_cache']
-        result['l1d_miss_per_sec'] = data['l1d_cache_refill'] / data['duration']
-        result['l1i_miss_per_sec'] = data['l1i_cache_refill'] / data['duration']
-        result['l2d_miss_per_sec'] = data['l2d_cache_refill'] / data['duration']
-        result['l3d_miss_per_sec'] = data['l3d_cache_refill'] / data['duration']
-        result['l1d_access_per_sec'] = data['l1d_cache'] / data['duration']
-        result['l1i_access_per_sec'] = data['l1i_cache'] / data['duration']
-        result['l2d_access_per_sec'] = data['l2d_cache'] / data['duration']
-        result['l3d_access_per_sec'] = data['l3d_cache'] / data['duration']
-        result['bus_access_per_sec'] = data['bus_access'] / data['duration']
-    except:
-        pass
+    except: pass
+    try:
+        result['l3d_hit_ratio'] = (data['l3d_cache'] - data['l3d_cache_refill']) / data['l3d_cache']        
+    except: pass
+    try:
+        result['l1d_miss_ratio'] = 1.0 - result['l1d_hit_ratio']
+    except: pass
+    try:
+        result['l1i_miss_ratio'] = 1.0 - result['l1i_hit_ratio']
+    except: pass
+    try:
+        result['l2d_miss_ratio'] = 1.0 - result['l2d_hit_ratio']
+    except: pass
+    try:
+        result['l3d_miss_ratio'] = 1.0 - result['l3d_hit_ratio']
+    except: pass
+    try:
+        result['l1d_miss_per_sec(10^6)'] = data['l1d_cache_refill'] / data['duration']/1000000.0
+    except: pass
+    try:
+        result['l1i_miss_per_sec(10^6)'] = data['l1i_cache_refill'] / data['duration']/1000000.0
+    except: pass
+    try:
+        result['l2d_miss_per_sec(10^6)'] = data['l2d_cache_refill'] / data['duration']/1000000.0
+    except: pass
+    try:
+        result['l3d_miss_per_sec(10^6)'] = data['l3d_cache_refill'] / data['duration']/1000000.0
+    except: pass
+    try:
+        result['l1d_access_per_sec(10^6)'] = data['l1d_cache'] / data['duration']/1000000.0
+    except: pass
+    try:
+        result['l1i_access_per_sec(10^6)'] = data['l1i_cache'] / data['duration']/1000000.0
+    except: pass
+    try:
+        result['l2d_access_per_sec(10^6)'] = data['l2d_cache'] / data['duration']/1000000.0
+    except: pass
+    try:
+        result['l3d_access_per_sec(10^6)'] = data['l3d_cache'] / data['duration']/1000000.0
+    except: pass
+    try:
+        result['bus_access_per_sec(10^6)'] = data['bus_access'] / data['duration']/1000000.0
+    except: pass
+    try:
+        result['-->l3d/l1d acess ratio'] = result['l3d_access_per_sec(10^6)']/result['l1d_access_per_sec(10^6)']
+    except: pass
+    
 
     for key in result:
-        print(key, result[key])
+        print(key, format(result[key], '.2f'))

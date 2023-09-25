@@ -128,7 +128,7 @@ def get_E2E_response_time(first_node_path, last_node_path, E2E_start_instance, E
         E2E_response_time[instance_id] = float(response_time * 1000) # unit: ms
 
     keys = list(E2E_response_time.keys())
-
+    
     does_start_instance_found = False
     for key in keys:
         if key >= E2E_start_instance and does_start_instance_found == False:
@@ -138,7 +138,7 @@ def get_E2E_response_time(first_node_path, last_node_path, E2E_start_instance, E
         if key >= E2E_end_instance and E2E_end_instance > 0.0: 
             E2E_end_instance = key
             break
-    E2E_end_instance = 800 #debug
+
     remove_target = []
     for k in E2E_response_time:
         if k < E2E_start_instance or k > E2E_end_instance or k not in keys: remove_target.append(k)

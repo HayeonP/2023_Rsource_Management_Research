@@ -1,0 +1,28 @@
+ Performance counter stats for 'CPU(s) 4-6':
+
+      310094185959      cpu-cycles                                                    (28.00%)
+      310693596770      cycles                                                        (28.01%)
+      562936585207      instructions              #    1.81  insn per cycle           (28.01%)
+       20412124257      bus_access                                                    (28.01%)
+       11900780248      bus_access_rd                                                 (28.02%)
+        8325287431      bus_access_wr                                                 (28.02%)
+      311488326222      bus_cycles                                                    (28.02%)
+      232746687865      l1d_cache                                                     (28.02%)
+        1097070237      l1d_cache_refill                                              (24.02%)
+         795699635      l1d_cache_refill_rd                                           (24.02%)
+         299455796      l1d_cache_refill_wr                                           (24.01%)
+         517561736      l1d_cache_wb                                                  (24.01%)
+      171931013840      l1i_cache                                                     (24.01%)
+        2163366323      l1i_cache_refill                                              (24.00%)
+        5163269493      l2d_cache                                                     (24.00%)
+        2122210360      l2d_cache_refill                                              (24.00%)
+        2104919238      l2d_cache_refill_rd                                           (23.99%)
+                 0      l2d_cache_refill_wr                                           (23.99%)
+        1878281736      l2d_cache_wb                                                  (23.99%)
+        4605886006      l3d_cache                                                     (23.99%)
+        2811943762      l3d_cache_rd                                                  (23.99%)
+         793302213      l3d_cache_refill                                              (23.99%)
+                 0      armv8_pmuv3/l3d_cache_wb/                                     (23.99%)
+
+     110.826111752 seconds time elapsed
+

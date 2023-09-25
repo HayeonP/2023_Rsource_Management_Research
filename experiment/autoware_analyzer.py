@@ -428,6 +428,7 @@ def profile_miss_alignment_delay(dir_path, output_title, chain_info, start_insta
 
     first_node_path = dir_path + '/' + chain_info[0] + '.csv'
     last_node_path = dir_path + '/' + chain_info[-1] + '.csv'
+    
     E2E_response_time, _, _ = aa.get_E2E_response_time(first_node_path, last_node_path, start_instance, end_instance, type='shortest')
 
     node_response_time_list = []
@@ -446,6 +447,7 @@ def profile_miss_alignment_delay(dir_path, output_title, chain_info, start_insta
 
     x_miss_alignment_delay_data = list(miss_alignment_delay.keys()) # Instance IDs
     y_miss_alignment_delay_data = list(miss_alignment_delay.values()) # E2E response time(ms)
+
     if not is_collapsed:
         x_miss_alignment_delay_data = x_miss_alignment_delay_data[:int(len(x_miss_alignment_delay_data) * filter)]
         y_miss_alignment_delay_data = y_miss_alignment_delay_data[:int(len(y_miss_alignment_delay_data) * filter)]
