@@ -1,0 +1,38 @@
+#!/bin/bash
+
+label: test
+ssh_address: 'root@192.168.0.11'
+target_project_dir: '/home/root/sdd/tools'
+duration: 3000 #(ms)
+target_cores: 4-7
+target_events: [
+  ### BASE EVENTS #####
+  cpu-cycles,
+  cycles,
+  instructions,
+  ### BUS EVENTS ######
+  # bus_access,
+  # bus_access_rd,
+  # bus_access_wr,
+  # bus_cycles,
+  ### L1D EVENTS ######
+  l1d_cache,
+  l1d_cache_refill,
+  l1d_cache_refill_rd,
+  l1d_cache_refill_wr,
+  l1d_cache_wb,
+  ### L1I EVENTS ######
+  l1i_cache,
+  l1i_cache_refill,
+  ### L2D EVENTS ######
+  l2d_cache,
+  l2d_cache_refill,
+  l2d_cache_refill_rd,
+  l2d_cache_refill_wr,
+  l2d_cache_wb,
+  ### L3D EVENTS ######
+  l3d_cache,
+  l3d_cache_rd,
+  l3d_cache_refill,
+  # armv8_pmuv3/l3d_cache_wb/
+]

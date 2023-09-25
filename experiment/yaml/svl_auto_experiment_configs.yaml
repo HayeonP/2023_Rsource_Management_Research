@@ -1,13 +1,13 @@
 # Setup
-adas_image_name: '230922_ADAS_lane_detection.ext4'
-experiment_title: test
-target_environment: desktop # desktop / exynos 
+adas_image_name: '230925_ADAS_lane_detection.ext4'
+experiment_title: lane_detection_4cam_4-7
+target_environment: exynos # desktop / exynos 
 autorunner_mode: FULL # LKAS / FULL
 max_iteration: 1
-duration: 250 # sec
+duration: 30 # sec
 svl_cfg_path: /home/hayeonp/git/2023_Resource_Management_Research/experiment/yaml/svl_scenario.yaml
 
-ADAS_cores: 4-6
+ADAS_cores: 4-7
 all_cores: 0-7
 
 # Commands
