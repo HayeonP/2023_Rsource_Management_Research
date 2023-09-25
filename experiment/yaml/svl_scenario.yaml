@@ -19,7 +19,7 @@ lgsvl_bridge:
   port: 9090
 
 ego:
-  asset-id: 477d5100-399c-40bb-aaf8-49b618c7118c
+  asset-id: 6b5dbffc-d960-4cd8-be64-0089e0231b95
 
 npc:
   - npc0:

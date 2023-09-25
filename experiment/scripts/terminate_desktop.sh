@@ -1,6 +1,10 @@
 rosnode kill /svl_sensing
 rosnode kill /twist_gate
 rosnode kill /lidar_republisher
+rosnode kill /lidar_republisher_redundant1
+rosnode kill /lidar_republisher_redundant2
+rosnode kill /republish1
+rosnode kill /republish2
 rosnode kill /base_link_to_velodyne
 rosnode kill /config_ndt
 rosnode kill /detection/lidar_detector/cluster_detect_visualization_center
@@ -31,5 +35,11 @@ rosnode kill /world_to_map
 rosnode kill /yolo3_rects
 rosnode kill /vision_darknet_detect
 rosnode kill /ndt_matching
+rosnode kill /image_redundant1
+rosnode kill /image_redundant2
+rosnode kill /lane_detector_top
+rosnode kill /lane_detector_right
+rosnode kill /lane_detector_left
+rosnode kill /lane_detector_rear
 sleep 1
 rosnode kill /driving_progress_logger

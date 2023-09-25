@@ -1,7 +1,7 @@
 # Setup
-adas_image_name: '230829_ADAS_DAG.ext4'
+adas_image_name: '230922_ADAS_lane_detection.ext4'
 experiment_title: test
-target_environment: exynos # desktop / exynos 
+target_environment: desktop # desktop / exynos 
 autorunner_mode: FULL # LKAS / FULL
 max_iteration: 1
 duration: 250 # sec

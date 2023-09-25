@@ -37,6 +37,10 @@ rosnode kill /vision_darknet_detect
 rosnode kill /ndt_matching
 rosnode kill /image_redundant1
 rosnode kill /image_redundant2
+rosnode kill /lane_detector_top
+rosnode kill /lane_detector_right
+rosnode kill /lane_detector_left
+rosnode kill /lane_detector_rear
 
 sleep 1
 rosnode kill /driving_progress_logger
