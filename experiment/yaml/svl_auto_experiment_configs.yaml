@@ -1,6 +1,6 @@
 # Setup
 adas_image_name: '230927_ADAS_lane_detection.ext4'
-experiment_title: dual_cam_480_rt
+experiment_title: single_cam_4k
 target_environment: exynos # desktop / exynos 
 autorunner_mode: FULL # LKAS / FULL
 max_iteration: 1

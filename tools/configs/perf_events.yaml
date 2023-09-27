@@ -1,6 +1,6 @@
 #!/bin/bash
 
-label: single_cam_480p
+label: single_cam_4k
 ssh_address: 'root@192.168.0.11'
 target_project_dir: '/home/root/sdd/tools'
 duration: 10000 #(ms)
