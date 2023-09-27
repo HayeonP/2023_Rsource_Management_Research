@@ -1,6 +1,6 @@
 #!/bin/bash
 
-label: SeqWr_log
+label: single_cam_480p
 ssh_address: 'root@192.168.0.11'
 target_project_dir: '/home/root/sdd/tools'
 duration: 10000 #(ms)

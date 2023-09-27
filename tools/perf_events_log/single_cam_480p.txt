@@ -1,0 +1,26 @@
+# started on Wed Sep 27 02:53:33 2023
+
+
+ Performance counter stats for 'CPU(s) 4-7':
+
+       53249053970      cpu-cycles                                                    (35.00%)
+       53164336339      cycles                                                        (35.00%)
+      120108250224      instructions              #    2.26  insn per cycle           (35.00%)
+       46666923784      l1d_cache                                                     (35.00%)
+         139744539      l1d_cache_refill                                              (35.00%)
+          92917137      l1d_cache_refill_rd                                           (35.00%)
+          41358100      l1d_cache_refill_wr                                           (35.00%)
+          67363277      l1d_cache_wb                                                  (35.00%)
+       34630785360      l1i_cache                                                     (30.00%)
+         232567513      l1i_cache_refill                                              (30.00%)
+         682038415      l2d_cache                                                     (30.00%)
+         245328208      l2d_cache_refill                                              (30.00%)
+         248697612      l2d_cache_refill_rd                                           (30.00%)
+                 0      l2d_cache_refill_wr                                           (30.00%)
+         257433382      l2d_cache_wb                                                  (30.00%)
+         607259986      l3d_cache                                                     (30.00%)
+         362088503      l3d_cache_rd                                                  (30.00%)
+         122394812      l3d_cache_refill                                              (30.00%)
+
+      10.001063061 seconds time elapsed
+
