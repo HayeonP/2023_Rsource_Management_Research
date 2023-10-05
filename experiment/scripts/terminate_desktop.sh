@@ -1,4 +1,8 @@
 rosnode kill /svl_sensing
+rosnode kill /svl_camera_top
+rosnode kill /svl_camera_right
+rosnode kill /svl_camera_left
+rosnode kill /svl_camera_bottom
 rosnode kill /twist_gate
 rosnode kill /lidar_republisher
 rosnode kill /lidar_republisher_redundant1
