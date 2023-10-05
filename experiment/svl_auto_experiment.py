@@ -289,7 +289,7 @@ if __name__ == '__main__':
         exit()
 
     experiment_title = configs['experiment_title']
-    target_ip = configs[target_environment]['target_ip']
+    if target_environment != 'desktop': target_ip = configs[target_environment]['target_ip']
     
     # Move params to the target board ant backup it
     if target_environment == 'desktop':
