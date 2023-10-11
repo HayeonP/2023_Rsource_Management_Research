@@ -1,0 +1,12 @@
+Memory bandwidth : 0.028 GB/s
+Memory bandwidth std: 0.5387459653841133
+max time interval: 0.5369949999999903, min time interval: 1.9999999949504854e-06, time interval std: 0.09143942937383992
+new bandwidth: 0.7210687022766414
+over 10GB/s ratio: 0.0
+graph area: 0.2841871858804221
+over 10GB/s graph area: 0
+event fetch frequency: 23.995539229257222
+core[000] event fetch frequency: 26.625342000516127
+core[001] event fetch frequency: 22.29587749225157
+core[002] event fetch frequency: 25.028519998538318
+core[003] event fetch frequency: 22.11998762081425

@@ -11,3 +11,9 @@
 2. Run `profile_perf_events.sh`.
 3. Run `analyze_perf_events.sh`.
     * Copy resutls from target and analyze it.
+
+### Bandwidth
+1. Setup parameters in `configs/bw_profiler.yaml`.
+2. Run `profile_bandwidth.sh`.
+3. Run `analyze_bandwidth.sh`.
+    * Copy resutls from target and analyze it.

@@ -1,3 +1,5 @@
 pmap_log/*
 data/*
 plots/*
+bw_profiler/backup
+__pycache__
