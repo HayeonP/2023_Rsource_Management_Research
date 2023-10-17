@@ -5,7 +5,10 @@ import sys
 import subprocess
 
 def profile_memory_bandwidth():
-    os.system(f'perf record --cpu {target_cores} -e l3d_cache_refill -F {target_frequency} sleep {duration} > /dev/null')
+    if mode == 'frequency':
+        os.system(f'perf record --cpu {target_cores} -e l3d_cache_refill -F {target_frequency} sleep {duration} > /dev/null')
+    elif mode == 'threshold':
+        os.system(f'perf record --cpu {target_cores} -e l3d_cache_refill -c {target_threshold} sleep {duration} > /dev/null')
     os.system(f'sleep 2')
     # print('finish')
     # sys.stdout.flush()
@@ -44,18 +47,20 @@ if __name__ == '__main__':
     label = configs['label']
     duration = configs['duration']
     target_cores = configs['target_cores']
+    mode = configs['mode']
     target_frequency = configs['target_frequency']
+    target_threshold = configs['target_threshold']
     dir_path = f'bw_profiler/{label}'
     file_path = f'{dir_path}/{label}.dat'
     file_name = f'{label}.dat'
-
-    if not os.path.exists(dir_path):
-        os.system(f'mkdir -p {dir_path}')
 
     if label != 'test' and os.path.exists(f'{file_path}'):
         print('[ERROR] Same name of log already exists')
         exit()
 
+    if not os.path.exists(dir_path):
+        os.system(f'mkdir -p {dir_path}')
+        
     print(f'Test CPU: {target_cores}')
     print(f'Experiment name: {label}')
     

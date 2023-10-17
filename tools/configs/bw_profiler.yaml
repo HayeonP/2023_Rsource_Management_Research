@@ -1,8 +1,10 @@
 label: test
+mode: threshold # frequency, threshold
 ssh_address: root@192.168.0.11
 target_project_dir: /home/root/sdd/tools
 target_cores: 0-3
 target_frequency: 1001
+target_threshold: 50000
 duration: 10
 xlim : [0.0, 10.0]
 ylim : [0.0, 15.0]
