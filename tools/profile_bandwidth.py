@@ -68,5 +68,7 @@ if __name__ == '__main__':
         profile_memory_bandwidth()
         if is_profile_correct():
             break
+    f.close()
+    os.system(f'cp configs/bw_profiler.yaml {dir_path}')
 
     print(f'{label}: Finish Profile Bandwidth')
