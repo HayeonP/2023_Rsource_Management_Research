@@ -1,4 +1,4 @@
-label: test
+label: test_4C4W_8192
 mode: frequency # frequency, threshold
 ssh_address: root@192.168.0.11
 target_project_dir: /home/root/sdd/tools

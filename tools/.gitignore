@@ -4,5 +4,6 @@ plots/*
 !bw_profiler/
 bw_profiler/*
 !bw_profiler/test
+memguard_experiment/*
 
 __pycache__

@@ -131,15 +131,15 @@ def plot_bandwidth_profile():
             # ivi          0.013    0.003388
 
     print("Memory bandwidth : {:.3f} GB/s\n".format(total_fetch *64 /(time_list[len(time_list)-1]-time_list[0])/ 1024.0 / 1024.0 / 1024.0))
-    print(f"Memory bandwidth std: {bw_std}")
-    print(f'max time interval: {max(time_diff_list)}, min time interval: {min(time_diff_list[10:])}, time interval std: {numpy.std(time_diff_list)}')
-    print(f'new bandwidth: {sum(list(new_bw_list.values())) / len(list(new_bw_list.values()))}')
-    print(f'over {bw_limit}GB/s ratio: {cnt / len(list(new_bw_list.values()))}')
-    print(f'graph area: {graph_area}')
-    print(f'over {bw_limit}GB/s graph area: {over_graph_area}')
-    print(f'event fetch frequency: {len(time_list) / (time_list[-1] - time_list[0]) / len(time_per_core_list)}')
-    for core in time_per_core_list:
-        print(f'core{core} event fetch frequency: {len(time_per_core_list[core]) / (time_per_core_list[core][-1] - time_per_core_list[core][0])}')
+    # print(f"Memory bandwidth std: {bw_std}")
+    # print(f'max time interval: {max(time_diff_list)}, min time interval: {min(time_diff_list[10:])}, time interval std: {numpy.std(time_diff_list)}')
+    # print(f'new bandwidth: {sum(list(new_bw_list.values())) / len(list(new_bw_list.values()))}')
+    # print(f'over {bw_limit}GB/s ratio: {cnt / len(list(new_bw_list.values()))}')
+    # print(f'graph area: {graph_area}')
+    # print(f'over {bw_limit}GB/s graph area: {over_graph_area}')
+    # print(f'event fetch frequency: {len(time_list) / (time_list[-1] - time_list[0]) / len(time_per_core_list)}')
+    # for core in time_per_core_list:
+    #     print(f'core{core} event fetch frequency: {len(time_per_core_list[core]) / (time_per_core_list[core][-1] - time_per_core_list[core][0])}')
 
     f = open(info_path, 'w')
     f.write("Memory bandwidth : {:.3f} GB/s\n".format(total_fetch *64 /(time_list[len(time_list)-1]-time_list[0])/ 1024.0 / 1024.0 / 1024.0))

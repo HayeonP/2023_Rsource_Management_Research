@@ -1,12 +1,16 @@
-Memory bandwidth : 4.981 GB/s
-Memory bandwidth std: 5.340898445548768
-max time interval: 0.5831990000006044, min time interval: 6.000002031214535e-06, time interval std: 0.029557979681874336
-new bandwidth: 9.180083623193193
-over 10GB/s ratio: 0.701001701001701
-graph area: 49.82183112076363
-over 10GB/s graph area: 7.377835921208562
-event fetch frequency: 132.3064770932898
-core[004] event fetch frequency: 425.74355356571505
-core[005] event fetch frequency: 27.012436525780693
-core[006] event fetch frequency: 30.395790183072002
-core[007] event fetch frequency: 46.19359294867367
+Memory bandwidth : 19.102 GB/s
+Memory bandwidth std: 1.8666262479224933
+max time interval: 0.7841870000120252, min time interval: 2.00001522898674e-06, time interval std: 0.03263835350882568
+new bandwidth: 19.099360958326788
+over 10GB/s ratio: 0.9964490037482738
+graph area: 191.07010337279473
+over 10GB/s graph area: 91.0651571425307
+event fetch frequency: 63.39562408478295
+core[000] event fetch frequency: 27.092950414241777
+core[001] event fetch frequency: 99.41754719730615
+core[002] event fetch frequency: 99.00506905952305
+core[003] event fetch frequency: 34.99580998955932
+core[004] event fetch frequency: 99.5502928078584
+core[005] event fetch frequency: 99.38334335180024
+core[006] event fetch frequency: 32.60861688741495
+core[007] event fetch frequency: 17.2955239184047
