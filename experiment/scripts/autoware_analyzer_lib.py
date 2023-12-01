@@ -114,7 +114,7 @@ def get_E2E_response_time(first_node_path, last_node_path, E2E_start_instance, E
         for i, row in enumerate(reader):
             if i == 0: 
                 column_idx = get_column_idx_from_csv(row)
-                continue       
+                continue
 
             start_time = float(row[column_idx['start']])
             instance_id = int(row[column_idx['instance']])
@@ -291,7 +291,7 @@ def center_offset_to_recent_data(center_offset_path, profiling_duartion):
     column_data = []
     recent_data = []
     column_idx = {}
-    
+
     with open(center_offset_path, 'r') as f:
         reader = csv.reader(f)
         for i, line in enumerate(reader):
@@ -337,7 +337,7 @@ def merge_binary_list_to_idx_list(a, b):
     for i,_ in enumerate(a):
         if a[i] == 1 or b[i] == 1: output.append(i)
     return output
-    
+
 def get_column_idx_from_csv(line):
     output = {}
     for i, v in enumerate(line):

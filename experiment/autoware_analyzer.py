@@ -524,10 +524,12 @@ def get_current_experiment_output():
     empty_experiment_info['l3d_cache_refill_event_cnt_of_ADAS_cores(per sec)'] = 1.1
     empty_experiment_info['l3d_cache_refill_event_cnt_of_all_cores(per sec)'] = 1.1
     with open(f'{cur_dir_output_path}/experiment_info.yaml', 'w') as f: yaml.dump(empty_experiment_info, f, default_flow_style=False)
+    if configs["experiment_title"][0] != 'cur_adas':
+        os.system(f'cp -r results/cur_adas results/{configs["experiment_title"][0]}')
 
 def get_recent_data():
     center_offset_path = 'results/cur_adas/0/center_offset.csv'
-    aa.center_offset_to_recent_data(center_offset_path, 50)
+    aa.center_offset_to_recent_data(center_offset_path, online_profiling_duration)
 
 if __name__ == '__main__':
     with open('yaml/autoware_analyzer.yaml') as f:
@@ -535,7 +537,9 @@ if __name__ == '__main__':
 
     chain_info = configs['node_chain']
     avoidance_x_range = configs['avoidnace_x_range']
-    if configs['experiment_title'][0] == 'cur_adas':
+    online_profiling = configs['online_profiling']
+    if online_profiling:
+        online_profiling_duration = configs['online_profiling_duration']
         get_current_experiment_output()
         get_recent_data()
 
