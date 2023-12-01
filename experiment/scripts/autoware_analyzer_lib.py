@@ -287,6 +287,37 @@ def check_matching_is_failed(center_offset_path, start_instance, end_instance, s
 
     return False
 
+def center_offset_to_recent_data(center_offset_path, profiling_duartion):
+    column_data = []
+    recent_data = []
+    column_idx = {}
+    
+    with open(center_offset_path, 'r') as f:
+        reader = csv.reader(f)
+        for i, line in enumerate(reader):
+            if i == 0:
+                column_idx = get_column_idx_from_csv(line)
+                column_data = line
+                continue
+            recent_data.append(line)
+
+    end_instance = int(recent_data[-1][column_idx['instance']])
+    end_time = float(recent_data[-1][column_idx['ts']])
+    start_time = end_time - profiling_duartion
+
+    recent_data = [line for line in recent_data if float(line[column_idx['ts']]) > start_time]
+    start_instance = recent_data[0][column_idx['instance']]
+
+
+    with open(center_offset_path, 'w') as f:
+        writer = csv.writer(f)
+        writer.writerow(column_data)
+        writer.writerows(recent_data)
+    return start_instance, end_instance
+
+def response_time_to_recent_data(response_time_path, start_instance, end_instance):
+    pass
+
 def mouse_event(event):
     print('x: {} and y: {}'.format(event.xdata, event.ydata))
     return

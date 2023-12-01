@@ -1,4 +1,4 @@
-
+import csv
 import yaml
 import matplotlib.pyplot as plt
 
@@ -510,12 +510,35 @@ def profile_perf_info_for_experiment(source_path):
 
     return perf_info
 
+def get_current_experiment_output():
+    cur_dir_output_path = 'results/cur_adas/0'
+    os.system(f'mkdir -p {cur_dir_output_path}')
+    os.system(f'mkdir -p {cur_dir_output_path}/../configs')
+    os.system(f'scp -r root@192.168.0.11:/var/lib/lxc/linux1/rootfs/home/root/Documents/profiling/response_time {cur_dir_output_path}')
+    os.system(f'cp ./center_line.csv {cur_dir_output_path}')
+    os.system(f'cp ./center_offset.csv {cur_dir_output_path}')
+    empty_experiment_info = {}
+    empty_experiment_info['avg_total_memory_bandwidth_usage(GB/s)'] = 1.0
+    empty_experiment_info['collapsed_position'] = []
+    empty_experiment_info['is_collaped'] = False
+    empty_experiment_info['l3d_cache_refill_event_cnt_of_ADAS_cores(per sec)'] = 1.1
+    empty_experiment_info['l3d_cache_refill_event_cnt_of_all_cores(per sec)'] = 1.1
+    with open(f'{cur_dir_output_path}/experiment_info.yaml', 'w') as f: yaml.dump(empty_experiment_info, f, default_flow_style=False)
+
+def get_recent_data():
+    center_offset_path = 'results/cur_adas/0/center_offset.csv'
+    aa.center_offset_to_recent_data(center_offset_path, 50)
+
 if __name__ == '__main__':
     with open('yaml/autoware_analyzer.yaml') as f:
         configs = yaml.load(f, Loader=yaml.FullLoader)
 
     chain_info = configs['node_chain']
     avoidance_x_range = configs['avoidnace_x_range']
+    if configs['experiment_title'][0] == 'cur_adas':
+        get_current_experiment_output()
+        get_recent_data()
+
 
     for i in range(len(configs['experiment_title'])):
         experiment_title = configs['experiment_title'][i]
