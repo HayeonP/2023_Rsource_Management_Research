@@ -3,6 +3,7 @@ import yaml
 import matplotlib.pyplot as plt
 
 import os
+import time
 import scripts.autoware_analyzer_lib as aa
 import numpy as np
 import copy
@@ -540,12 +541,18 @@ if __name__ == '__main__':
     online_profiling = configs['online_profiling']
     if online_profiling:
         online_profiling_duration = configs['online_profiling_duration']
+        sleep_bar = tqdm(range(online_profiling_duration))
+        sleep_bar.set_description(f'Sleep during {online_profiling_duration} seconds')
+        for sleep_tick in sleep_bar:
+            time.sleep(1)
         get_current_experiment_output()
         get_recent_data()
 
 
     for i in range(len(configs['experiment_title'])):
         experiment_title = configs['experiment_title'][i]
+        if online_profiling:
+            experiment_title = 'cur_adas'
         output_title = configs['output_title'][i]
         first_node = configs['first_node'][i]
         last_node = configs['last_node'][i]
