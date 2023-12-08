@@ -28,7 +28,7 @@ def _profile_response_time(dir_path, output_title, first_node, last_node, start_
     last_node_path = dir_path + '/' + last_node + '.csv'
 
     E2E_response_time, max_E2E_response_time, avg_E2E_response_time \
-                = aa.get_E2E_response_time(first_node_path, last_node_path, start_instance, end_instance, type=type)
+                = aa.get_E2E_response_time(first_node_path, last_node_path, start_instance, end_instance, online_profiling, type=type)
 
     exp_title = dir_path.split('/')[1]
     exp_id = dir_path.split('/')[2]
@@ -110,7 +110,7 @@ def _profile_response_time_for_experiment(source_path, output_title, first_node,
         if start_instance < 0: continue
 
         E2E_response_time, _, _ \
-            = aa.get_E2E_response_time(first_node_path, last_node_path, start_instance, end_instance, type)        
+            = aa.get_E2E_response_time(first_node_path, last_node_path, start_instance, end_instance, online_profiling, type)        
 
         # Profile instance leakge ratio
         instance_list = list(E2E_response_time.keys())
@@ -430,12 +430,12 @@ def profile_miss_alignment_delay(dir_path, output_title, chain_info, start_insta
     first_node_path = dir_path + '/' + chain_info[0] + '.csv'
     last_node_path = dir_path + '/' + chain_info[-1] + '.csv'
     
-    E2E_response_time, _, _ = aa.get_E2E_response_time(first_node_path, last_node_path, start_instance, end_instance, type='shortest')
+    E2E_response_time, _, _ = aa.get_E2E_response_time(first_node_path, last_node_path, start_instance, end_instance, online_profiling, type='shortest')
 
     node_response_time_list = []
     for node in chain_info:        
         node_path = dir_path + '/' + node + '.csv'
-        node_response_time, _, _ = aa.get_E2E_response_time(node_path, node_path, start_instance, end_instance, type='shortest')
+        node_response_time, _, _ = aa.get_E2E_response_time(node_path, node_path, start_instance, end_instance, online_profiling, type='shortest')
         node_response_time_list.append(node_response_time)
     miss_alignment_delay = copy.deepcopy(E2E_response_time)
 
@@ -525,8 +525,8 @@ def get_current_experiment_output():
     empty_experiment_info['l3d_cache_refill_event_cnt_of_ADAS_cores(per sec)'] = 1.1
     empty_experiment_info['l3d_cache_refill_event_cnt_of_all_cores(per sec)'] = 1.1
     with open(f'{cur_dir_output_path}/experiment_info.yaml', 'w') as f: yaml.dump(empty_experiment_info, f, default_flow_style=False)
-    if configs["experiment_title"][0] != 'cur_adas':
-        os.system(f'cp -r results/cur_adas results/{configs["experiment_title"][0]}')
+    # if configs["experiment_title"][0] != 'cur_adas':
+    #     os.system(f'cp -r results/cur_adas results/{configs["experiment_title"][0]}')
 
 def get_recent_data():
     center_offset_path = 'results/cur_adas/0/center_offset.csv'

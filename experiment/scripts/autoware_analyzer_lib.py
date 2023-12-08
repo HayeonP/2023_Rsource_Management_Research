@@ -83,12 +83,14 @@ def get_instance_pair(center_offset_path, start_x, end_x, simulator):
     # print(output_start_instance, output_end_instance)
     return output_start_instance, output_end_instance    
 
-def get_E2E_response_time(first_node_path, last_node_path, E2E_start_instance, E2E_end_instance, type):
+def get_E2E_response_time(first_node_path, last_node_path, E2E_start_instance, E2E_end_instance, online_profiling, type):
     if type != 'shortest' and type != 'longest':
         print('[ERROR] Invalidate type:', type)
         exit()
 
-    # E2E_start_instance = 368 # debug
+    
+    if not online_profiling or E2E_start_instance < 368:
+        E2E_start_instance = 368 # debug
 
     instance_info = {}
     start_instance = -1
