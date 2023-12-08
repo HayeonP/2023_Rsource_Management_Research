@@ -88,7 +88,7 @@ def get_E2E_response_time(first_node_path, last_node_path, E2E_start_instance, E
         print('[ERROR] Invalidate type:', type)
         exit()
 
-    E2E_start_instance = 368 # debug
+    # E2E_start_instance = 368 # debug
 
     instance_info = {}
     start_instance = -1
