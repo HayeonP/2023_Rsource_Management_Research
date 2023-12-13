@@ -202,7 +202,32 @@ def _profile_response_time_for_experiment(source_path, output_title, first_node,
             + ' / Collision ratio: ' + str(collision_ratio) \
             + ' / Matching failure ratio: '+ str(matching_failure_ratio))
     plt.savefig(plot_path)
-    plt.close()    
+    plt.close()
+    
+    # Distribution
+    distribution_path = 'analyzation/' + output_title + '/' + exp_title + '_' + mode + '_' + type + '_E2E_distribution.png'
+    
+    plt.hist(all_E2E_response_time_list, bins=50, density = True, color='c')
+    plt.axvline(avg_E2E_response_time, color="r", linestyle="--", label=f"Avg E2E: {round(avg_E2E_response_time,2)}ms")
+    
+    if len(all_E2E_response_time_list) > 0:
+        percentile_95 = round(np.percentile(all_E2E_response_time_list, 95),2)
+        plt.axvline(percentile_95, color="b", linestyle="--", label=f"95 percentile: {round(percentile_95,2)}ms")
+
+        percentile_99 = round(np.percentile(all_E2E_response_time_list, 99), 2)
+        plt.axvline(percentile_99, color="g", linestyle="--", label=f"99 percentile: {round(percentile_99,2)}ms")
+    
+    if len(max_E2E_response_time_list) > 0:
+        plt.axvline(max(max_E2E_response_time_list), color="k", linestyle="--", label=f"Max E2E: {round(max(max_E2E_response_time_list),2)}ms")
+    
+    plt.xlabel("E2E")
+    plt.ylabel("Density")
+    plt.legend(loc="lower center", bbox_to_anchor=(0.5,1.02), ncol=2)    
+    plt.tight_layout()
+    
+    plt.savefig(distribution_path)
+    plt.close()
+    
 
     return
 
