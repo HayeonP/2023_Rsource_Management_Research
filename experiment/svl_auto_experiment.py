@@ -11,6 +11,7 @@ from autoware_msgs.msg import VehicleCmd
 import scripts.slack_library as slack_library
 import scripts.svl_scenario as svl
 import signal
+import multiprocessing
 
 
 is_experiment_running = threading.Event()
@@ -187,6 +188,41 @@ def calculate_avg_memory_bandwidth_usage(l3d_cache_refill_event_cnt_per_sec):
     avg_memory_bandwidth_usage = l3d_cache_refill_event_cnt_per_sec * cache_line_size * 0.000000001
     return avg_memory_bandwidth_usage
 
+def run_stream():
+    os.system("ssh root@192.168.0.11 'taskset -c 1-3 /home/root/sdd/STREAM/STREAM_64MB_100000'")
+    return
+
+def kill_stream():
+    cmd = "ssh root@192.168.0.11 \"ps -ax\" | grep STREAM_64MB_100000"
+
+    while True:
+        while True:
+            try:
+                result = subprocess.check_output(cmd, shell=True, universal_newlines=True)
+                result = result.strip()
+                result = result.split("\n")
+                break
+            except subprocess.CalledProcessError as e:
+                if e.stderr is None: 
+                    result = []
+                    break
+                print(f"Error: {e}")
+
+        ps_info_list = []
+        for line in result:
+            ps_info = line.split(' ')
+            ps_info = [v for v in ps_info if v != '']
+            ps_info_list.append(ps_info)
+
+        if len(ps_info_list) == 0: break
+
+        for ps_info in ps_info_list:
+            if len(ps_info) == 0: continue
+            pid = ps_info[0]
+            os.system(f"ssh root@192.168.0.11 \"kill -9 {pid}\"")
+
+    return
+
 def experiment_manager(main_thread_pid):
     print('- Manager: Start manager')
     svl_scenario = svl.svl_scenario(configs['svl_cfg_path'])
@@ -216,12 +252,21 @@ def experiment_manager(main_thread_pid):
         
         # Start Experiment
         print('- Mnager: Start Experiment')
+        if configs['run_stream']:
+            stream_process = multiprocessing.Process(target=run_stream, args=())
+            stream_process.start()
+            time.sleep(5)
         start_writing_position_info()                
         perf_thread_for_ADAS_profiling.start()
         perf_thread_for_profiling.start()
         is_collapsed, collapsed_position = svl_scenario.run(timeout=configs['duration'], label='Iteration: ' + str(i+1)+'/'+str(configs['max_iteration']))        
         kill_perf()
         stop_writing_position_info()
+        if configs['run_stream']:
+            stream_process.terminate()
+            # stream_process.join()
+            kill_stream()
+            time.sleep(2)
 
         if i+1 == int(configs['max_iteration']): is_experiment_running.clear()
 
@@ -319,7 +364,8 @@ if __name__ == '__main__':
     if target_environment == 'desktop':
         os.system('cp ~/rubis_ws/src/rubis_autorunner/cfg/cubetown_autorunner/cubetown_autorunner_params.yaml ' + 'results/'+configs['experiment_title']+'/configs')
     elif target_environment == 'exynos':
-        os.system('scp -r root@' + configs[target_environment]['target_ip'] +':/var/lib/lxc/linux1/rootfs/opt/ros/melodic/share/rubis_autorunner/cfg/cubetown_autorunner/cubetown_autorunner_params.yaml ' + 'results/'+configs['experiment_title']+'/configs')        
+        os.system('scp -r root@' + configs[target_environment]['target_ip'] +':/var/lib/lxc/linux1/rootfs/home/root/rubis_ws/src/rubis_autorunner/cfg/cubetown_autorunner/cubetown_autorunner_params.yaml ' + 'results/'+configs['experiment_title']+'/configs')        
+        # os.system('scp -r root@' + configs[target_environment]['target_ip'] +':/var/lib/lxc/linux1/rootfs/opt/ros/melodic/share/rubis_autorunner/cfg/cubetown_autorunner/cubetown_autorunner_params.yaml ' + 'results/'+configs['experiment_title']+'/configs')        
 
     # Backup svl scenario
     os.system('cp yaml/svl_scenario.yaml ' + 'results/'+configs['experiment_title']+'/configs')
