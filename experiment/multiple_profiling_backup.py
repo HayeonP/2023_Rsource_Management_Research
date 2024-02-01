@@ -2,17 +2,9 @@ import yaml
 import os
 
 version_list = [1,2,3,4,5,6,7,8,9,10]
-repeat_list = [3,3,3,3,3,3,3,3,3,3]
-
-print(len(version_list))
-print(len(repeat_list))
-input("arr size check, Enter any key")
+repeat_list = [20,20,20,20,20,20,20,20,20,20]
 
 for i in range(len(version_list)):
-    # Erase log
-    os.system("ssh root@192.168.0.11 \'rm -r /var/lib/lxc/linux1/rootfs/home/root/autoware_openplanner_logs/*\'")
-    os.system("ssh root@192.168.0.11 \'rm -r /var/lib/lxc/linux1/rootfs/home/root/.ros/*\'")
-    
     with open("yaml/svl_auto_experiment_configs.yaml", "r") as f:
         config = yaml.load(f, Loader=yaml.FullLoader)
         
