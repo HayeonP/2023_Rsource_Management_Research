@@ -1,24 +1,22 @@
-simulator: 'svl' # carla, svl or old(before 230204)
-
-# avoidnace_x_range: [-34.0, 25.0]
-avoidnace_x_range: [-1000, 1000]
-
-# # The node chain for LKAS
-# node_chain: ['lidar_republisher', 'voxel_grid_filter', 'ndt_matching', 'pure_pursuit', 'twist_filter', 'twist_gate']
-
-online_profiling: True
-online_profiling_duration: 50
-
-experiment_title: ['cur_adas']
-output_title:     ['new_adas_baseline']
-first_node:       ['svl_sensing']
-last_node:        ['twist_filter']
-E2E_deadline:     [400.0]
-
-# The node chain for LKAS
-node_chain: ['svl_sensing', 'voxel_grid_filter', 'ndt_matching', 'pure_pursuit', 'twist_filter']
-
-# # The node chain for detection
-# node_chain: ['lidar_republisher', 'ray_ground_filter', 'lidar_euclidean_cluster_detect', 'op_motion_predictor']
-
-# 
+E2E_deadline:
+- 400.0
+avoidnace_x_range:
+- -1000
+- 1000
+experiment_title:
+- 240201_b9000_adas
+first_node:
+- svl_sensing
+last_node:
+- twist_filter
+node_chain:
+- svl_sensing
+- voxel_grid_filter
+- ndt_matching
+- pure_pursuit
+- twist_filter
+online_profiling: false
+online_profiling_duration: 300
+output_title:
+- 240201_b9000_adas
+simulator: svl

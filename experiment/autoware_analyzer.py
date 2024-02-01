@@ -1,5 +1,6 @@
 import csv
 import yaml
+import json
 import matplotlib.pyplot as plt
 
 import os
@@ -56,6 +57,11 @@ def _profile_response_time(dir_path, output_title, first_node, last_node, start_
     plt.title('E2E during avoidance\nis_collapsed='+str(is_collapsed) + '/ is_matching_failed='+str(is_matching_failed))
     plt.savefig(plot_path)
     plt.close()
+
+    e2e_path = output_dir_path+'/' + exp_title + '_' + exp_id + '_' + type + '_E2E_list.yaml'
+    with open(e2e_path, "w") as f:
+        e2e_data = {"instance_id": x_data, "e2e_response_time": y_data}
+        json.dump(e2e_data, f, indent=4)
         
 
     return
@@ -153,9 +159,11 @@ def _profile_response_time_for_experiment(source_path, output_title, first_node,
         avg_E2E_response_time = 0
         var_E2E_response_time = 0
         avg_max_E2E_response_time = 0
+        percentile_99 = 0
     else:
         max_E2E_response_time = max(all_E2E_response_time_list)    
         avg_E2E_response_time = sum(all_E2E_response_time_list) / len(all_E2E_response_time_list)
+        percentile_99 = float(round(np.percentile(all_E2E_response_time_list, 99),2))
         var_E2E_response_time = float(np.var(all_E2E_response_time_list))
         avg_max_E2E_response_time = sum(max_E2E_response_time_list) / len(max_E2E_response_time_list)
     
@@ -164,6 +172,7 @@ def _profile_response_time_for_experiment(source_path, output_title, first_node,
     E2E_response_time_info['deadline_ms'] = deadline
     E2E_response_time_info['max'] = max_E2E_response_time
     E2E_response_time_info['avg'] = avg_E2E_response_time
+    E2E_response_time_info['percentile_99'] = percentile_99
     E2E_response_time_info['var'] = var_E2E_response_time
     E2E_response_time_info['avg_max'] = avg_max_E2E_response_time    
     
