@@ -229,6 +229,7 @@ def _profile_response_time_for_experiment(source_path, output_title, first_node,
     if len(max_E2E_response_time_list) > 0:
         plt.axvline(max(max_E2E_response_time_list), color="k", linestyle="--", label=f"Max E2E: {round(max(max_E2E_response_time_list),2)}ms")
     
+    plt.ylim(0, 0.015)
     plt.xlabel("E2E")
     plt.ylabel("Density")
     plt.legend(loc="lower center", bbox_to_anchor=(0.5,1.02), ncol=2)    

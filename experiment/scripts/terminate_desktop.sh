@@ -1,12 +1,12 @@
 rosnode kill /svl_sensing
-rosnode kill /svl_camera_top
-rosnode kill /svl_camera_right
-rosnode kill /svl_camera_left
-rosnode kill /svl_camera_bottom
 rosnode kill /twist_gate
 rosnode kill /lidar_republisher
 rosnode kill /lidar_republisher_redundant1
 rosnode kill /lidar_republisher_redundant2
+rosnode kill /svl_camera_top
+rosnode kill /svl_camera_right
+rosnode kill /svl_camera_left
+rosnode kill /svl_camera_bottom
 rosnode kill /republish1
 rosnode kill /republish2
 rosnode kill /base_link_to_velodyne
@@ -45,5 +45,8 @@ rosnode kill /lane_detector_top
 rosnode kill /lane_detector_right
 rosnode kill /lane_detector_left
 rosnode kill /lane_detector_rear
+
 sleep 1
 rosnode kill /driving_progress_logger
+
+python3 scripts/terminate_cubetown_autorunner.py

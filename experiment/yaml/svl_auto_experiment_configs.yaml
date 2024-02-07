@@ -1,12 +1,12 @@
 ADAS_cores: 4-7
-adas_image_name: 230927_ADAS_lane_detection.ext4
+adas_image_name: 231005_ADAS_DAG.ext4
 all_cores: 0-7
 autorunner_mode: FULL
 desktop:
   response_time_path: /home/hayeonp/Documents/profiling/response_time
   rosbridge_cmd: roslaunch /home/hayeonp/rosbridge_websocket.launch
   termination_cmd: ./scripts/terminate_desktop.sh
-duration: 100000
+duration: 1000000
 experiment_title: test
 exynos:
   response_time_path: /var/lib/lxc/linux1/rootfs/home/root/Documents/profiling/response_time
@@ -14,5 +14,6 @@ exynos:
   target_ip: 192.168.0.11
   termination_cmd: ./scripts/terminate_exynos.sh
 max_iteration: 3
+run_stream: false
 svl_cfg_path: /home/hayeonp/git/2023_Resource_Management_Research/experiment/yaml/svl_scenario.yaml
 target_environment: exynos

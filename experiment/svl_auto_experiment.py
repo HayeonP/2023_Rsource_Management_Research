@@ -250,6 +250,9 @@ def experiment_manager(main_thread_pid):
         while not is_autorunner_started.is_set():
             svl_scenario.run(timeout=1, is_init=True)
         
+        # Set affinity
+        os.system("python3 scripts/set_affinity.py")
+        
         # Start Experiment
         print('- Mnager: Start Experiment')
         if configs['run_stream']:
