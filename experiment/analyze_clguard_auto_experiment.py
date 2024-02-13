@@ -5,8 +5,9 @@ import json
 import glob
 import numpy as np
 
-title_tag = '240208_b7000_adas'
+title_tag = '240212_b7000_adas'
 adas_exp_path_list = glob.glob(f'analyzation/{title_tag}_v*')
+adas_iteration = 3
 
 
 def get_exp_info(adas_exp_label):
@@ -26,7 +27,7 @@ def get_exp_info(adas_exp_label):
         if len(exp_results['result']['collision_index']) > 0:
             is_collapsed = True
 
-    for i in range(3):
+    for i in range(adas_iteration):
         with open(f'analyzation/{adas_exp_label}/shortest_E2E_response_time/{adas_exp_label}_{i}_shortest_E2E_list.yaml') as f:
             e2e_info = yaml.safe_load(f)
             e2e_list = e2e_info['e2e_response_time']
@@ -50,6 +51,23 @@ def get_exp_info(adas_exp_label):
                 if 'Throttling count' in line:
                     end_throttling_count = int(line.replace(' ', '').split(':')[-1].split('-')[0])
         exp_info[f'it{i}_throttling_cnt'] = end_throttling_count - start_throttling_count
+
+    with open(f'results/{adas_exp_label}/configs/it0_clguard_config_end.txt') as f:
+        lines = f.readlines()
+        for line in lines:
+            if 'Core4 hrtimer start time' in line:
+                core4_hrtimer_start_time = int(line.replace(' ', '').split(':')[-1].split('-')[0])
+            if 'Core5 hrtimer start time' in line:
+                core5_hrtimer_start_time = int(line.replace(' ', '').split(':')[-1].split('-')[0])
+            if 'Core6 hrtimer start time' in line:
+                core6_hrtimer_start_time = int(line.replace(' ', '').split(':')[-1].split('-')[0])
+            if 'Core7 hrtimer start time' in line:
+                core7_hrtimer_start_time = int(line.replace(' ', '').split(':')[-1].split('-')[0])
+
+    exp_info['core4_hrtimer_start_time'] = float(core4_hrtimer_start_time - core4_hrtimer_start_time) / 1000
+    exp_info['core5_hrtimer_start_time'] = float(core4_hrtimer_start_time - core5_hrtimer_start_time) / 1000
+    exp_info['core6_hrtimer_start_time'] = float(core4_hrtimer_start_time - core6_hrtimer_start_time) / 1000
+    exp_info['core7_hrtimer_start_time'] = float(core4_hrtimer_start_time - core7_hrtimer_start_time) / 1000
             
 
     version = int(adas_exp_label.split('_')[-1].replace('v', ''))
@@ -66,10 +84,10 @@ def write_adas_E2E(exp_info_list):
     e2e_file_name = title_tag.replace(title_tag.split('_')[0] + '_', '') + '_e2e'
     with open(f'{e2e_file_name}.csv', 'w') as f:
         writer = csv.writer(f)
-        writer.writerow(['adas_budget', 'seqwr_budget', 'avg_E2E', '99percentile_E2E', 'is_collapsed', 'it0_99percentile_E2E', 'it1_99percentile_E2E', 'it2_99percentile_E2E', 'it0_over7000_ratio', 'it1_over7000_ratio', 'it2_over7000_ratio', 'it0_throttling_cnt', 'it1_throttling_cnt', 'it2_throttling_cnt', 'version'])
+        writer.writerow(['adas_budget', 'seqwr_budget', 'avg_E2E', '99percentile_E2E', 'is_collapsed', 'it0_99percentile_E2E', 'it1_99percentile_E2E', 'it2_99percentile_E2E', 'it0_over7000_ratio', 'it1_over7000_ratio', 'it2_over7000_ratio', 'it0_throttling_cnt', 'it1_throttling_cnt', 'it2_throttling_cnt', 'core4_hrtimer_start_time', 'core5_hrtimer_start_time', 'core6_hrtimer_start_time', 'core7_hrtimer_start_time', 'version'])
 
         for exp_info in exp_info_list:
-            writer.writerow([7000, 4000, exp_info['adas_avg_E2E'], exp_info['adas_99percentile_E2E'], exp_info['is_collapsed'], exp_info['it0_99percentile_E2E'], exp_info['it1_99percentile_E2E'], exp_info['it2_99percentile_E2E'], exp_info['it0_over7000_ratio'], exp_info['it1_over7000_ratio'], exp_info['it2_over7000_ratio'], exp_info['it0_throttling_cnt'], exp_info['it1_throttling_cnt'], exp_info['it2_throttling_cnt'], exp_info['version']])
+            writer.writerow([7000, 4000, exp_info['adas_avg_E2E'], exp_info['adas_99percentile_E2E'], exp_info['is_collapsed'], exp_info['it0_99percentile_E2E'], exp_info['it1_99percentile_E2E'], exp_info['it2_99percentile_E2E'], exp_info['it0_over7000_ratio'], exp_info['it1_over7000_ratio'], exp_info['it2_over7000_ratio'], exp_info['it0_throttling_cnt'], exp_info['it1_throttling_cnt'], exp_info['it2_throttling_cnt'], exp_info['core4_hrtimer_start_time'], exp_info['core5_hrtimer_start_time'], exp_info['core6_hrtimer_start_time'], exp_info['core7_hrtimer_start_time'], exp_info['version']])
 
 if __name__ == '__main__':
     exp_info_list = []
