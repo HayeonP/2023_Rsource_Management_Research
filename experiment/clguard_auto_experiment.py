@@ -140,6 +140,9 @@ def profile_bandwidth(label, adas_iteration, adas_budget):
             # if current_velocity > 20: continue
             current_vehicle_cmd = rospy.wait_for_message('/vehicle_cmd', VehicleCmd, timeout=None)
             if current_vehicle_cmd.ctrl_cmd.linear_velocity < 1: continue
+            result = subprocess.check_output("ssh root@192.168.0.11 'cat /sys/kernel/debug/clguard1/config'", shell=True, universal_newlines=True)
+            with open(f'results/{label}/configs/it{i}_clguard_config_start.txt', 'w') as f:
+                f.write(result)
             os.system(f'cd {host_bandwidth_profiler_dir} && sh profile_bandwidth.sh')
             break
         
@@ -149,6 +152,9 @@ def profile_bandwidth(label, adas_iteration, adas_budget):
             except:
                 break
         print("@@@@ rospy.spin is over")
+        result = subprocess.check_output("ssh root@192.168.0.11 'cat /sys/kernel/debug/clguard1/config'", shell=True, universal_newlines=True)
+        with open(f'results/{label}/configs/it{i}_clguard_config_end.txt', 'w') as f:
+            f.write(result)
 
     print('code_end')
 
@@ -261,6 +267,103 @@ def b7000_adas_b4000_seqwr_experiment(version):
     rmmod_clguard('clguard1')
     rmmod_clguard('clguard2')
 
+def b7000_adas_seqwr4000_experiment(version):
+    adas_budget = 7000
+    seqwr_budget = 4000
+
+    # clguard1: ADAS, clguard2: SeqWr
+    if is_clguard_installed():
+        rmmod_clguard('clguard1')
+        rmmod_clguard('clguard2')
+    # if is_seqwr_executed():
+    #     terminate_seqwr()
+
+    # Setup ADAS budget to clguard
+    insmod_clguard('clguard1', '4-7', adas_budget)
+
+    # ADAS (w/ Clguard) + Seqwr (w/ Clguard)
+    label = f'{experiment_tag}_b{adas_budget}_adas_seqwr{seqwr_budget}_v{version}'
+    update_adas_config(label)
+
+    seqwr_process = multiprocessing.Process(target=seqwr_workload, args=(1, seqwr_budget,))
+    seqwr_process.start()
+
+    bw_profiling_process = multiprocessing.Process(target=profile_bandwidth, args=(label, adas_iteration, adas_budget,))
+    bw_profiling_process.start()
+
+    os.system(f'python3 svl_auto_experiment.py')
+
+    seqwr_process.terminate()
+    bw_profiling_process.terminate()
+    seqwr_process.join()
+    bw_profiling_process.join()
+    terminate_seqwr()
+
+    os.system(f'python3 autoware_analyzer.py')
+
+    rmmod_clguard('clguard1')
+    time.sleep(1)
+
+def b7000_adas_experiment(version):
+    adas_budget = 7000
+
+    # clguard1: ADAS, clguard2: SeqWr
+    if is_clguard_installed():
+        rmmod_clguard('clguard1')
+        rmmod_clguard('clguard2')
+    # if is_seqwr_executed():
+    #     terminate_seqwr()
+
+    # Setup ADAS budget to clguard
+    insmod_clguard('clguard1', '4-7', adas_budget)
+
+    # ADAS (w/ Clguard) + Seqwr (w/ Clguard)
+    label = f'{experiment_tag}_b{adas_budget}_adas_v{version}'
+    update_adas_config(label)
+
+    bw_profiling_process = multiprocessing.Process(target=profile_bandwidth, args=(label, adas_iteration, adas_budget,))
+    bw_profiling_process.start()
+
+    os.system(f'python3 svl_auto_experiment.py')
+
+    bw_profiling_process.terminate()
+    bw_profiling_process.join()
+
+    os.system(f'python3 autoware_analyzer.py')
+
+    rmmod_clguard('clguard1')
+    time.sleep(1)
+
+def b7000_adas_fix_clguard_experiment(version):
+    adas_budget = 7000
+
+    # clguard1: ADAS, clguard2: SeqWr
+    # if is_clguard_installed():
+    #     rmmod_clguard('clguard1')
+    #     rmmod_clguard('clguard2')
+    # if is_seqwr_executed():
+    #     terminate_seqwr()
+
+    # Setup ADAS budget to clguard
+    # insmod_clguard('clguard1', '4-7', adas_budget)
+
+    # ADAS (w/ Clguard) + Seqwr (w/ Clguard)
+    label = f'{experiment_tag}_b{adas_budget}_adas_fix_clguard_v{version}'
+    update_adas_config(label)
+
+    bw_profiling_process = multiprocessing.Process(target=profile_bandwidth, args=(label, adas_iteration, adas_budget,))
+    bw_profiling_process.start()
+
+    os.system(f'python3 svl_auto_experiment.py')
+
+    bw_profiling_process.terminate()
+    bw_profiling_process.join()
+
+    os.system(f'python3 autoware_analyzer.py')
+
+    # rmmod_clguard('clguard1')
+    time.sleep(1)
+
 if __name__ == '__main__':
     with open('yaml/clguard_auto_experiment.yaml') as f:
         configs = yaml.load(f, Loader=yaml.FullLoader)
@@ -282,6 +385,14 @@ if __name__ == '__main__':
     # for adas_budget in adas_budget_list:
     #     for seqwr_budget in seqwr_budget_list:
     #         adas_experiment(adas_budget, seqwr_budget)
+    # for i in range(100):
+    #     b7000_adas_seqwr4000_experiment(i)
 
-    for i in range(100):
-        b7000_adas_b4000_seqwr_experiment(i)
+    for i in range(0, 50):
+        b7000_adas_experiment(i)
+
+    # for i in range(50):
+    #     b7000_adas_b4000_seqwr_experiment(i)
+
+    # for i in range(50):
+    #     b7000_adas_seqwr4000_experiment(i)
