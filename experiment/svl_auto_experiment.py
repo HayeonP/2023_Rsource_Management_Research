@@ -352,8 +352,8 @@ if __name__ == '__main__':
         if does_dir_exist:
             print('[Error] Experiment result exists already')
             exit()
-    os.mkdir('results/'+configs['experiment_title'])
-    os.mkdir('results/'+configs['experiment_title']+'/configs')
+    os.system('mkdir -p results/'+configs['experiment_title'])
+    os.system('mkdir -p results/'+configs['experiment_title']+'/configs')
     
     # Move params to the target board ant backup it
     if target_environment == 'desktop':
