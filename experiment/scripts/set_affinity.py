@@ -60,7 +60,6 @@ if __name__ == "__main__":
     node_ps_info = get_node_ps_info(autorunner_params.keys(), ps_output)
         
     for node_name in tqdm(autorunner_params):
-        if node_name != "others": continue        
         if "affinity" not in autorunner_params[node_name]:
             continue
         
@@ -72,8 +71,9 @@ if __name__ == "__main__":
             continue
         
         for target_ps_info in target_ps_info_list:
-            if target_ps_info["pid"] == target_ps_info["tid"]:
-                run_ssh_command(f"taskset -p -c {main_affinity} {target_ps_info['tid']}")
-            else:
-                run_ssh_command(f"taskset -p -c {child_affinity} {target_ps_info['tid']}")
+            # if target_ps_info["pid"] == target_ps_info["tid"]:
+            #     run_ssh_command(f"taskset -p -c {main_affinity} {target_ps_info['tid']}")
+            # else:
+            #     run_ssh_command(f"taskset -p -c {child_affinity} {target_ps_info['tid']}")
+            run_ssh_command(f"chrt -f -p 99 {target_ps_info['tid']}")
     

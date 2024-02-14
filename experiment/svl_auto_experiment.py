@@ -250,8 +250,8 @@ def experiment_manager(main_thread_pid):
         while not is_autorunner_started.is_set():
             svl_scenario.run(timeout=1, is_init=True)
         
-        # Set affinity
-        os.system("python3 scripts/set_affinity.py")
+        # # Set affinity
+        # os.system("python3 scripts/set_affinity.py")
         
         # Start Experiment
         print('- Mnager: Start Experiment')
@@ -291,7 +291,7 @@ def experiment_manager(main_thread_pid):
         experiment_info['avg_total_memory_bandwidth_usage(GB/s)'] = calculate_avg_memory_bandwidth_usage(l3d_cache_refill_event_cnt_of_all_cores)
 
         print('- Manager: Save result')
-        save_result(i, experiment_info)       
+        save_result(i, experiment_info) 
         if not is_experiment_running.is_set():
             message = 'Experiment is finished: '+configs['experiment_title']
             payload = {"text": message}
@@ -338,14 +338,6 @@ if __name__ == '__main__':
 
     experiment_title = configs['experiment_title']
     if target_environment != 'desktop': target_ip = configs[target_environment]['target_ip']
-    
-    # Move params to the target board ant backup it
-    if target_environment == 'desktop':
-        os.system('cp yaml/cubetown_autorunner_params.yaml ~/rubis_ws/src/rubis_autorunner/cfg/cubetown_autorunner/cubetown_autorunner_params.yaml')
-        os.system(f'cp yaml/cubetown_autorunner_params.yaml results/{experiment_title}/configs')
-    elif target_environment == 'exynos':        
-        os.system(f'scp -r yaml/cubetown_autorunner_params.yaml root@{target_ip}:/var/lib/lxc/linux1/rootfs/home/root/rubis_ws/src/rubis_autorunner/cfg/cubetown_autorunner/cubetown_autorunner_params.yaml')        
-        os.system(f'cp yaml/cubetown_autorunner_params.yaml results/{experiment_title}/configs')
 
     # Setup ssh key of host to the exynos board
     if target_environment == 'exynos':
@@ -362,6 +354,16 @@ if __name__ == '__main__':
             exit()
     os.mkdir('results/'+configs['experiment_title'])
     os.mkdir('results/'+configs['experiment_title']+'/configs')
+    
+    # Move params to the target board ant backup it
+    if target_environment == 'desktop':
+        os.system('cp yaml/cubetown_autorunner_params.yaml ~/rubis_ws/src/rubis_autorunner/cfg/cubetown_autorunner/cubetown_autorunner_params.yaml')
+        os.system(f'cp yaml/cubetown_autorunner_params.yaml results/{experiment_title}/configs')
+    elif target_environment == 'exynos':        
+        os.system(f'scp -r yaml/cubetown_autorunner_params.yaml root@{target_ip}:/var/lib/lxc/linux1/rootfs/home/root/rubis_ws/src/rubis_autorunner/cfg/cubetown_autorunner/cubetown_autorunner_params.yaml')        
+        print(f'cp yaml/cubetown_autorunner_params.yaml results/{experiment_title}/configs')
+        os.system(f'cp yaml/cubetown_autorunner_params.yaml results/{experiment_title}/configs')
+    
     
     # Backup autoware params
     if target_environment == 'desktop':

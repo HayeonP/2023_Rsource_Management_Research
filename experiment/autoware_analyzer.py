@@ -469,6 +469,9 @@ def profile_miss_alignment_delay(dir_path, output_title, chain_info, start_insta
 
     node_response_time_list = []
     for node in chain_info:        
+        if node == "voxel_grid_filter":
+            node = "voexl_grid_filter"
+
         node_path = dir_path + '/' + node + '.csv'
         node_response_time, _, _ = aa.get_E2E_response_time(node_path, node_path, start_instance, end_instance, online_profiling, type='shortest')
         node_response_time_list.append(node_response_time)

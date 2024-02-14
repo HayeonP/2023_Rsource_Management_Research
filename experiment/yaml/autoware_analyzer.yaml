@@ -4,7 +4,7 @@ avoidnace_x_range:
 - -1000
 - 1000
 experiment_title:
-- test
+- 240213_b7000_adas_100sec_x20_v14
 first_node:
 - svl_sensing
 last_node:
@@ -15,8 +15,8 @@ node_chain:
 - ndt_matching
 - pure_pursuit
 - twist_filter
-online_profiling: True
+online_profiling: false
 online_profiling_duration: 30
 output_title:
-- online
+- 240213_b7000_adas_100sec_x20_v14
 simulator: svl

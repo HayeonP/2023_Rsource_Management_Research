@@ -318,9 +318,8 @@ def b7000_adas_experiment(version):
     insmod_clguard('clguard1', '4-7', adas_budget)
 
     # ADAS (w/ Clguard) + Seqwr (w/ Clguard)
-    label = f'{experiment_tag}_b{adas_budget}_adas_v{version}'
+    label = f'{experiment_tag}_b{adas_budget}_adas_{adas_duration}sec_x{adas_iteration}_v{version}'
     update_adas_config(label)
-
     bw_profiling_process = multiprocessing.Process(target=profile_bandwidth, args=(label, adas_iteration, adas_budget,))
     bw_profiling_process.start()
 
@@ -388,7 +387,7 @@ if __name__ == '__main__':
     # for i in range(100):
     #     b7000_adas_seqwr4000_experiment(i)
 
-    for i in range(0, 50):
+    for i in range(0, 15):
         b7000_adas_experiment(i)
 
     # for i in range(50):

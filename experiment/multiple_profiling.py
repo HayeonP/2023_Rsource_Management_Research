@@ -1,8 +1,8 @@
 import yaml
 import os
 
-version_list = [1,2,3,4,5,6,7,8,9,10]
-repeat_list = [3,3,3,3,3,3,3,3,3,3]
+version_list = range(6)
+repeat_list = [3,3,3,3,3,3]
 
 print(len(version_list))
 print(len(repeat_list))
