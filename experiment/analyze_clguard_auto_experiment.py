@@ -5,7 +5,7 @@ import json
 import glob
 import numpy as np
 
-title_tag = '240212_b7000_adas'
+title_tag = '240214_newCl_b7000_adas'
 adas_exp_path_list = glob.glob(f'analyzation/{title_tag}_v*')
 adas_iteration = 3
 

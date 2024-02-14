@@ -19,7 +19,7 @@ lgsvl_bridge:
   port: 9090
 
 ego:
-  asset-id: de8dd014-aa11-4980-9b0a-614bc38f44fe
+  asset-id: 0aa34802-8dc2-472f-a211-237e2ce163bc
 
 asset-id_info_path: ../RubisSVL/toolset/sensor_setup/asset_id.yaml
 

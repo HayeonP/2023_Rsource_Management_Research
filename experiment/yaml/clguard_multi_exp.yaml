@@ -1,0 +1,6 @@
+adas_iteration: 3
+adas_duration: 100
+experiment_tag: 'test'
+
+adas_budget_list: [9000, 6000]
+seqwr_budget_list: [1000, 5000]
