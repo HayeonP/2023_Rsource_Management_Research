@@ -1,10 +1,14 @@
 adas_iteration: 20
 adas_duration: 100
 ssh_address: 'root@192.168.0.11'
-host_bandwidth_profiler_dir: '/home/hayeonp/git/ClusterLevelMemguard/tools'
+host_bandwidth_profiler_dir: '/home/lee/experience/rubis-lab/ClusterLevelMemguard/tools'
 exynos_clguard_dir: '/var/lib/lxc/linux1/rootfs/home/root/mg'
 clguard_limit_dir: '/sys/kernel/debug/memguard/clusters'
+<<<<<<< HEAD
 experiment_tag: '240213'
+=======
+experiment_tag: '240214_timer_'
+>>>>>>> cbc393479f98114faeb0276fca5d40ca5d6184e2
 # adas_budget: [9000]
 # seqwr_budget: [4000]
 
@@ -13,4 +17,8 @@ experiment_tag: '240213'
 # adas_budget: [9000, 8000, 7000, 6000]
 # seqwr_budget: [1000, 2000, 3000, 4000, 5000, 6000, 7000]
 adas_budget: [7000]
+<<<<<<< HEAD
 seqwr_budget: [3000]
+=======
+seqwr_budget: [4000]
+>>>>>>> cbc393479f98114faeb0276fca5d40ca5d6184e2
