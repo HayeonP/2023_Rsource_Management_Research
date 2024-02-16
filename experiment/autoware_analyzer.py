@@ -31,8 +31,8 @@ def _profile_response_time(dir_path, output_title, first_node, last_node, start_
     E2E_response_time, max_E2E_response_time, avg_E2E_response_time \
                 = aa.get_E2E_response_time(first_node_path, last_node_path, start_instance, end_instance, online_profiling, type=type)
 
-    exp_title = dir_path.split('/')[1]
-    exp_id = dir_path.split('/')[2]
+    exp_title = dir_path.split('/')[-3]
+    exp_id = dir_path.split('/')[-2]
 
     output_dir_path = 'analyzation/' + output_title + '/' + type + '_E2E_response_time'
     if not os.path.exists(output_dir_path): os.system('mkdir -p ' + output_dir_path)
