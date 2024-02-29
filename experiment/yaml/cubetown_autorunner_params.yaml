@@ -16,10 +16,7 @@ svl_sensing:
     exec_time: 1_000_000
     deadline: 2_000_000
     period: 2_000_000
-  affinity:
-    main: 7
-    child: 7
-  task_response_time_filename: "~/Documents/profiling/response_time/svl_sensing.csv"
+  task_response_time_filename: "~/Documents/profiling/response_time/svl_sensing.csv"  
 
 lane_detector_top:
   task_scheduling_configs:
@@ -28,10 +25,52 @@ lane_detector_top:
     exec_time: 1_000_000
     deadline: 2_000_000
     period: 2_000_000
-  affinity:
-    main: 4
-    child: 4
-  task_response_time_filename: "~/Documents/profiling/response_time/lane_detector_top.csv"
+  task_response_time_filename: "~/Documents/profiling/response_time/lane_detector_top.csv"  
+
+lane_detector_right:
+  task_scheduling_configs:
+    policy: "NONE"
+    priority: 20
+    exec_time: 1_000_000
+    deadline: 2_000_000
+    period: 2_000_000
+  task_response_time_filename: "~/Documents/profiling/response_time/lane_detector_right.csv"  
+
+lane_detector_left:
+  task_scheduling_configs:
+    policy: "NONE"
+    priority: 20
+    exec_time: 1_000_000
+    deadline: 2_000_000
+    period: 2_000_000
+  task_response_time_filename: "~/Documents/profiling/response_time/lane_detector_left.csv"  
+
+lane_detector_rear:
+  task_scheduling_configs:
+    policy: "NONE"
+    priority: 20
+    exec_time: 1_000_000
+    deadline: 2_000_000
+    period: 2_000_000
+  task_response_time_filename: "~/Documents/profiling/response_time/lane_detector_rear.csv"  
+
+lidar_republisher:
+  task_scheduling_configs:
+    policy: "NONE"
+    priority: 20
+    exec_time: 1_000_000
+    deadline: 2_000_000
+    period: 2_000_000
+  task_response_time_filename: "~/Documents/profiling/response_time/lidar_republisher.csv"  
+
+voxel_grid_filter:  
+  task_scheduling_configs:
+    policy: "NONE"
+    priority: 20
+    exec_time: 0 # ns
+    deadline: 0 # ns
+    period: 0 # ns
+  task_response_time_filename: "~/Documents/profiling/response_time/voxel_grid_filter.csv"  
 
 ndt_matching:
   task_scheduling_configs:
@@ -40,13 +79,10 @@ ndt_matching:
     exec_time: 0 # ns
     deadline: 0 # ns
     period: 0 # ns
-  affinity:
-    main: 5
-    child: 5
   task_response_time_filename: "~/Documents/profiling/response_time/ndt_matching.csv"
-
+  
   use_kalman_filter: False
-  tf_x: 1.0510799
+  tf_x: 1.0510799 
   tf_y: 0
   tf_z: 1.96
   tf_roll: 0
@@ -60,11 +96,8 @@ pure_pursuit:
     priority: 20
     exec_time: 0 # ns
     deadline: 0 # ns
-    period: 0 # ns
-  affinity:
-    main: 7
-    child: 7
-  task_response_time_filename: "~/Documents/profiling/response_time/pure_pursuit.csv"
+    period: 0 # ns  
+  task_response_time_filename: "~/Documents/profiling/response_time/pure_pursuit.csv"  
 
   dynamic_params_flag: False
   dynamic_params_path: "~/autoware.ai/autoware_files/lgsvl_file/parameter/lgsvl_pure_pursuit.yaml"
@@ -76,9 +109,6 @@ twist_filter:
     exec_time: 0 # ns
     deadline: 0 # ns
     period: 0 # ns
-  affinity:
-    main: 7
-    child: 7
   task_response_time_filename: "~/Documents/profiling/response_time/twist_filter.csv"
 
 # Detection
@@ -89,9 +119,6 @@ ray_ground_filter_center:
     exec_time: 0 # ns
     deadline: 0 # ns
     period: 0 # ns
-  affinity:
-    main: 7
-    child: 7
   task_response_time_filename: "~/Documents/profiling/response_time/ray_ground_filter.csv"
 
 lidar_euclidean_cluster_detect:
@@ -101,9 +128,6 @@ lidar_euclidean_cluster_detect:
     exec_time: 0 # ns
     deadline: 0 # ns
     period: 0 # ns
-  affinity:
-    main: 7
-    child: 7
   task_response_time_filename: "~/Documents/profiling/response_time/lidar_euclidean_cluster_detect.csv"
 
   network_definition_file: "~/autoware.ai/autoware_files/vision/yolov3-320.cfg"
@@ -118,9 +142,6 @@ op_global_planner:
     exec_time: 0 # ns
     deadline: 0 # ns
     period: 0 # ns
-  affinity:
-    main: 7
-    child: 7
   task_response_time_filename: "~/Documents/profiling/response_time/op_global_planner.csv"
 
   multilap_flag: 1
@@ -131,6 +152,7 @@ op_common_params:
   maxVelocity: 7.5
   maxAcceleration: 7.5
   maxDeceleration: -7.5
+  blockIdx: 2
 
 op_trajectory_generator:
   task_scheduling_configs:
@@ -139,9 +161,6 @@ op_trajectory_generator:
     exec_time: 0 # ns
     deadline: 0 # ns
     period: 0 # ns
-  affinity:
-    main: 7
-    child: 7
   task_response_time_filename: "~/Documents/profiling/response_time/op_trajectory_generator.csv"
 
 op_trajectory_evaluator:
@@ -151,9 +170,6 @@ op_trajectory_evaluator:
     exec_time: 0 # ns
     deadline: 0 # ns
     period: 0 # ns
-  affinity:
-    main: 7
-    child: 7
   task_response_time_filename: "~/Documents/profiling/response_time/op_trajectory_evaluator.csv"
 
   weightPriority: 1
@@ -172,15 +188,21 @@ op_behavior_selector:
     exec_time: 0 # ns
     deadline: 0 # ns
     period: 0 # ns
-  affinity:
-    main: 7
-    child: 7
   task_response_time_filename: "~/Documents/profiling/response_time/op_behavior_selector.csv"
 
   distanceToPedestrianThreshold: 15.0
   sprintSpeed: 10.0
   obstacleWaitingTimeinIntersection: 2.0
   turnThreshold: 30.0
+
+op_motion_predictor:
+  task_scheduling_configs:
+    policy: "NONE"
+    priority: 20
+    exec_time: 0 # ns
+    deadline: 0 # ns
+    period: 0 # ns  
+  task_response_time_filename: "~/Documents/profiling/response_time/op_motion_predictor.csv"
 
 # Independent
 twist_gate:
@@ -190,14 +212,6 @@ twist_gate:
     exec_time: 0 # ns
     deadline: 0 # ns
     period: 0 # ns
-  affinity:
-    main: 7
-    child: 7
   task_response_time_filename: "~/Documents/profiling/response_time/twist_gate.csv"
 
   zero_flag: 0 ## Publish target velocity as 0
-
-others:
-  affinity:
-    main: 6
-    child: 6
