@@ -1,0 +1,47 @@
+exp:
+  iteration: 2
+
+origin:
+  offset:
+    x: 1.62       # right to left (ROS -y)
+    y: 0          # Vertical (ROS z)
+    z: 18.3       # Forward (ROS x)
+    r: 90         # Counter-Clockwise, degree
+
+simulator:
+  address: localhost
+  port: 8181
+  scene: CubeTown
+
+# Host
+lgsvl_bridge:
+  address: 127.0.01
+  port: 9090
+
+ego:
+  asset-id: de8dd014-aa11-4980-9b0a-614bc38f44fe
+
+asset-id_info_path: ../RubisSVL/toolset/sensor_setup/asset_id.yaml
+
+npc:
+  - npc0:
+    name: DongMin
+    type: Sedan
+    offset:
+      forward: 58
+      right: 25
+      rotation: -90
+  - npc1:
+    name: Seohwan
+    type: Sedan
+    offset:
+      forward: 52
+      right: 0
+      rotation: -90 # Clockwise
+  - npc2:
+    name: Rubis
+    type: Sedan
+    offset:
+      forward: 58
+      right: -30
+      rotation: -90 # Clockwise

@@ -1,0 +1,7 @@
+
+ Performance counter stats for 'CPU(s) 4-7':
+
+         508747412      l3d_cache_refill                                            
+
+       5.328182241 seconds time elapsed
+

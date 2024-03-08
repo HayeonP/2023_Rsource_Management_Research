@@ -1,0 +1,39 @@
+exp:
+  iteration: 2
+
+origin:
+  offset:
+    x: 1.62       # right to left (ROS -y)
+    y: 0          # Vertical (ROS z)
+    z: 18.3       # Forward (ROS x)
+    r: 90         # Counter-Clockwise, degree
+
+simulator:
+  address: localhost
+  port: 8181
+  scene: CubeTown
+
+# Host
+lgsvl_bridge:
+  address: 127.0.0.1
+  port: 9090
+
+ego:
+  asset-id: 477d5100-399c-40bb-aaf8-49b618c7118c # hypark
+
+npc:
+  - npc0:
+    name: DongMin
+    type: Sedan
+    offset:
+      forward: 56
+      right: 0
+      rotation: -90
+  - npc1:
+    name: Seohwan
+    type: Sedan
+    offset:
+      forward: 53
+      right: 0
+      rotation: -90 # Clockwise
+  
