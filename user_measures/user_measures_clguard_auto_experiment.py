@@ -104,10 +104,10 @@ def update_adas_config(label, user_measure):
     with open("yaml/svl_auto_experiment_configs.yaml", "r") as f:
         config = yaml.load(f, Loader=yaml.FullLoader)
 
-    config["experiment_title"] = label + '_' + user_measure + '_'
+    config["experiment_title"] = label
     config["max_iteration"] = adas_iteration
     # select user measure scenario
-    config["svl_cfg_path"] = config["svl_cfg_path"].split("svl_scenario.yaml")[0] + "svl_scenario_" + user_measure + ".yaml"
+    config["svl_cfg_path"] = config["svl_cfg_path"].split("svl_scenario")[0] + "svl_scenario_" + user_measure + ".yaml"
     if user_measure == 'handling':
         config["duration"] = 100
     else:
@@ -174,32 +174,32 @@ def start_experiment(measure, adas_budget, seqwr_budget, seqwr_clguard):
     
     # ADAS only (w/o Clguard)
     if not adas_budget and not seqwr_budget:
-        label = f'{experiment_tag}_b{adas_budget}_adas_only'
+        label = f'{experiment_tag}_{measure}_b{adas_budget}_adas_only'
         update_adas_config(label, measure)
 
         bw_profiling_process = multiprocessing.Process(target=profile_bandwidth, args=(label, adas_iteration, adas_budget,))
         bw_profiling_process.start()
 
-        os.system(f'python3 svl_auto_experiment.py')
+        os.system(f'python3 user_measures_svl_auto_experiment.py')
 
         bw_profiling_process.terminate()
         bw_profiling_process.join()
 
         time.sleep(1)
-        os.system(f'python3 autoware_analyzer.py')
+        os.system(f'python3 user_measures_autoware_analyzer.py')
 
     # ADAS only (w/ Clguard)
     elif adas_budget and not seqwr_budget:
         # Setup ADAS budget to clguard
         insmod_clguard('clguard1', '4-7', adas_budget)
         
-        label = f'{experiment_tag}_b{adas_budget}_adas_only'
+        label = f'{experiment_tag}_{measure}_b{adas_budget}_adas_only'
         update_adas_config(label, measure)
 
         bw_profiling_process = multiprocessing.Process(target=profile_bandwidth, args=(label, adas_iteration, adas_budget,))
         bw_profiling_process.start()
 
-        os.system(f'python3 svl_auto_experiment.py')
+        os.system(f'python3 user_measures_svl_auto_experiment.py')
 
         seqwr_process.terminate()
         bw_profiling_process.terminate()
@@ -207,7 +207,7 @@ def start_experiment(measure, adas_budget, seqwr_budget, seqwr_clguard):
         bw_profiling_process.join()
         terminate_seqwr()
 
-        os.system(f'python3 autoware_analyzer.py')
+        os.system(f'python3 user_measures_autoware_analyzer.py')
 
         rmmod_clguard('clguard1')
 
@@ -218,7 +218,7 @@ def start_experiment(measure, adas_budget, seqwr_budget, seqwr_clguard):
         # Setup SeqWr budget to Clguard
         insmod_clguard('clguard2', '1-3', seqwr_budget)
 
-        label = f'{experiment_tag}_b{adas_budget}_adas_b{seqwr_budget}_seqwr'
+        label = f'{experiment_tag}_{measure}_b{adas_budget}_adas_b{seqwr_budget}_seqwr'
         update_adas_config(label, measure)
 
         seqwr_process = multiprocessing.Process(target=seqwr_workload, args=(1, 204800,))
@@ -226,7 +226,7 @@ def start_experiment(measure, adas_budget, seqwr_budget, seqwr_clguard):
         seqwr_process.start()
         bw_profiling_process.start()
 
-        os.system(f'python3 svl_auto_experiment.py')
+        os.system(f'python3 user_measures_svl_auto_experiment.py')
 
         seqwr_process.terminate()
         bw_profiling_process.terminate()
@@ -234,7 +234,7 @@ def start_experiment(measure, adas_budget, seqwr_budget, seqwr_clguard):
         bw_profiling_process.join()
         terminate_seqwr()
 
-        os.system(f'python3 autoware_analyzer.py')
+        os.system(f'python3 user_measures_autoware_analyzer.py')
     
         rmmod_clguard('clguard1')
         rmmod_clguard('clguard2')
@@ -244,7 +244,7 @@ def start_experiment(measure, adas_budget, seqwr_budget, seqwr_clguard):
         # Setup ADAS budget to clguard
         insmod_clguard('clguard1', '4-7', adas_budget)
         
-        label = f'{experiment_tag}_b{adas_budget}_adas_seqwr{seqwr_budget}'
+        label = f'{experiment_tag}_{measure}_b{adas_budget}_adas_seqwr{seqwr_budget}'
         update_adas_config(label, measure)
 
         seqwr_process = multiprocessing.Process(target=seqwr_workload, args=(1, seqwr_budget,))
@@ -252,7 +252,7 @@ def start_experiment(measure, adas_budget, seqwr_budget, seqwr_clguard):
         seqwr_process.start()
         bw_profiling_process.start()
 
-        os.system(f'python3 svl_auto_experiment.py')
+        os.system(f'python3 user_measures_svl_auto_experiment.py')
 
         seqwr_process.terminate()
         bw_profiling_process.terminate()
@@ -260,13 +260,13 @@ def start_experiment(measure, adas_budget, seqwr_budget, seqwr_clguard):
         bw_profiling_process.join()
         terminate_seqwr()
 
-        os.system(f'python3 autoware_analyzer.py')
+        os.system(f'python3 user_measures_autoware_analyzer.py')
 
         rmmod_clguard('clguard1')
 
 
 if __name__ == '__main__':
-    with open('yaml/clguard_auto_experiment.yaml') as f:
+    with open('yaml/user_measures_auto_experiment.yaml') as f:
         configs = yaml.load(f, Loader=yaml.FullLoader)
 
     adas_iteration = configs['adas_iteration']

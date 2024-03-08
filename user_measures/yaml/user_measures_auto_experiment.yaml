@@ -1,10 +1,10 @@
-adas_iteration: 3
+adas_iteration: 1
 # adas_duration: auto set (to handling -> 100 / braking,lane_change -> 20)
 ssh_address: 'root@192.168.0.11'
 host_bandwidth_profiler_dir: '/home/hayeonp/git/ClusterLevelMemguard/tools'
 exynos_clguard_dir: '/var/lib/lxc/linux1/rootfs/home/root/mg'
 clguard_limit_dir: '/sys/kernel/debug/memguard/clusters'
-experiment_tag: '240223/clguard_leader_untrack_'
+experiment_tag: '240308/7.5'
 
 # user_measure_scenario: ['braking', 'handling', 'lane_change']
 user_measure_scenario: ['braking', 'handling', 'lane_change']
