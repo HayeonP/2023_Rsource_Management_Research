@@ -3,21 +3,17 @@ adas_image_name: 231005_ADAS_DAG.ext4
 all_cores: 0-7
 autorunner_mode: FULL
 desktop:
-  response_time_path: /home/lee/Documents/profiling/response_time
+  response_time_path: /home/hayeonp/Documents/profiling/response_time
   rosbridge_cmd: roslaunch lgsvl_ros_bridge rosbridge_websocket.launch
   termination_cmd: ./scripts/terminate_desktop.sh
-duration: 100
-<<<<<<< HEAD
-experiment_title: 240213_b7000_adas_100sec_x20_v14
-=======
-experiment_title: 240214_timer__b7000_adas_v20
->>>>>>> cbc393479f98114faeb0276fca5d40ca5d6184e2
+duration: 22
+experiment_title: 240305/zigzag_b8000_adas_3seqwr
 exynos:
   response_time_path: /var/lib/lxc/linux1/rootfs/home/root/Documents/profiling/response_time
   rosbridge_cmd: roslaunch lgsvl_ros_bridge rosbridge_websocket.launch
   target_ip: 192.168.0.11
   termination_cmd: ./scripts/terminate_exynos.sh
-max_iteration: 20
+max_iteration: 50
 run_stream: false
-svl_cfg_path: /home/lee/experience/2023_Resource_Management_Research/experiment/yaml/svl_scenario.yaml
+svl_cfg_path: /home/hayeonp/git/2023_Resource_Management_Research/experiment/yaml/svl_scenario.yaml
 target_environment: exynos

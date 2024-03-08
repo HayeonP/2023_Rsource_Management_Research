@@ -4,6 +4,6 @@ target_project_dir: /home/root/sdd/tools
 target_workload: [1C1W, 4C1W, 4C2W, 4C3W, 4C4W]
 target_bandwidth: ['no_limit', 2048, 4096, 8192]
 profiling_duration: 10
-host_memguard_directory: /home/lee/experience/rubis-lab/ClusterLevelMemguard
+host_memguard_directory: /home/hayeonp/git/ClusterLevelMemguard
 exynos_memguard_directory: /var/lib/lxc/linux1/rootfs/home/root/mg
 memguard_limit_directory: /sys/kernel/debug/memguard/clusters

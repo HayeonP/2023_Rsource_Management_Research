@@ -4,11 +4,7 @@ avoidnace_x_range:
 - -1000
 - 1000
 experiment_title:
-<<<<<<< HEAD
-- 240213_b7000_adas_100sec_x20_v14
-=======
-- 240214_timer__b7000_adas_v20
->>>>>>> cbc393479f98114faeb0276fca5d40ca5d6184e2
+- 240305/zigzag_b8000_adas_3seqwr
 first_node:
 - svl_sensing
 last_node:
@@ -20,13 +16,7 @@ node_chain:
 - pure_pursuit
 - twist_filter
 online_profiling: false
-<<<<<<< HEAD
-online_profiling_duration: 30
-output_title:
-- 240213_b7000_adas_100sec_x20_v14
-=======
 online_profiling_duration: 300
 output_title:
-- 240214_timer__b7000_adas_v20
->>>>>>> cbc393479f98114faeb0276fca5d40ca5d6184e2
+- 240305/zigzag_b8000_adas_3seqwr
 simulator: svl

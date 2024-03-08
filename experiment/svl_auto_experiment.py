@@ -54,6 +54,7 @@ def autorunner():
         if not is_experiment_running.is_set(): break
         print('- Autorunner: Unlock barrier')
         barrier.wait()
+        print('- Autorunner: barrier is passed')
 
     print('- Autorunner: Turn off Autorunner thread')
 
@@ -250,16 +251,13 @@ def experiment_manager(main_thread_pid):
         while not is_autorunner_started.is_set():
             svl_scenario.run(timeout=1, is_init=True)
         
-        # # Set affinity
-        # os.system("python3 scripts/set_affinity.py")
-        
         # Start Experiment
         print('- Mnager: Start Experiment')
         if configs['run_stream']:
             stream_process = multiprocessing.Process(target=run_stream, args=())
             stream_process.start()
             time.sleep(5)
-        start_writing_position_info()                
+        start_writing_position_info()             
         perf_thread_for_ADAS_profiling.start()
         perf_thread_for_profiling.start()
         is_collapsed, collapsed_position = svl_scenario.run(timeout=configs['duration'], label='Iteration: ' + str(i+1)+'/'+str(configs['max_iteration']))        
@@ -270,8 +268,6 @@ def experiment_manager(main_thread_pid):
             # stream_process.join()
             kill_stream()
             time.sleep(2)
-
-        if i+1 == int(configs['max_iteration']): is_experiment_running.clear()
 
         # Terminate        
         kill_autorunner()
@@ -292,13 +288,19 @@ def experiment_manager(main_thread_pid):
 
         print('- Manager: Save result')
         save_result(i, experiment_info) 
-        if not is_experiment_running.is_set():
-            message = 'Experiment is finished: '+configs['experiment_title']
-            payload = {"text": message}
-            slack_library.send_slack_message(payload, slack_webhook)
+        # if not is_experiment_running.is_set():
+        #     message = 'Experiment is finished: '+configs['experiment_title']
+        #     payload = {"text": message}
+        #     slack_library.send_slack_message(payload, slack_webhook)
+        #     break
+        
+        if i+1 == int(configs['max_iteration']):
+            is_experiment_running.clear()
             break
+        
         print('- Manager: Unlock barrier')
         barrier.wait()
+        print('- Manager: Barrier is passed')
         barrier.reset()
         time.sleep(3)                
 
@@ -320,12 +322,13 @@ def stop_writing_position_info():
             break
 
         if pid != -1: os.kill(pid, signal.SIGINT)
+    
     return
 
 if __name__ == '__main__':
     main_thread_pid = os.getpid()
 
-    slack_webhook = slack_library.get_slack_webhook()    
+    # slack_webhook = slack_library.get_slack_webhook()    
 
     with open('yaml/svl_auto_experiment_configs.yaml') as f:
         configs = yaml.load(f, Loader=yaml.FullLoader)

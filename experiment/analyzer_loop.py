@@ -59,7 +59,7 @@ def loop_analyze():
         if '230707' in rel_name:
             # change_yaml(rel_name)
             # os.system('python3 autoware_analyzer.py')
-            os.system(f'scp -r -P 2224 {name} lee@147.46.114.230:/home/lee/experience/temp')
+            os.system(f'scp -r -P 2224 {name} lee@147.46.114.230:/home/hayeonp/experience/temp')
 
 
 if __name__ == "__main__":

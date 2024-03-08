@@ -1,12 +1,12 @@
 import yaml
 import os
 
-version_list = range(6)
-repeat_list = [3,3,3,3,3,3]
+version_list = [0]
+repeat_list = [3]
 
 print(len(version_list))
 print(len(repeat_list))
-input("arr size check, Enter any key")
+# input("arr size check, Enter any key")
 
 for i in range(len(version_list)):
     # Erase log
@@ -18,7 +18,7 @@ for i in range(len(version_list)):
         
     version = version_list[i]
     repeat = repeat_list[i]
-    config["experiment_title"] = config["experiment_title"].split("x")[0] + "x" + str(repeat) + "_v" + str(version)
+    # config["experiment_title"] = config["experiment_title"].split("x")[0] + "x" + str(repeat) + "_v" + str(version)
     config["max_iteration"] = repeat
     
     with open("yaml/svl_auto_experiment_configs.yaml", "w") as f:

@@ -212,6 +212,9 @@ def get_center_line(center_line_path):
         for i, line in enumerate(reader):
             if i == 0: 
                 column_idx = get_column_idx_from_csv(line)
+                if 'instance' in column_idx:
+                    for key in column_idx:
+                        column_idx[key] -= 1
                 continue
             pose_x = float(line[column_idx['center_x']])
             pose_y = float(line[column_idx['center_y']])

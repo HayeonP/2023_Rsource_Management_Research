@@ -67,7 +67,8 @@ def _profile_response_time(dir_path, output_title, first_node, last_node, start_
     return
 
 def profile_response_time_for_experiment(source_path, output_title, first_node, last_node, is_collapsed_list, is_matching_failed_list, x_range=[0.0, 0.0], filter=1.0, deadline=450.0):    
-    exp_title = source_path.split('/')[1]
+    exp_title = dir_path.split('/')[-3]
+    
     _profile_response_time_for_experiment(source_path, output_title, first_node, last_node, exp_title, is_collapsed_list, is_matching_failed_list, deadline, type='shortest', mode='all', x_range=x_range, filter=filter)
     _profile_response_time_for_experiment(source_path, output_title, first_node, last_node, exp_title, is_collapsed_list, is_matching_failed_list, deadline, type='shortest', mode='normal', x_range=x_range, filter=filter)
     _profile_response_time_for_experiment(source_path, output_title, first_node, last_node, exp_title, is_collapsed_list, is_matching_failed_list, deadline, type='shortest', mode='collision', x_range=x_range, filter=filter)
@@ -242,15 +243,22 @@ def _profile_response_time_for_experiment(source_path, output_title, first_node,
     return
 
 def profile_center_offset(dir_path, output_title, center_offset, max_center_offset, avg_center_offset, is_collapsed):
-    exp_title = dir_path.split('/')[1]
-    exp_id = dir_path.split('/')[2]
+    exp_title = dir_path.split('/')[-3]
+    exp_id = dir_path.split('/')[-2]
     output_dir_path = 'analyzation/' + output_title + '/center_offset'
     if not os.path.exists(output_dir_path): os.system('mkdir -p ' + output_dir_path)
 
     # Plot graph
+    center_offset = {x:center_offset[x] for x in center_offset if x < 1000}
     x_data = list(center_offset.keys()) # Instance IDs
     y_data = list(center_offset.values()) # Center offset(m)
+
     plot_path = output_dir_path+'/' + exp_title + '_' + exp_id + '_center_offset.png'
+    center_offset_info_path = output_dir_path+'/' + exp_title + '_' + exp_id + '_center_offset_info.yaml'
+    center_offset_dict = {}
+    center_offset_dict['center_offset'] = y_data
+    with open(f'{center_offset_info_path}', 'w') as f:
+        yaml.dump(center_offset_dict, f, default_flow_style=False)
 
     plt.plot(x_data, y_data)
     plt.axhline(y = max_center_offset, color = 'r', linestyle = ':', label='Max')
@@ -277,8 +285,8 @@ def profile_avg_center_offset_for_experiment(source_path, is_matching_failed_lis
     return avg
 
 def profile_waypoints(dir_path, output_title, is_collapsed, is_matching_failed):
-    exp_title = dir_path.split('/')[1]
-    exp_id = dir_path.split('/')[2]
+    exp_title = dir_path.split('/')[-3]
+    exp_id = dir_path.split('/')[-2]
     output_dir_path = 'analyzation/' + output_title + '/trajectories'
     if not os.path.exists(output_dir_path): os.system('mkdir -p ' + output_dir_path)
 
@@ -295,7 +303,8 @@ def profile_waypoints(dir_path, output_title, is_collapsed, is_matching_failed):
     plt.plot(center_line_x, center_line_y, 'k', label='Center line')
 
     # Waypoints
-    exp_title = source_path.split('/')[1]
+    exp_title = dir_path.split('/')[-2]
+    exp_id = dir_path.split('/')[-1]
 
     center_offset_path = dir_path + '/center_offset.csv'
     waypoints = aa.get_waypoints(center_offset_path, configs['simulator'])
@@ -324,6 +333,8 @@ def profile_waypoints(dir_path, output_title, is_collapsed, is_matching_failed):
 
     # Plot
     plot_path = output_dir_path + '/' + exp_title + '_' + exp_id + '_waypoints.png'
+    print("##",exp_title,exp_id)
+    print(plot_path)
             
     # plt.xlim(-70, 40)
     # plt.ylim(20,75)
@@ -372,7 +383,7 @@ def _profile_waypoints_for_experiment(source_path, output_title, is_collapsed_li
         for remove_target in merged_indices:
             target_experiment_idx_list.remove(remove_target)
 
-    exp_title = source_path.split('/')[1]
+    exp_title = dir_path.split('/')[-3]
 
     # Waypoints
     for idx in target_experiment_idx_list:        
@@ -459,8 +470,8 @@ def profile_analyzation_info(source_path, output_title, avg_center_offset, is_co
     return
 
 def profile_miss_alignment_delay(dir_path, output_title, chain_info, start_instance, end_instance, is_collapsed, filter=1.0):
-    exp_title = dir_path.split('/')[1]
-    exp_id = dir_path.split('/')[2]
+    exp_title = dir_path.split('/')[-3]
+    exp_id = dir_path.split('/')[-2]
 
     first_node_path = dir_path + '/' + chain_info[0] + '.csv'
     last_node_path = dir_path + '/' + chain_info[-1] + '.csv'
@@ -469,7 +480,7 @@ def profile_miss_alignment_delay(dir_path, output_title, chain_info, start_insta
 
     node_response_time_list = []
     for node in chain_info:        
-        if node == "voxel_grid_filter":
+        if node == "voxel_grid_filter" and not os.path.exists(dir_path + '/' + node + '.csv'):
             node = "voexl_grid_filter"
 
         node_path = dir_path + '/' + node + '.csv'

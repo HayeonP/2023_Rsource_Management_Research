@@ -90,8 +90,11 @@ class svl_scenario(object):
 				self.origin.rotation + \
 				    lgsvl.Vector(0, self.cfg['npc'][i]['offset']['rotation'], 0)
 
-            npc = self.sim.add_agent(
-                self.cfg['npc'][i]['type'], lgsvl.AgentType.NPC, npc_state)
+            if self.cfg['npc'][i]['type'] == 'Bob':
+                self.sim.add_agent("Bob", lgsvl.AgentType.PEDESTRIAN, npc_state)
+            else:
+                npc = self.sim.add_agent(
+                    self.cfg['npc'][i]['type'], lgsvl.AgentType.NPC, npc_state)
 
         return
 

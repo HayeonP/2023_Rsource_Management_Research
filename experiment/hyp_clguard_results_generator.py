@@ -5,33 +5,50 @@ import json
 import glob
 import numpy as np
 
-title_tag = '240212_b7000_adas_sl30m_x1'
+title_tag = '240217/clguard_leader_untrack_b7000_adas_b4000_seqwr'
 adas_exp_path_list = glob.glob(f'analyzation/{title_tag}_v*')
 
 
-def get_exp_info(adas_exp_label):
+def get_exp_info(adas_exp_label, exp_dir):
     exp_info = {}
     # adas_exp_label = f'{title_tag}_v{version}'
 
     is_collapsed = False
 
-    with open(f'analyzation/{adas_exp_label}/{adas_exp_label}_E2E_response_time_info(all,shortest).yaml') as f:
-        exp_results = yaml.safe_load(f)
+    if exp_dir == "":
+        with open(f'analyzation/{adas_exp_label}/{adas_exp_label}_E2E_response_time_info(all,shortest).yaml') as f:
+            exp_results = yaml.safe_load(f)
+    else:
+        with open(f'analyzation/{exp_dir}/{adas_exp_label}/{exp_dir}_E2E_response_time_info(all,shortest).yaml') as f:
+            exp_results = yaml.safe_load(f)
 
     adas_avg_E2E = exp_results['avg']
     adas_99percentile_E2E = exp_results['percentile_99']
 
-    with open(f'analyzation/{adas_exp_label}/analyzation_info.yaml') as f:
-        exp_results = yaml.safe_load(f)
-        if len(exp_results['result']['collision_index']) > 0:
-            is_collapsed = True
+    if exp_dir == "":
+        with open(f'analyzation/{adas_exp_label}/analyzation_info.yaml') as f:
+            exp_results = yaml.safe_load(f)
+            if len(exp_results['result']['collision_index']) > 0:
+                is_collapsed = True
+    else:
+        with open(f'analyzation/{exp_dir}/{adas_exp_label}/analyzation_info.yaml') as f:
+            exp_results = yaml.safe_load(f)
+            if len(exp_results['result']['collision_index']) > 0:
+                is_collapsed = True
 
-    for i in range(1):
-        with open(f'analyzation/{adas_exp_label}/shortest_E2E_response_time/{adas_exp_label}_{i}_shortest_E2E_list.yaml') as f:
-            e2e_info = yaml.safe_load(f)
-            e2e_list = e2e_info['e2e_response_time']
-            exp_info[f'it{i}_avg_E2E'] = sum(e2e_list) / len(e2e_list)
-            exp_info[f'it{i}_99percentile_E2E'] = np.percentile(e2e_list, 99)
+    for i in range(3):
+        if exp_dir == "":
+            with open(f'analyzation/{adas_exp_label}/shortest_E2E_response_time/{adas_exp_label}_{i}_shortest_E2E_list.yaml') as f:
+                e2e_info = yaml.safe_load(f)
+                e2e_list = e2e_info['e2e_response_time']
+                exp_info[f'it{i}_avg_E2E'] = sum(e2e_list) / len(e2e_list)
+                exp_info[f'it{i}_99percentile_E2E'] = np.percentile(e2e_list, 99)
+        else:
+            with open(f'analyzation/{exp_dir}/{adas_exp_label}/shortest_E2E_response_time/{adas_exp_label}_{i}_shortest_E2E_list.yaml') as f:
+                e2e_info = yaml.safe_load(f)
+                e2e_list = e2e_info['e2e_response_time']
+                exp_info[f'it{i}_avg_E2E'] = sum(e2e_list) / len(e2e_list)
+                exp_info[f'it{i}_99percentile_E2E'] = np.percentile(e2e_list, 99)
 
         # with open(f'/home/hayeonp/git/ClusterLevelMemguard/tools/results/bw_profiler/{adas_exp_label}_it{i}/summary.json') as f:
         #     bw_profile_result = json.load(f)
@@ -75,7 +92,7 @@ if __name__ == '__main__':
     exp_info_list = []
     for adas_exp_path in adas_exp_path_list:
         adas_exp_label = adas_exp_path.split('/')[-1]
-        exp_info = get_exp_info(adas_exp_label)
+        exp_info = get_exp_info(adas_exp_label, title_tag.split("/")[0])
         exp_info_list.append(exp_info)
 
     exp_info_list = sorted(exp_info_list, key = lambda x: (x['version']))

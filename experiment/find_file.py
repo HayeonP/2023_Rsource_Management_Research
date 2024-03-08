@@ -6,7 +6,7 @@ import os
 s = '2023_Resource_Management_Research'
 p = re.compile(s)
 
-files = glob.glob('/home/lee/experience/recovery_temp/*')
+files = glob.glob('/home/hayeonp/experience/recovery_temp/*')
 files_txt = [f for f in files if f.endswith('.txt')]
 print(files_txt)
 

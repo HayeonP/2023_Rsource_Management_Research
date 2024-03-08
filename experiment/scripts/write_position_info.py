@@ -81,7 +81,7 @@ def write_position_info():
     center_line_file = 'center_line.csv'
     with open(center_line_file, "w") as f:
         center_line_wr = csv.writer(f)
-        center_line_wr.writerow(['center_x', 'center_y'])
+        center_line_wr.writerow(['instance','center_x', 'center_y'])
         for p in map_wp_list:
             center_line_wr.writerow([float(p[0]), float(p[1])])
     f.close()
