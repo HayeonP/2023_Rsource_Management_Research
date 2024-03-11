@@ -18,7 +18,6 @@ is_experiment_running = threading.Event()
 is_scenario_started = threading.Event()
 is_autorunner_started = threading.Event()
 is_autorunner_killed = threading.Event()
-is_sensing_to_detection_autorunner_started = threading.Event()
 is_experiment_finished = threading.Event()
 barrier = threading.Barrier(2)
 
@@ -36,9 +35,7 @@ def autorunner():
                 if configs['autorunner_mode'] == 'LKAS': 
                     os.system('ssh root@' + configs[target_environment]['target_ip'] + ' \"lxc-attach -n linux1 -- /home/root/scripts/cubetown_lkas_autorunner.sh\"')
                 elif configs['autorunner_mode'] == 'FULL': 
-                    os.system('ssh root@' + configs[target_environment]['target_ip'] + ' \"lxc-attach -n linux1 -- /home/root/scripts/_cubetown_autorunner_4_planning.sh\" &')
-                    os.system('ssh root@' + configs[target_environment]['target_ip'] + ' \"lxc-attach -n linux1 -- /home/root/scripts/_cubetown_autorunner_5_control.sh\"')
-                    # os.system('ssh root@' + configs[target_environment]['target_ip'] + ' \"lxc-attach -n linux1 -- /home/root/scripts/cubetown_full_autorunner.sh\"')
+                    os.system('ssh root@' + configs[target_environment]['target_ip'] + ' \"lxc-attach -n linux1 -- /home/root/scripts/cubetown_full_autorunner.sh\"')
                 else:
                     print('Invalidate mode:', configs['autorunner_mode'])
             elif target_environment == 'desktop':
@@ -86,26 +83,14 @@ def save_result(iter, experiment_info):
 
     return
 
-def kill_autorunner(mode='full'):
-    if mode == 'exception':
-        cmd = configs[target_environment]['termination_cmd'].replace('terminate_exynos', 'terminate_partial_exynos')
-        print(cmd)
-        p = subprocess.Popen(cmd, shell=True, stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
-        p.wait()
-        
-        while True:
-            time.sleep(1)
-            _output = str(os.popen('rosnode list').read())
-            if 'op_global_planner' not in _output: break
-
-    else:
-        p = subprocess.Popen(configs[target_environment]['termination_cmd'], shell=True, stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
-        p.wait()
-        
-        while True:
-            time.sleep(1)
-            _output = str(os.popen('rosnode list').read())
-            if 'ndt_matching' not in _output: break
+def kill_autorunner():
+    p = subprocess.Popen(configs[target_environment]['termination_cmd'], shell=True, stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
+    p.wait()
+    
+    while True:
+        time.sleep(1)
+        _output = str(os.popen('rosnode list').read())
+        if 'ndt_matching' not in _output: break
     return
 
 def imu_cb(msg):
@@ -242,16 +227,7 @@ def kill_stream():
 def experiment_manager(main_thread_pid):
     print('- Manager: Start manager')
     svl_scenario = svl.svl_scenario(configs['svl_cfg_path'])
-
-    # print(configs[target_environment]['target_ip'])
-    # exit(0)
-    # os.system(f'scp -r exynos_scripts/* root@{configs[target_environment]['target_ip']}:/var/lib/lxc/linux1/rootfs/home/root/scripts')
-    os.system('scp -r exynos_scripts/* root@192.168.0.11:/var/lib/lxc/linux1/rootfs/home/root/scripts')
-
-    os.system('ssh root@' + configs[target_environment]['target_ip'] + ' \"lxc-attach -n linux1 -- /home/root/scripts/_cubetown_autorunner_1_sensing.sh\" &')
-    os.system('ssh root@' + configs[target_environment]['target_ip'] + ' \"lxc-attach -n linux1 -- /home/root/scripts/_cubetown_autorunner_2_localization.sh\" &')
-    os.system('ssh root@' + configs[target_environment]['target_ip'] + ' \"lxc-attach -n linux1 -- /home/root/scripts/_cubetown_autorunner_3_detection.sh\" &')
-    print('hihi')
+    
 
     # Threads
     autorunner_thread = threading.Thread(target=autorunner)
@@ -260,7 +236,6 @@ def experiment_manager(main_thread_pid):
     while True:
         _output = str(os.popen('rosnode list').read())
         if 'rosbridge_websocket' in _output: break
-
 
     for i in range(configs['max_iteration']):
         experiment_info = {}
@@ -294,8 +269,8 @@ def experiment_manager(main_thread_pid):
             kill_stream()
             time.sleep(2)
 
-        # Terminate
-        kill_autorunner('exception')
+        # Terminate        
+        kill_autorunner()
         perf_thread_for_ADAS_profiling.join()
         perf_thread_for_profiling.join()
         is_autorunner_started.clear()
@@ -327,9 +302,7 @@ def experiment_manager(main_thread_pid):
         barrier.wait()
         print('- Manager: Barrier is passed')
         barrier.reset()
-        time.sleep(3)  
-
-    kill_autorunner()              
+        time.sleep(3)                
 
     return os.kill(main_thread_pid, signal.SIGQUIT)
 
@@ -384,7 +357,7 @@ if __name__ == '__main__':
             exit()
     os.system('mkdir -p results/'+configs['experiment_title'])
     os.system('mkdir -p results/'+configs['experiment_title']+'/configs')
-    
+        
     # select params for the measure
     scenario = configs['svl_cfg_path'].split('svl_scenario_')[1]
     
@@ -404,7 +377,6 @@ if __name__ == '__main__':
     elif target_environment == 'exynos':        
         os.system(f'scp -r yaml/cubetown_autorunner_params{measure}.yaml root@{target_ip}:/var/lib/lxc/linux1/rootfs/home/root/rubis_ws/src/rubis_autorunner/cfg/cubetown_autorunner/cubetown_autorunner_params.yaml')
         print(f'cp yaml/cubetown_autorunner_params{measure}.yaml results/{experiment_title}/configs')
-        os.system(f'scp -r scripts/terminate_cubetown_autorunner.py root@{target_ip}:/home/root/scripts/terminate_cubetown_autorunner.py')
         os.system(f'cp yaml/cubetown_autorunner_params{measure}.yaml results/{experiment_title}/configs')
     
     
@@ -417,6 +389,7 @@ if __name__ == '__main__':
 
     # Backup svl scenario
     os.system(f'cp yaml/svl_scenario{measure}.yaml ' + 'results/'+configs['experiment_title']+'/configs')
+
 
     # Backup image name
     with open('results/'+configs['experiment_title']+'/configs/image.txt', 'w') as f:

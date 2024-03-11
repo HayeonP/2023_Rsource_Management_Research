@@ -1,19 +1,23 @@
-adas_iteration: 1
+adas_iteration: 3
 # adas_duration: auto set (to handling -> 100 / braking,lane_change -> 20)
 ssh_address: 'root@192.168.0.11'
 host_bandwidth_profiler_dir: '/home/hayeonp/git/ClusterLevelMemguard/tools'
 exynos_clguard_dir: '/var/lib/lxc/linux1/rootfs/home/root/mg'
 clguard_limit_dir: '/sys/kernel/debug/memguard/clusters'
-experiment_tag: '240308/7.5'
+experiment_tag: '240311/7.5'
 
+# each measure do "len(versions) * len(adas_budget)" times
 # user_measure_scenario: ['braking', 'handling', 'lane_change']
 user_measure_scenario: ['braking', 'handling', 'lane_change']
 
+# each version do "len(adas_budget)" times
+versions: [0,1]
+
 # adas_budget: 0 -> no budget / not 0 -> clguard budget
-adas_budget: [0]
+adas_budget: [7000,9000]
 
 # seqwr_budget: 0 -> don't run seqwr / not 0 -> run seqwr
-seqwr_budget: [0]
+seqwr_budget: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,]
 
 # seqwr_clguard: 'y' -> use clguard / 'n' -> use seqwr parameter
 seqwr_clguard: 'y'
