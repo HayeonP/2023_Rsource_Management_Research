@@ -88,8 +88,7 @@ def get_E2E_response_time(first_node_path, last_node_path, E2E_start_instance, E
         print('[ERROR] Invalidate type:', type)
         exit()
 
-    
-    if not online_profiling or E2E_start_instance < 368:
+    if E2E_start_instance < 368:
         E2E_start_instance = 368 # debug
 
     instance_info = {}

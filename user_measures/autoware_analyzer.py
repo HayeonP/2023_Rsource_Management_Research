@@ -249,7 +249,7 @@ def profile_center_offset(dir_path, output_title, center_offset, max_center_offs
     if not os.path.exists(output_dir_path): os.system('mkdir -p ' + output_dir_path)
 
     # Plot graph
-    center_offset = {x:center_offset[x] for x in center_offset if x < 1000}
+    # center_offset = {x:center_offset[x] for x in center_offset if x < 1000}
     x_data = list(center_offset.keys()) # Instance IDs
     y_data = list(center_offset.values()) # Center offset(m)
 
@@ -333,8 +333,8 @@ def profile_waypoints(dir_path, output_title, is_collapsed, is_matching_failed):
 
     # Plot
     plot_path = output_dir_path + '/' + exp_title + '_' + exp_id + '_waypoints.png'
-    print("##",exp_title,exp_id)
-    print(plot_path)
+    # print("##",exp_title,exp_id)
+    # print(plot_path)
             
     # plt.xlim(-70, 40)
     # plt.ylim(20,75)
