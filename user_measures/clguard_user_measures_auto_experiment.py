@@ -175,24 +175,8 @@ def start_experiment(measure, adas_budget, version, seqwr_budget, seqwr_clguard)
     # if is_seqwr_executed():
     #     terminate_seqwr()
     
-    # ADAS only (w/o Clguard)
-    if not adas_budget and not seqwr_budget:
-        label = f'{experiment_tag}_{measure}_b{adas_budget}_adas_only_v{version}'
-        update_adas_config(label, measure)
-
-        bw_profiling_process = multiprocessing.Process(target=profile_bandwidth, args=(measure, label, adas_iteration, adas_budget,))
-        bw_profiling_process.start()
-
-        os.system(f'python3 user_measures_svl_auto_experiment_autorunner.py')
-
-        bw_profiling_process.terminate()
-        bw_profiling_process.join()
-
-        time.sleep(1)
-        os.system(f'python3 user_measures_autoware_analyzer.py')
-
     # ADAS only (w/ Clguard)
-    elif adas_budget and not seqwr_budget:
+    if adas_budget and not seqwr_budget:
         # Setup ADAS budget to clguard
         insmod_clguard('clguard1', '4-7', adas_budget)
         
@@ -202,7 +186,7 @@ def start_experiment(measure, adas_budget, version, seqwr_budget, seqwr_clguard)
         bw_profiling_process = multiprocessing.Process(target=profile_bandwidth, args=(measure, label, adas_iteration, adas_budget,))
         bw_profiling_process.start()
 
-        os.system(f'python3 user_measures_svl_auto_experiment_autorunner.py')
+        os.system(f'python3 user_measures_svl_auto_experiment.py')
 
         bw_profiling_process.terminate()
         bw_profiling_process.join()
@@ -226,7 +210,7 @@ def start_experiment(measure, adas_budget, version, seqwr_budget, seqwr_clguard)
         seqwr_process.start()
         bw_profiling_process.start()
 
-        os.system(f'python3 user_measures_svl_auto_experiment_autorunner.py')
+        os.system(f'python3 user_measures_svl_auto_experiment.py')
 
         seqwr_process.terminate()
         bw_profiling_process.terminate()
@@ -252,7 +236,7 @@ def start_experiment(measure, adas_budget, version, seqwr_budget, seqwr_clguard)
         seqwr_process.start()
         bw_profiling_process.start()
 
-        os.system(f'python3 user_measures_svl_auto_experiment_autorunner.py')
+        os.system(f'python3 user_measures_svl_auto_experiment.py')
 
         seqwr_process.terminate()
         bw_profiling_process.terminate()

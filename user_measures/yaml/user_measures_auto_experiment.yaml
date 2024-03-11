@@ -5,18 +5,23 @@ host_bandwidth_profiler_dir: '/home/hayeonp/git/ClusterLevelMemguard/tools'
 exynos_clguard_dir: '/var/lib/lxc/linux1/rootfs/home/root/mg'
 clguard_limit_dir: '/sys/kernel/debug/memguard/clusters'
 experiment_tag: '240311/7.5'
+# experiment name templates
+# 1. seqwr_budget: 0 -> {tag}_{measure}_{adas budget}_adas_only_v{version}
+# 2. seqwr_cl: 'y' -> {tag}_{measure}_{adas budget}_adas_{seqwr budget}_seqwr_v{version}
+# 3. seqwr_cl: 'n' -> {tag}_{measure}_{adas budget}_adas_seqwr{seqwr_budget}_v{version}
 
 # each measure do "len(versions) * len(adas_budget)" times
 # user_measure_scenario: ['braking', 'handling', 'lane_change']
-user_measure_scenario: ['braking', 'handling', 'lane_change']
+user_measure_scenario: ['lane_change']
 
 # each version do "len(adas_budget)" times
-versions: [0,1]
+versions: [1,2]
 
 # adas_budget: 0 -> no budget / not 0 -> clguard budget
-adas_budget: [7000,9000]
+adas_budget: [10000]
 
 # seqwr_budget: 0 -> don't run seqwr / not 0 -> run seqwr
+# have to set "len(adas_budget) <= len (seqwr_budget)"
 seqwr_budget: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,]
 
 # seqwr_clguard: 'y' -> use clguard / 'n' -> use seqwr parameter

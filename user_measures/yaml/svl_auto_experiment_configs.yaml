@@ -7,7 +7,7 @@ desktop:
   rosbridge_cmd: roslaunch lgsvl_ros_bridge rosbridge_websocket.launch
   termination_cmd: ./scripts/terminate_desktop.sh
 duration: 20
-experiment_title: 240311/7.5_braking_b9000_adas_only_v0
+experiment_title: 240311/7.5_lane_change_b10000_adas_only_v2
 exynos:
   response_time_path: /var/lib/lxc/linux1/rootfs/home/root/Documents/profiling/response_time
   rosbridge_cmd: roslaunch lgsvl_ros_bridge rosbridge_websocket.launch
@@ -15,5 +15,5 @@ exynos:
   termination_cmd: ./scripts/terminate_exynos.sh
 max_iteration: 3
 run_stream: false
-svl_cfg_path: /home/hayeonp/git/2023_Resource_Management_Research/user_measures/yaml/svl_scenario_braking.yaml
+svl_cfg_path: /home/hayeonp/git/2023_Resource_Management_Research/user_measures/yaml/svl_scenario_lane_change.yaml
 target_environment: exynos

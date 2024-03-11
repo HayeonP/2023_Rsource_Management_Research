@@ -399,7 +399,7 @@ if __name__ == '__main__':
     
     # Move params to the target board ant backup it
     if target_environment == 'desktop':
-        os.system(f'₩ㅌ yaml/cubetown_autorunner_params{measure}.yaml ~/rubis_ws/src/rubis_autorunner/cfg/cubetown_autorunner/cubetown_autorunner_params.yaml')
+        os.system(f'cp yaml/cubetown_autorunner_params{measure}.yaml ~/rubis_ws/src/rubis_autorunner/cfg/cubetown_autorunner/cubetown_autorunner_params.yaml')
         os.system(f'cp yaml/cubetown_autorunner_params{measure}.yaml results/{experiment_title}/configs')
     elif target_environment == 'exynos':        
         os.system(f'scp -r yaml/cubetown_autorunner_params{measure}.yaml root@{target_ip}:/var/lib/lxc/linux1/rootfs/home/root/rubis_ws/src/rubis_autorunner/cfg/cubetown_autorunner/cubetown_autorunner_params.yaml')

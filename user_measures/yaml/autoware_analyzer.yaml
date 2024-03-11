@@ -4,7 +4,7 @@ avoidnace_x_range:
 - -1000
 - 1000
 experiment_title:
-- 240311/7.5_braking_b9000_adas_only_v0
+- 240311/7.5_lane_change_b10000_adas_only_v2
 first_node:
 - svl_sensing
 last_node:
@@ -18,5 +18,5 @@ node_chain:
 online_profiling: false
 online_profiling_duration: 300
 output_title:
-- 240311/7.5_braking_b9000_adas_only_v0
+- 240311/7.5_lane_change_b10000_adas_only_v2
 simulator: svl
