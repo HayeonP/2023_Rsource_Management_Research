@@ -6,7 +6,7 @@
 
 **1. Setup experiment**
 
-Setup parameters in /yaml/user_measures_auto_experiment.yaml
+Setup parameters in `/yaml/user_measures_auto_experiment.yaml`
 
 1. experiment_tag : set experiment title
 
@@ -49,7 +49,6 @@ Setup parameters in /yaml/user_measures_auto_experiment.yaml
 -> `{tag}_{measure}_{adas budget}_adas_seqwr{seqwr_budget}_v{version}`
 
 <br/><br/>
-
 **2. run**
 
     python3 clguard_user_measures_auto_experiment.py 
