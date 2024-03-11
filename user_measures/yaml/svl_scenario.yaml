@@ -25,23 +25,9 @@ asset-id_info_path: ../RubisSVL/toolset/sensor_setup/asset_id.yaml
 
 npc:
   - npc0:
-    name: DongMin
-    type: Sedan
-    offset:
-      forward: 58
-      right: 25
-      rotation: -90
-  - npc1:
-    name: Seohwan
-    type: Sedan
-    offset:
-      forward: 52
-      right: 0
-      rotation: -90 # Clockwise
-  - npc2:
     name: Rubis
-    type: Sedan
+    type: BoxTruck
     offset:
-      forward: 58
-      right: -30
-      rotation: -90 # Clockwise
+      forward: 57
+      right: 0
+      rotation: -90

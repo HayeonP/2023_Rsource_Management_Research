@@ -359,36 +359,36 @@ if __name__ == '__main__':
     os.system('mkdir -p results/'+configs['experiment_title']+'/configs')
     
     # select params for the measure
-    scenario = configs['svl_cfg_path'].split('yaml/')[0]
-
-    if scenario == 'svl_scenario_handling.yaml':
+    scenario = configs['svl_cfg_path'].split('svl_scenario_')[1]
+    
+    if scenario == 'handling.yaml':
         measure = '_handling'
-    elif scenario == 'svl_scenario_braking.yaml':
+    elif scenario == 'braking.yaml':
         measure = '_braking'
-    elif scenario == 'svl_scenario_lane_change.yaml':
+    elif scenario == 'lane_change.yaml':
         measure = '_lane_change'
     else:
         measure = ''
-
+    
     # Move params to the target board ant backup it
     if target_environment == 'desktop':
-        os.system(f'cp yaml/cubetown_autorunner_params.yaml ~/rubis_ws/src/rubis_autorunner/cfg/cubetown_autorunner/cubetown_autorunner_params{measure}.yaml')
-        os.system(f'cp yaml/cubetown_autorunner_params.yaml results/{experiment_title}/configs')
+        os.system(f'₩ㅌ yaml/cubetown_autorunner_params{measure}.yaml ~/rubis_ws/src/rubis_autorunner/cfg/cubetown_autorunner/cubetown_autorunner_params.yaml')
+        os.system(f'cp yaml/cubetown_autorunner_params{measure}.yaml results/{experiment_title}/configs')
     elif target_environment == 'exynos':        
-        os.system(f'scp -r yaml/cubetown_autorunner_params.yaml root@{target_ip}:/var/lib/lxc/linux1/rootfs/home/root/rubis_ws/src/rubis_autorunner/cfg/cubetown_autorunner/cubetown_autorunner_params{measure}.yaml')        
-        print(f'cp yaml/cubetown_autorunner_params.yaml results/{experiment_title}/configs')
-        os.system(f'cp yaml/cubetown_autorunner_params.yaml results/{experiment_title}/configs')
+        os.system(f'scp -r yaml/cubetown_autorunner_params{measure}.yaml root@{target_ip}:/var/lib/lxc/linux1/rootfs/home/root/rubis_ws/src/rubis_autorunner/cfg/cubetown_autorunner/cubetown_autorunner_params.yaml')
+        print(f'cp yaml/cubetown_autorunner_params{measure}.yaml results/{experiment_title}/configs')
+        os.system(f'cp yaml/cubetown_autorunner_params{measure}.yaml results/{experiment_title}/configs')
     
     
     # Backup autoware params
     if target_environment == 'desktop':
-        os.system('cp ~/rubis_ws/src/rubis_autorunner/cfg/cubetown_autorunner/cubetown_autorunner_params.yaml ' + 'results/'+configs['experiment_title']+'/configs')
+        os.system(f'cp ~/rubis_ws/src/rubis_autorunner/cfg/cubetown_autorunner/cubetown_autorunner_params{measure}.yaml ' + 'results/'+configs['experiment_title']+'/configs')
     elif target_environment == 'exynos':
-        os.system('scp -r root@' + configs[target_environment]['target_ip'] +':/var/lib/lxc/linux1/rootfs/home/root/rubis_ws/src/rubis_autorunner/cfg/cubetown_autorunner/cubetown_autorunner_params.yaml ' + 'results/'+configs['experiment_title']+'/configs')        
+        os.system(f'scp -r root@' + configs[target_environment]['target_ip'] +':/var/lib/lxc/linux1/rootfs/home/root/rubis_ws/src/rubis_autorunner/cfg/cubetown_autorunner/cubetown_autorunner_params.yaml ' + 'results/'+configs['experiment_title']+'/configs')        
         # os.system('scp -r root@' + configs[target_environment]['target_ip'] +':/var/lib/lxc/linux1/rootfs/opt/ros/melodic/share/rubis_autorunner/cfg/cubetown_autorunner/cubetown_autorunner_params.yaml ' + 'results/'+configs['experiment_title']+'/configs')        
 
     # Backup svl scenario
-    os.system('cp yaml/svl_scenario.yaml ' + 'results/'+configs['experiment_title']+'/configs')
+    os.system(f'cp yaml/svl_scenario{measure}.yaml ' + 'results/'+configs['experiment_title']+'/configs')
 
     # Backup image name
     with open('results/'+configs['experiment_title']+'/configs/image.txt', 'w') as f:

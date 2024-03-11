@@ -6,14 +6,14 @@ desktop:
   response_time_path: /home/hayeonp/Documents/profiling/response_time
   rosbridge_cmd: roslaunch lgsvl_ros_bridge rosbridge_websocket.launch
   termination_cmd: ./scripts/terminate_desktop.sh
-duration: 20
-experiment_title: 240308/7.5_lane_change_b0_adas_only
+duration: 25
+experiment_title: 240311/7.5_lane_change_b7000_adas_only_v1
 exynos:
   response_time_path: /var/lib/lxc/linux1/rootfs/home/root/Documents/profiling/response_time
   rosbridge_cmd: roslaunch lgsvl_ros_bridge rosbridge_websocket.launch
   target_ip: 192.168.0.11
   termination_cmd: ./scripts/terminate_exynos.sh
-max_iteration: 1
+max_iteration: 3
 run_stream: false
 svl_cfg_path: /home/hayeonp/git/2023_Resource_Management_Research/user_measures/yaml/svl_scenario_lane_change.yaml
 target_environment: exynos
