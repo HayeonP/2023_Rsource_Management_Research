@@ -111,7 +111,7 @@ def update_adas_config(label, user_measure):
     if user_measure == 'handling':
         config["duration"] = 100
     else:
-        config["duration"] = 25
+        config["duration"] = 20
 
     with open("yaml/svl_auto_experiment_configs.yaml", "w") as f:
         yaml.dump(config, f)
@@ -134,7 +134,7 @@ def profile_bandwidth(measure, label, adas_iteration, adas_budget):
         if measure == 'handling':
             os.system(f'sed -i \'/profiling_duration:/ c\profiling_duration: 80\' {host_bandwidth_profiler_dir}/configs/bw_profiler.yaml')
         else:
-            os.system(f'sed -i \'/profiling_duration:/ c\profiling_duration: 20\' {host_bandwidth_profiler_dir}/configs/bw_profiler.yaml')
+            os.system(f'sed -i \'/profiling_duration:/ c\profiling_duration: 15\' {host_bandwidth_profiler_dir}/configs/bw_profiler.yaml')
         os.system(f'sed -i \'/label:/ c\label: {bw_profiler_title}\' {host_bandwidth_profiler_dir}/configs/bw_profiler.yaml')
         os.system(f'sed -i \'/profiling_frequency:/ c\profiling_frequency: 200\' {host_bandwidth_profiler_dir}/configs/bw_profiler.yaml')
         os.system(f'sed -i \'/target_cores:/ c\\target_cores: 4-7\' {host_bandwidth_profiler_dir}/configs/bw_profiler.yaml')
@@ -183,7 +183,7 @@ def start_experiment(measure, adas_budget, version, seqwr_budget, seqwr_clguard)
         bw_profiling_process = multiprocessing.Process(target=profile_bandwidth, args=(measure, label, adas_iteration, adas_budget,))
         bw_profiling_process.start()
 
-        os.system(f'python3 user_measures_svl_auto_experiment.py')
+        os.system(f'python3 user_measures_svl_auto_experiment_autorunner.py')
 
         bw_profiling_process.terminate()
         bw_profiling_process.join()
@@ -202,7 +202,7 @@ def start_experiment(measure, adas_budget, version, seqwr_budget, seqwr_clguard)
         bw_profiling_process = multiprocessing.Process(target=profile_bandwidth, args=(measure, label, adas_iteration, adas_budget,))
         bw_profiling_process.start()
 
-        os.system(f'python3 user_measures_svl_auto_experiment.py')
+        os.system(f'python3 user_measures_svl_auto_experiment_autorunner.py')
 
         bw_profiling_process.terminate()
         bw_profiling_process.join()
@@ -226,7 +226,7 @@ def start_experiment(measure, adas_budget, version, seqwr_budget, seqwr_clguard)
         seqwr_process.start()
         bw_profiling_process.start()
 
-        os.system(f'python3 user_measures_svl_auto_experiment.py')
+        os.system(f'python3 user_measures_svl_auto_experiment_autorunner.py')
 
         seqwr_process.terminate()
         bw_profiling_process.terminate()
@@ -252,7 +252,7 @@ def start_experiment(measure, adas_budget, version, seqwr_budget, seqwr_clguard)
         seqwr_process.start()
         bw_profiling_process.start()
 
-        os.system(f'python3 user_measures_svl_auto_experiment.py')
+        os.system(f'python3 user_measures_svl_auto_experiment_autorunner.py')
 
         seqwr_process.terminate()
         bw_profiling_process.terminate()
