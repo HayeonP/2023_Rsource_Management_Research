@@ -37,7 +37,7 @@ def autorunner():
                     os.system('ssh root@' + configs[target_environment]['target_ip'] + ' \"lxc-attach -n linux1 -- /home/root/scripts/cubetown_lkas_autorunner.sh\"')
                 elif configs['autorunner_mode'] == 'FULL': 
                     os.system('ssh root@' + configs[target_environment]['target_ip'] + ' \"lxc-attach -n linux1 -- /home/root/scripts/_cubetown_autorunner_4_planning.sh\" &')
-                    os.system('ssh root@' + configs[target_environment]['target_ip'] + ' \"lxc-attach -n linux1 -- /home/root/scripts/_cubetown_autorunner_5_control.sh\" &')
+                    os.system('ssh root@' + configs[target_environment]['target_ip'] + ' \"lxc-attach -n linux1 -- /home/root/scripts/_cubetown_autorunner_5_control.sh\"')
                     # os.system('ssh root@' + configs[target_environment]['target_ip'] + ' \"lxc-attach -n linux1 -- /home/root/scripts/cubetown_full_autorunner.sh\"')
                 else:
                     print('Invalidate mode:', configs['autorunner_mode'])
@@ -295,9 +295,7 @@ def experiment_manager(main_thread_pid):
             time.sleep(2)
 
         # Terminate
-        print('before terminate')
         kill_autorunner('exception')
-        print('after terminate')
         perf_thread_for_ADAS_profiling.join()
         perf_thread_for_profiling.join()
         is_autorunner_started.clear()
@@ -404,8 +402,9 @@ if __name__ == '__main__':
         os.system(f'cp yaml/cubetown_autorunner_params.yaml ~/rubis_ws/src/rubis_autorunner/cfg/cubetown_autorunner/cubetown_autorunner_params{measure}.yaml')
         os.system(f'cp yaml/cubetown_autorunner_params.yaml results/{experiment_title}/configs')
     elif target_environment == 'exynos':        
-        os.system(f'scp -r yaml/cubetown_autorunner_params.yaml root@{target_ip}:/var/lib/lxc/linux1/rootfs/home/root/rubis_ws/src/rubis_autorunner/cfg/cubetown_autorunner/cubetown_autorunner_params{measure}.yaml')        
+        os.system(f'scp -r yaml/cubetown_autorunner_params.yaml root@{target_ip}:/var/lib/lxc/linux1/rootfs/home/root/rubis_ws/src/rubis_autorunner/cfg/cubetown_autorunner/cubetown_autorunner_params{measure}.yaml')
         print(f'cp yaml/cubetown_autorunner_params.yaml results/{experiment_title}/configs')
+        os.system(f'scp -r scripts/terminate_cubetown_autorunner.py root@{target_ip}:/home/root/scripts/terminate_cubetown_autorunner.py')
         os.system(f'cp yaml/cubetown_autorunner_params.yaml results/{experiment_title}/configs')
     
     
