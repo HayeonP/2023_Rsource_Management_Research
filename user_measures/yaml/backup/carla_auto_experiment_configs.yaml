@@ -8,7 +8,7 @@ duration: 20 # sec
 # Commands
 common:
   carla_simulator_cmd: /home/hayeonp/carla_simulator/CARLA_0.9.13/CarlaUE4.sh -RenderOffScreen
-  carla_autoware_cmd: /home/hayeonp/git/2023_Resource_Management_Research/experiment/scripts/carla_autoware.sh  
+  carla_autoware_cmd: /home/hayeonp/git/ClguardExperiment/experiment/scripts/carla_autoware.sh  
 
 desktop:
   carla_lkas_autorunner_cmd: roslaunch rubis_autorunner exynos_carla_lkas_autorunner.launch

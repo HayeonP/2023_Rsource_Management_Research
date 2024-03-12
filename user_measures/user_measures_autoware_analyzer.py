@@ -34,7 +34,7 @@ def _profile_response_time(dir_path, output_title, first_node, last_node, start_
     exp_title = dir_path.split('/')[-3]
     exp_id = dir_path.split('/')[-2]
 
-    output_dir_path = 'analyzation/' + output_title + '/' + type + '_E2E_response_time'
+    output_dir_path = f"analyzation/{output_title}/E2E"
     if not os.path.exists(output_dir_path): os.system('mkdir -p ' + output_dir_path)
 
     # Plot graph
@@ -44,7 +44,7 @@ def _profile_response_time(dir_path, output_title, first_node, last_node, start_
         x_data = x_data[:int(len(x_data) * filter)]
         y_data = y_data[:int(len(y_data) * filter)]
 
-    plot_path = output_dir_path+'/' + exp_title + '_' + exp_id + '_' + type + '_E2E_plot.png'
+    plot_path = f"{output_dir_path}/E2E_plot_v{exp_id}.png"
 
     plt.plot(x_data, y_data)
     plt.axhline(y = max_E2E_response_time, color = 'r', linestyle = ':', label='Max')
@@ -58,7 +58,7 @@ def _profile_response_time(dir_path, output_title, first_node, last_node, start_
     plt.savefig(plot_path)
     plt.close()
 
-    e2e_path = output_dir_path+'/' + exp_title + '_' + exp_id + '_' + type + '_E2E_list.yaml'
+    e2e_path = f"{output_dir_path}/E2E_list_v{exp_id}.yaml"
     with open(e2e_path, "w") as f:
         e2e_data = {"instance_id": x_data, "e2e_response_time": y_data}
         json.dump(e2e_data, f, indent=4)
@@ -69,7 +69,7 @@ def _profile_response_time(dir_path, output_title, first_node, last_node, start_
 def profile_response_time_for_experiment(source_path, output_title, first_node, last_node, is_collapsed_list, is_matching_failed_list, x_range=[0.0, 0.0], filter=1.0, deadline=450.0):    
     exp_title = dir_path.split('/')[-3]
     
-    _profile_response_time_for_experiment(source_path, output_title, first_node, last_node, exp_title, is_collapsed_list, is_matching_failed_list, deadline, type='shortest', mode='all', x_range=x_range, filter=filter)
+    _profile_response_time_for_experiment(source_path, output_title, first_node, last_node, exp_title, is_collapsed_list, is_matching_failed_list, deadline, type='shortest', mode='total', x_range=x_range, filter=filter)
     _profile_response_time_for_experiment(source_path, output_title, first_node, last_node, exp_title, is_collapsed_list, is_matching_failed_list, deadline, type='shortest', mode='normal', x_range=x_range, filter=filter)
     _profile_response_time_for_experiment(source_path, output_title, first_node, last_node, exp_title, is_collapsed_list, is_matching_failed_list, deadline, type='shortest', mode='collision', x_range=x_range, filter=filter)
     _profile_response_time_for_experiment(source_path, output_title, first_node, last_node, exp_title, is_collapsed_list, is_matching_failed_list, deadline, type='shortest', mode='matching_failed', x_range=x_range, filter=filter)
@@ -84,7 +84,7 @@ def _profile_response_time_for_experiment(source_path, output_title, first_node,
     else:
         print('[ERROR] Invalid mode:', label)
     
-    available_mode = ['all', 'normal', 'collision', 'matching_failed']
+    available_mode = ['total', 'normal', 'collision', 'matching_failed']
     if mode not in available_mode:
         print('[ERROR] Invalidate mode:', mode)
         exit()
@@ -94,7 +94,7 @@ def _profile_response_time_for_experiment(source_path, output_title, first_node,
     sum_of_deadilne_miss_ratio = 0
 
     target_experiment_idx_list = []
-    if mode == 'all': target_experiment_idx_list = range(n)
+    if mode == 'total': target_experiment_idx_list = range(n)
     elif mode == 'collision': target_experiment_idx_list = aa.get_idices_of_one_from_list(is_collapsed_list)
     elif mode == 'matching_failed': target_experiment_idx_list = aa.get_idices_of_one_from_list(is_matching_failed_list)        
     elif mode == 'normal':
@@ -168,7 +168,15 @@ def _profile_response_time_for_experiment(source_path, output_title, first_node,
         var_E2E_response_time = float(np.var(all_E2E_response_time_list))
         avg_max_E2E_response_time = sum(max_E2E_response_time_list) / len(max_E2E_response_time_list)
     
-    E2E_response_time_info_path = 'analyzation/' + output_title + '/' + exp_title + '_E2E_response_time_info(' + mode + ',' + type + ').yaml'
+    if mode == "total":
+        E2E_response_time_info_path = f"analyzation/{output_title}/{mode}_E2E_info.yaml"
+    else:
+        E2E_response_time_info_fname = f"{mode}_E2E_info.yaml"
+        E2E_response_time_info_fpath = f"analyzation/{output_title}/summary/"
+        if not os.path.exists(E2E_response_time_info_fpath):
+            os.system(f"mkdir {E2E_response_time_info_fpath}")
+        E2E_response_time_info_path = f"{E2E_response_time_info_fpath}{E2E_response_time_info_fname}"
+        
     E2E_response_time_info = {}
     E2E_response_time_info['deadline_ms'] = deadline
     E2E_response_time_info['max'] = max_E2E_response_time
@@ -195,8 +203,14 @@ def _profile_response_time_for_experiment(source_path, output_title, first_node,
     if len(is_matching_failed_list) == 0: matching_failure_ratio = 0
     else: matching_failure_ratio = sum(is_matching_failed_list)/len(is_matching_failed_list)
 
-    # Plot    
-    plot_path = 'analyzation/' + output_title + '/' + exp_title + '_' + mode + '_' + type + '_E2E_response_time.png'
+    # Plot
+    if mode == "total":
+        plot_path = f"analyzation/{output_title}/{mode}_E2E_plot.png"
+    else:
+        plot_fname = f"{mode}_E2E_plot.png"
+        plot_fpath = f"analyzation/{output_title}/summary/"
+        if not os.path.exists(plot_fpath): os.system(f"mkdir {plot_fpath}")
+        plot_path = f"{plot_fpath}{plot_fname}"
 
     plt.legend()    
     plt.xlabel('Instance ID')
@@ -215,7 +229,13 @@ def _profile_response_time_for_experiment(source_path, output_title, first_node,
     plt.close()
     
     # Distribution
-    distribution_path = 'analyzation/' + output_title + '/' + exp_title + '_' + mode + '_' + type + '_E2E_distribution.png'
+    if mode == "total":
+        distribution_path = f"analyzation/{output_title}/{mode}_E2E_distribution.png"
+    else:
+        distribution_fname = f"{mode}_E2E_distribution.png"
+        distribution_fpath = f"analyzation/{output_title}/summary/"
+        if not os.path.exists: os.system(f"mkdir {distribution_fpath}")
+        distribution_path = f"{distribution_fpath}{distribution_fname}"
     
     plt.hist(all_E2E_response_time_list, bins=50, density = True, color='c')
     plt.axvline(avg_E2E_response_time, color="r", linestyle="--", label=f"Avg E2E: {round(avg_E2E_response_time,2)}ms")
@@ -253,8 +273,8 @@ def profile_center_offset(dir_path, output_title, center_offset, max_center_offs
     x_data = list(center_offset.keys()) # Instance IDs
     y_data = list(center_offset.values()) # Center offset(m)
 
-    plot_path = output_dir_path+'/' + exp_title + '_' + exp_id + '_center_offset.png'
-    center_offset_info_path = output_dir_path+'/' + exp_title + '_' + exp_id + '_center_offset_info.yaml'
+    plot_path = f"{output_dir_path}/center_offset_v{exp_id}.png"
+    center_offset_info_path = f"{output_dir_path}/center_offset_info_v{exp_id}.yaml"
     center_offset_dict = {}
     center_offset_dict['center_offset'] = y_data
     with open(f'{center_offset_info_path}', 'w') as f:
@@ -332,12 +352,8 @@ def profile_waypoints(dir_path, output_title, is_collapsed, is_matching_failed):
         pass
 
     # Plot
-    plot_path = output_dir_path + '/' + exp_title + '_' + exp_id + '_waypoints.png'
-    print("##",exp_title,exp_id)
-    print(plot_path)
+    plot_path = f"{output_dir_path}/waypoints_v{exp_id}.png"    
             
-    # plt.xlim(-70, 40)
-    # plt.ylim(20,75)
     plt.xlabel('x (m)')
     plt.ylabel('y (m)')
     plt.title('is_collapsed='+str(is_collapsed) + '/ is_matching_failed='+str(is_matching_failed))
@@ -347,13 +363,13 @@ def profile_waypoints(dir_path, output_title, is_collapsed, is_matching_failed):
     plt.close()
 
 def profile_waypoints_for_experiment(source_path, output_title, is_collapsed_list, is_matching_failed_list):
-    _profile_waypoints_for_experiment(source_path, output_title, is_collapsed_list, is_matching_failed_list, mode='all')
+    _profile_waypoints_for_experiment(source_path, output_title, is_collapsed_list, is_matching_failed_list, mode='total')
     _profile_waypoints_for_experiment(source_path, output_title, is_collapsed_list, is_matching_failed_list, mode='normal')
     _profile_waypoints_for_experiment(source_path, output_title, is_collapsed_list, is_matching_failed_list, mode='collision')
     _profile_waypoints_for_experiment(source_path, output_title, is_collapsed_list, is_matching_failed_list, mode='matching_failed')
 
-def _profile_waypoints_for_experiment(source_path, output_title, is_collapsed_list, is_matching_failed_list, mode='all'):
-    available_mode = ['all', 'normal', 'collision', 'matching_failed']
+def _profile_waypoints_for_experiment(source_path, output_title, is_collapsed_list, is_matching_failed_list, mode='total'):
+    available_mode = ['total', 'normal', 'collision', 'matching_failed']
     if mode not in available_mode:
         print('[ERROR] Invalidate mode:', mode)
         exit()
@@ -373,7 +389,7 @@ def _profile_waypoints_for_experiment(source_path, output_title, is_collapsed_li
     plt.plot(center_line_x, center_line_y, 'k', label='Center line')
     
     target_experiment_idx_list = []
-    if mode == 'all': target_experiment_idx_list = range(n)
+    if mode == 'total': target_experiment_idx_list = range(n)
     elif mode == 'collision':
         target_experiment_idx_list = aa.get_idices_of_one_from_list(is_collapsed_list)
     elif mode == 'matching_failed': target_experiment_idx_list = aa.get_idices_of_one_from_list(is_matching_failed_list)
@@ -423,7 +439,15 @@ def _profile_waypoints_for_experiment(source_path, output_title, is_collapsed_li
     else: matching_failure_ratio = sum(is_matching_failed_list)/len(is_matching_failed_list)
 
     # Plot
-    plot_path = 'analyzation/' + output_title + '/' + exp_title + '_' + mode + '_waypoints.png'        
+    if mode == "total":
+        plot_path = f"analyzation/{output_title}/{mode}_waypoints.png"
+    else:
+        plot_fname = f"{mode}_waypoints.png"
+        plot_fpath = f"analyzation/{output_title}/summary/"
+        
+        if not os.path.exists(plot_fpath):
+            os.system(f"mkdir {plot_fpath}")
+        plot_path = f"{plot_fpath}{plot_fname}"
     
     if configs['simulator'] == 'old':
         plt.xlim(-70, 40)
@@ -464,7 +488,7 @@ def profile_analyzation_info(source_path, output_title, avg_center_offset, is_co
     for key in list(perf_info.keys()):
         analyzation_info['resource_usage'][key] = perf_info[key]
 
-    analyzation_info_path = 'analyzation/' + output_title + '/analyzation_info.yaml'
+    analyzation_info_path = f"analyzation/analyzation_info.yaml"
     with open(analyzation_info_path, 'w') as f: yaml.dump(analyzation_info, f, default_flow_style=False)
 
     return
@@ -515,7 +539,7 @@ def profile_miss_alignment_delay(dir_path, output_title, chain_info, start_insta
     
     plt.plot(x_E2E_data, y_E2E_data, color = color, label = 'E2E')
 
-    plot_path = output_dir_path+'/' + exp_title + '_' + exp_id + '_' + 'miss_alignment_delay_plot.png'
+    plot_path = f"{output_dir_path}/miss_alignment_delay_v{exp_id}_plot.png"
            
     plt.legend()
     plt.ylim(0, 1000)
@@ -538,7 +562,7 @@ def profile_perf_info_for_experiment(source_path):
     l3d_cache_refill_event_cnt_of_all_cores_list = []
     n = n - 1
     for idx in range(n):
-        experiment_info_path = source_path + '/' + str(idx) + '/experiment_info.yaml'
+        experiment_info_path = f"{source_path}/{str(idx)}/experiment_info.yaml"
         with open(experiment_info_path) as f:
             experiment_info = yaml.load(f, Loader=yaml.FullLoader)
             if 'l3d_cache_refill_event_cnt_of_ADAS_cores(per sec)' not in experiment_info \
@@ -622,7 +646,7 @@ if __name__ == '__main__':
             experiment_info_path = source_path + '/' + str(idx) + '/experiment_info.yaml'
             experiment_info = aa.get_experiment_info(experiment_info_path)
             is_collapsed = experiment_info['is_collaped']
-            is_collapsed_list.append(is_collapsed)
+            is_collapsed_list.append(is_collapsed)  
 
             # Center offset
             center_offset_path = source_path + '/' + str(idx) + '/center_offset.csv'

@@ -15,5 +15,5 @@ exynos:
   termination_cmd: ./scripts/terminate_exynos.sh
 max_iteration: 50
 run_stream: false
-svl_cfg_path: /home/hayeonp/git/2023_Resource_Management_Research/experiment/yaml/svl_scenario.yaml
+svl_cfg_path: /home/hayeonp/git/ClguardExperiment/experiment/yaml/svl_scenario.yaml
 target_environment: exynos

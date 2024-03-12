@@ -5,7 +5,7 @@ target_environment: exynos # desktop / exynos
 autorunner_mode: FULL # LKAS / FULL
 max_iteration: 20
 duration: 100 # sec
-svl_cfg_path: /home/hayeonp/git/2023_Resource_Management_Research/experiment/yaml/svl_scenario.yaml
+svl_cfg_path: /home/hayeonp/git/ClguardExperiment/experiment/yaml/svl_scenario.yaml
 
 ADAS_cores: 4-7
 all_cores: 0-7

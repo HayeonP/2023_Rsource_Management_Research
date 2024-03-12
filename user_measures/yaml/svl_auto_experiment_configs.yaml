@@ -15,5 +15,5 @@ exynos:
   termination_cmd: ./scripts/terminate_exynos.sh
 max_iteration: 3
 run_stream: false
-svl_cfg_path: /home/hayeonp/git/2023_Resource_Management_Research/user_measures/yaml/svl_scenario_lane_change.yaml
+svl_cfg_path: /home/hayeonp/git/ClguardExperiment/user_measures/yaml/svl_scenario_lane_change.yaml
 target_environment: exynos
