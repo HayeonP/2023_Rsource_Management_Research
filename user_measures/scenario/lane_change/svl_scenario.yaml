@@ -26,8 +26,8 @@ asset-id_info_path: ../RubisSVL/toolset/sensor_setup/asset_id.yaml
 npc:
   - npc0:
     name: Rubis
-    type: BoxTruck
+    type: Sedan
     offset:
       forward: 57
-      right: 0
+      right: -15
       rotation: -90

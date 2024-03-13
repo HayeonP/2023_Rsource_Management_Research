@@ -627,10 +627,12 @@ def get_user_measures(output_title):
         pritn(f"[ERROR] Cannot detect scenario from experiment path: {output_title}")
         exit()
     
-    def get_max_center_offset(output_title):
+    def get_handling_user_measure(output_title):
         center_offset_fpath = f"analyzation/{output_title}/center_offset/"
         fnames = os.listdir(center_offset_fpath)
-        max_center_offset = 0
+        max_center_offset = 0.0
+        avg_center_offset = 0.0
+        n = 0.0
         
         for fname in fnames:
             if ".yaml" not in fname: continue
@@ -639,10 +641,13 @@ def get_user_measures(output_title):
                 if len(data["center_offset"]) < 1: continue
                 if max(data["center_offset"]) > max_center_offset:
                     max_center_offset = max(data["center_offset"])
+                n += len(data["center_offset"])
+                avg_center_offset += sum(data["center_offset"])
+        avg_center_offset = avg_center_offset / n
 
-        return max_center_offset
+        return max_center_offset, avg_center_offset
     
-    def get_min_distance_to_obstacle_when_stop(output_title):
+    def get_braking_user_measure(output_title):
         waypoints_fpath = f"analyzation/{output_title}/trajectories/"
         fnames = os.listdir(waypoints_fpath)
         min_distance = 1000
@@ -656,43 +661,54 @@ def get_user_measures(output_title):
                 distance = last_x - 5 - 4.5 # Hard coding (5: end of obstacle, 4.5: base_link to front)
                 min_distance = min(distance, min_distance)
         
-        return min_distance
+        return min_distance_to_obstacle
     
-    def get_distance_to_obstacle_when_lane_change(output_title):
-        waypoints_fpath = f"analyzation/{output_title}/trajectories/"
-        fnames = os.listdir(waypoints_fpath)
-        min_distance = 1000
+    # def get_lane_change_user_measure(output_title):
+    #     waypoints_fpath = f"analyzation/{output_title}/trajectories/"
+    #     fnames = os.listdir(waypoints_fpath)
                
-        for fname in fnames:
-            if ".yaml" not in fname: continue
-            with open(f"{waypoints_fpath}{fname}", "r") as f:
-                data = yaml.safe_load(f)
-                if len(data["waypoints"]) < 1: continue  
-                # start: x < 40일 때 10개 term의 y 차이가 
-                start_cnt = 0                
-                start_ts = 0.0
-                for i, line in enumerate(data):
-                    ts = float(line["time_stmap"])
-                    x = float(line["x"])
-                    y = float(line["y"])
-                    if x > 40: continue
+    #     center_line_y = 57.0
+    #     left_line_y = 52.0
+        
+    #     for fname in fnames:
+    #         lane_change_duration = 0.0
+    #         max_center_offset_after_change = 0.0
+    #         avg_center_offset_after_change = 0.0
+    #         lane_chnage_start_idx = -1
+    #         lane_chnage_end_idx = -1
+            
+    #         if ".yaml" not in fname: continue
+    #         with open(f"{waypoints_fpath}{fname}", "r") as f:
+    #             data = yaml.safe_load(f)
+    #             if len(data["waypoints"]) < 1: continue
+                
+    #             # Find start idx of lane change
+    #             for i in range(len(data)):
+    #                 if i > len(data)-10: break
+    #                 local_start_pose = data[i]                    
                     
-                    # initialize
-                    if y < 54: start_cnt += 1
-                    else: start_cnt = max(0, start_cnt - 1)
+    #                 if float(data[i]["y"]) > 40: continue
                     
-                    if start_cnt == 1: start_ts = ts
-                    if start_cnt == 10: break
-                if start_cnt < 10: ts = -1.0
+    #                 for j in range(i,i+10):
+    #                     if float(data[j]["y"]) < (center_line - 0.5):
+                
                     
-                # end: x가 40 이하고, y가 51~53 이하인 구간이 20회 이상 반복 됐을 때 시작 시점
+                    
+                        
+                    
+                
+                    
+    #             # end: x가 40 이하고, y가 51~53 이하인 구간이 20회 이상 반복 됐을 때 시작 시점
                 
         
-        return
+    #     return
     
-    max_center_offset = get_max_center_offset(output_title)
-    min_distance_when_stop = get_min_distance_to_obstacle_when_stop(output_title)
-    print(min_distance_when_stop)
+    max_center_offset, avg_center_offset = get_handling_user_measure(output_title)
+    min_distance_to_obstacle = get_braking_user_measure(output_title)
+    
+    print("handling:", max_center_offset)
+    
+    print("braking:", min_distance_when_stop)
     
     return
 
@@ -779,4 +795,4 @@ if __name__ == '__main__':
         profile_waypoints_for_experiment(source_path, output_title, is_collapsed_list, is_matching_failed)
 
         # Get user measure
-        get_user_measures(output_title)
+        # get_user_measures(output_title)
