@@ -251,7 +251,6 @@ def experiment_manager(main_thread_pid):
     os.system('ssh root@' + configs[target_environment]['target_ip'] + ' \"lxc-attach -n linux1 -- /home/root/scripts/_cubetown_autorunner_1_sensing.sh\" &')
     os.system('ssh root@' + configs[target_environment]['target_ip'] + ' \"lxc-attach -n linux1 -- /home/root/scripts/_cubetown_autorunner_2_localization.sh\" &')
     os.system('ssh root@' + configs[target_environment]['target_ip'] + ' \"lxc-attach -n linux1 -- /home/root/scripts/_cubetown_autorunner_3_detection.sh\" &')
-    print('hihi')
 
     # Threads
     autorunner_thread = threading.Thread(target=autorunner)
@@ -262,7 +261,7 @@ def experiment_manager(main_thread_pid):
         if 'rosbridge_websocket' in _output: break
 
 
-    for i in range(configs['max_iteration']):
+    for i in range(configs['iterations']):
         experiment_info = {}
         is_collapsed = False        
         is_experiment_running.set()
@@ -285,7 +284,7 @@ def experiment_manager(main_thread_pid):
         start_writing_position_info()             
         perf_thread_for_ADAS_profiling.start()
         perf_thread_for_profiling.start()
-        is_collapsed, collapsed_position = svl_scenario.run(timeout=configs['duration'], label='Iteration: ' + str(i+1)+'/'+str(configs['max_iteration']))        
+        is_collapsed, collapsed_position = svl_scenario.run(timeout=configs['duration'], label='Iteration: ' + str(i+1)+'/'+str(configs['iterations']))        
         kill_perf()
         stop_writing_position_info()
         if configs['run_stream']:
@@ -319,7 +318,7 @@ def experiment_manager(main_thread_pid):
         #     slack_library.send_slack_message(payload, slack_webhook)
         #     break
         
-        if i+1 == int(configs['max_iteration']):
+        if i+1 == int(configs['iterations']):
             is_experiment_running.clear()
             break
         
@@ -375,7 +374,7 @@ if __name__ == '__main__':
 
     # Create result dir
     does_dir_exist = os.path.exists('results/'+configs['experiment_title'])
-    if configs['experiment_title'] == 'test':
+    if 'test' in configs['experiment_title']:
         if does_dir_exist:
             os.system('rm -r results/'+configs['experiment_title'])
     else:
@@ -386,24 +385,22 @@ if __name__ == '__main__':
     os.system('mkdir -p results/'+configs['experiment_title']+'/configs')
     
     # select params for the measure
-    scenario = configs['svl_cfg_path'].split('svl_scenario_')[1]
-    
-    if scenario == 'handling.yaml':
-        measure = '_handling'
-    elif scenario == 'braking.yaml':
-        measure = '_braking'
-    elif scenario == 'lane_change.yaml':
-        measure = '_lane_change'
-    else:
-        measure = ''
+    scenario = configs['svl_cfg_path'].split("/")[-2]
+    measure = scenario
     
     # Move params to the target board ant backup it
     if target_environment == 'desktop':
-        os.system(f'cp yaml/cubetown_autorunner_params{measure}.yaml ~/rubis_ws/src/rubis_autorunner/cfg/cubetown_autorunner/cubetown_autorunner_params.yaml')
-        os.system(f'cp yaml/cubetown_autorunner_params{measure}.yaml results/{experiment_title}/configs')
+        os.system(f'scenario/{measure}/cubetown_autorunner_params.yaml ~/rubis_ws/src/rubis_autorunner/cfg/cubetown_autorunner/cubetown_autorunner_params.yaml')
+        os.system(f'scenario/{measure}/cubetown_autorunner_params.yaml results/{experiment_title}/configs')
     elif target_environment == 'exynos':        
-        os.system(f'scp -r yaml/cubetown_autorunner_params{measure}.yaml root@{target_ip}:/var/lib/lxc/linux1/rootfs/home/root/rubis_ws/src/rubis_autorunner/cfg/cubetown_autorunner/cubetown_autorunner_params.yaml')
-        print(f'cp yaml/cubetown_autorunner_params{measure}.yaml results/{experiment_title}/configs')
+        os.system(f'scp -r scenario/{measure}/cubetown_autorunner_params.yaml root@{target_ip}:/var/lib/lxc/linux1/rootfs/home/root/rubis_ws/src/rubis_autorunner/cfg/cubetown_autorunner/cubetown_autorunner_params.yaml')
+        
+        os.system(f'scp -r scenario/{measure}/_cubetown_autorunner_1_sensing.launch root@{target_ip}:/var/lib/lxc/linux1/rootfs/opt/ros/melodic/share/rubis_autorunner/scripts/cubetown_autorunner/_cubetown_autorunner_1_sensing.launch')
+        os.system(f'scp -r scenario/{measure}/_cubetown_autorunner_2_localization.launch root@{target_ip}:/var/lib/lxc/linux1/rootfs/opt/ros/melodic/share/rubis_autorunner/scripts/cubetown_autorunner/_cubetown_autorunner_2_localization.launch')
+        os.system(f'scp -r scenario/{measure}/_cubetown_autorunner_3_detection.launch root@{target_ip}:/var/lib/lxc/linux1/rootfs/opt/ros/melodic/share/rubis_autorunner/scripts/cubetown_autorunner/_cubetown_autorunner_3_detection.launch')
+        os.system(f'scp -r scenario/{measure}/_cubetown_autorunner_4_planning.launch root@{target_ip}:/var/lib/lxc/linux1/rootfs/opt/ros/melodic/share/rubis_autorunner/scripts/cubetown_autorunner/_cubetown_autorunner_4_planning.launch')
+        os.system(f'scp -r scenario/{measure}/_cubetown_autorunner_5_control.launch root@{target_ip}:/var/lib/lxc/linux1/rootfs/opt/ros/melodic/share/rubis_autorunner/scripts/cubetown_autorunner/_cubetown_autorunner_5_control.launch')
+        
         os.system(f'scp -r scripts/terminate_cubetown_autorunner.py root@{target_ip}:/home/root/scripts/terminate_cubetown_autorunner.py')
         os.system(f'cp yaml/cubetown_autorunner_params{measure}.yaml results/{experiment_title}/configs')
     

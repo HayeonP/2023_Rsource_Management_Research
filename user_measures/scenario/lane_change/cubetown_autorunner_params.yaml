@@ -147,12 +147,12 @@ op_global_planner:
   multilap_flag: 1
 
 op_common_params:
-  rollOutDensity: 4
+  rollOutDensity: 5
   rollOutsNumber: 2
   maxVelocity: 7.5
   maxAcceleration: 7.5
   maxDeceleration: -7.5
-  blockIdx: 2
+  blockIdx: -1
 
 op_trajectory_generator:
   task_scheduling_configs:
@@ -172,8 +172,8 @@ op_trajectory_evaluator:
     period: 0 # ns
   task_response_time_filename: "~/Documents/profiling/response_time/op_trajectory_evaluator.csv"
 
-  weightPriority: 1
-  weightTransition: 0.5
+  weightPriority: 0
+  weightTransition: 5
   weightLong: 10
   weightLat: 10
   blockThreshold: 1.5

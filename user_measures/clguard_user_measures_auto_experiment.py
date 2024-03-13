@@ -105,9 +105,11 @@ def update_adas_config(label, user_measure):
         config = yaml.load(f, Loader=yaml.FullLoader)
 
     config["experiment_title"] = label
-    config["max_iteration"] = epochs
-    # select user measure scenario
-    config["svl_cfg_path"] = config["svl_cfg_path"].split("svl_scenario")[0] + "svl_scenario_" + user_measure + ".yaml"
+    config["iterations"] = iterations
+    
+    # select user measure scenario    
+    config["svl_cfg_path"] = f"./scenario/{user_measure}/svl_scenario.yaml"
+    
     if user_measure == 'handling':
         config["duration"] = 100
     else:
@@ -126,10 +128,10 @@ def update_adas_config(label, user_measure):
     with open("yaml/autoware_analyzer.yaml", "w") as f:
         yaml.dump(analyzer_config, f)
 
-def profile_bandwidth(measure, label, epochs, adas_budget):
+def profile_bandwidth(measure, label, iterations, adas_budget):
     rospy.init_node('profiling_bandwidth_for_clguard_experiment_node')
 
-    for i in range(epochs):
+    for i in range(iterations):
         bw_profiler_title = f'{label}_it{i}'
         if measure == 'handling':
             os.system(f'sed -i \'/profiling_duration:/ c\profiling_duration: 80\' {host_bandwidth_profiler_dir}/configs/bw_profiler.yaml')
@@ -167,7 +169,7 @@ def profile_bandwidth(measure, label, epochs, adas_budget):
     print('code_end')
 
 
-def start_experiment(measure, adas_budget, version, seqwr_budget, seqwr_clguard):
+def start_experiment(measure, adas_budget, epoch, seqwr_budget, seqwr_clguard):
     # clguard1: ADAS, clguard2: SeqWr
     if is_clguard_installed():
         rmmod_clguard('clguard1')
@@ -180,10 +182,10 @@ def start_experiment(measure, adas_budget, version, seqwr_budget, seqwr_clguard)
         # Setup ADAS budget to clguard
         insmod_clguard('clguard1', '4-7', adas_budget)
         
-        label = f'{experiment_tag}_{measure}_b{adas_budget}_adas_only_v{version}'
+        label = f'{experiment_tag}_{measure}_b{adas_budget}_adas_only_v{epoch}'
         update_adas_config(label, measure)
 
-        bw_profiling_process = multiprocessing.Process(target=profile_bandwidth, args=(measure, label, epochs, adas_budget,))
+        bw_profiling_process = multiprocessing.Process(target=profile_bandwidth, args=(measure, label, iterations, adas_budget,))
         bw_profiling_process.start()
 
         os.system(f'python3 user_measures_svl_auto_experiment.py')
@@ -202,11 +204,11 @@ def start_experiment(measure, adas_budget, version, seqwr_budget, seqwr_clguard)
         # Setup SeqWr budget to Clguard
         insmod_clguard('clguard2', '1-3', seqwr_budget)
 
-        label = f'{experiment_tag}_{measure}_b{adas_budget}_adas_b{seqwr_budget}_seqwr_v{version}'
+        label = f'{experiment_tag}_{measure}_b{adas_budget}_adas_b{seqwr_budget}_seqwr_v{epoch}'
         update_adas_config(label, measure)
 
         seqwr_process = multiprocessing.Process(target=seqwr_workload, args=(1, 204800,))
-        bw_profiling_process = multiprocessing.Process(target=profile_bandwidth, args=(measure, label, epochs, adas_budget,))
+        bw_profiling_process = multiprocessing.Process(target=profile_bandwidth, args=(measure, label, iterations, adas_budget,))
         seqwr_process.start()
         bw_profiling_process.start()
 
@@ -228,11 +230,11 @@ def start_experiment(measure, adas_budget, version, seqwr_budget, seqwr_clguard)
         # Setup ADAS budget to clguard
         insmod_clguard('clguard1', '4-7', adas_budget)
         
-        label = f'{experiment_tag}_{measure}_b{adas_budget}_adas_seqwr{seqwr_budget}_v{version}'
+        label = f'{experiment_tag}_{measure}_b{adas_budget}_adas_seqwr{seqwr_budget}_v{epoch}'
         update_adas_config(label, measure)
 
         seqwr_process = multiprocessing.Process(target=seqwr_workload, args=(1, seqwr_budget,))
-        bw_profiling_process = multiprocessing.Process(target=profile_bandwidth, args=(measure, label, epochs, adas_budget,))
+        bw_profiling_process = multiprocessing.Process(target=profile_bandwidth, args=(measure, label, iterations, adas_budget,))
         seqwr_process.start()
         bw_profiling_process.start()
 
@@ -253,7 +255,7 @@ if __name__ == '__main__':
     with open('yaml/user_measures_auto_experiment.yaml') as f:
         configs = yaml.load(f, Loader=yaml.FullLoader)
 
-    epochs = configs['epochs']
+    iterations = configs['iterations']
     ssh_address = configs['ssh_address']
     exynos_clguard_dir = configs['exynos_clguard_dir']
     clguard_limit_dir = configs['clguard_limit_dir']
@@ -261,7 +263,7 @@ if __name__ == '__main__':
     host_bandwidth_profiler_dir = configs['host_bandwidth_profiler_dir']
 
     scenario_list = configs['user_measure_scenario']
-    iteration_list = configs['iterations']
+    epochs = configs['epochs']
     
     adas_budget_list = configs['adas_budget']
     seqwr_budget_list = configs['seqwr_budget']
@@ -270,8 +272,11 @@ if __name__ == '__main__':
     seqwr_clguard = configs['seqwr_clguard']
     
     for scenario in scenario_list:
-        for version in iteration_list:
+        if scenario not in ["braking", "lane_change", "handling"]:
+            print(f"[ERROR] Wrong scenario: {scenario}")
+            continue
+        for epoch in range(epochs):
             for i in range(len(adas_budget_list)):
                 adas_budget = adas_budget_list[i]
                 seqwr_budget = seqwr_budget_list[i]
-                start_experiment(scenario, adas_budget, version, seqwr_budget, seqwr_clguard)
+                start_experiment(scenario, adas_budget, epoch, seqwr_budget, seqwr_clguard)

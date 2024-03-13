@@ -328,12 +328,14 @@ def profile_waypoints(dir_path, output_title, is_collapsed, is_matching_failed):
 
     center_offset_path = dir_path + '/center_offset.csv'
     waypoints = aa.get_waypoints(center_offset_path, configs['simulator'])
+    time_stamp = []
     waypoints_x = []
     waypoints_y = []
     
     for waypoint in waypoints:
         waypoints_x.append(float(waypoint[0]))
         waypoints_y.append(float(waypoint[1]))
+        time_stamp.append(float(waypoint[2]))
 
     color = 'b'
     if is_collapsed: color = 'r'
@@ -361,6 +363,15 @@ def profile_waypoints(dir_path, output_title, is_collapsed, is_matching_failed):
     plt.savefig(plot_path)
 
     plt.close()
+    
+    # info
+    info_path = f"{output_dir_path}/waypoints_info_v{exp_id}.yaml"
+    info_dict = {}
+    info_dict["waypoints"] = [{"time_stamp": pair[2], "x": pair[0], "y": pair[1]} for pair in zip(time_stamp, waypoints_x, waypoints_y)]
+    with open(f"{info_path}", "w") as f:
+        yaml.dump(info_dict, f, default_flow_style=False)
+    
+    return
 
 def profile_waypoints_for_experiment(source_path, output_title, is_collapsed_list, is_matching_failed_list):
     _profile_waypoints_for_experiment(source_path, output_title, is_collapsed_list, is_matching_failed_list, mode='total')
@@ -605,6 +616,86 @@ def get_recent_data():
     center_offset_path = 'results/cur_adas/0/center_offset.csv'
     aa.center_offset_to_recent_data(center_offset_path, online_profiling_duration)
 
+def get_user_measures(output_title):
+    if "handling" in output_title:
+        scenario = "handling"
+    elif "braking" in output_title:
+        scenario = "braking"
+    elif "lane_change" in output_title:
+        scenario = "lane_change"
+    else:
+        pritn(f"[ERROR] Cannot detect scenario from experiment path: {output_title}")
+        exit()
+    
+    def get_max_center_offset(output_title):
+        center_offset_fpath = f"analyzation/{output_title}/center_offset/"
+        fnames = os.listdir(center_offset_fpath)
+        max_center_offset = 0
+        
+        for fname in fnames:
+            if ".yaml" not in fname: continue
+            with open(f"{center_offset_fpath}{fname}", "r") as f:
+                data = yaml.safe_load(f)
+                if len(data["center_offset"]) < 1: continue
+                if max(data["center_offset"]) > max_center_offset:
+                    max_center_offset = max(data["center_offset"])
+
+        return max_center_offset
+    
+    def get_min_distance_to_obstacle_when_stop(output_title):
+        waypoints_fpath = f"analyzation/{output_title}/trajectories/"
+        fnames = os.listdir(waypoints_fpath)
+        min_distance = 1000
+               
+        for fname in fnames:
+            if ".yaml" not in fname: continue
+            with open(f"{waypoints_fpath}{fname}", "r") as f:
+                data = yaml.safe_load(f)
+                if len(data["waypoints"]) < 1: continue                
+                last_x = data["waypoints"][-1]["x"]
+                distance = last_x - 5 - 4.5 # Hard coding (5: end of obstacle, 4.5: base_link to front)
+                min_distance = min(distance, min_distance)
+        
+        return min_distance
+    
+    def get_distance_to_obstacle_when_lane_change(output_title):
+        waypoints_fpath = f"analyzation/{output_title}/trajectories/"
+        fnames = os.listdir(waypoints_fpath)
+        min_distance = 1000
+               
+        for fname in fnames:
+            if ".yaml" not in fname: continue
+            with open(f"{waypoints_fpath}{fname}", "r") as f:
+                data = yaml.safe_load(f)
+                if len(data["waypoints"]) < 1: continue  
+                # start: x < 40일 때 10개 term의 y 차이가 
+                start_cnt = 0                
+                start_ts = 0.0
+                for i, line in enumerate(data):
+                    ts = float(line["time_stmap"])
+                    x = float(line["x"])
+                    y = float(line["y"])
+                    if x > 40: continue
+                    
+                    # initialize
+                    if y < 54: start_cnt += 1
+                    else: start_cnt = max(0, start_cnt - 1)
+                    
+                    if start_cnt == 1: start_ts = ts
+                    if start_cnt == 10: break
+                if start_cnt < 10: ts = -1.0
+                    
+                # end: x가 40 이하고, y가 51~53 이하인 구간이 20회 이상 반복 됐을 때 시작 시점
+                
+        
+        return
+    
+    max_center_offset = get_max_center_offset(output_title)
+    min_distance_when_stop = get_min_distance_to_obstacle_when_stop(output_title)
+    print(min_distance_when_stop)
+    
+    return
+
 if __name__ == '__main__':
     with open('yaml/autoware_analyzer.yaml') as f:
         configs = yaml.load(f, Loader=yaml.FullLoader)
@@ -686,4 +777,6 @@ if __name__ == '__main__':
         
         # Profile waypoints
         profile_waypoints_for_experiment(source_path, output_title, is_collapsed_list, is_matching_failed)
-        
+
+        # Get user measure
+        get_user_measures(output_title)
