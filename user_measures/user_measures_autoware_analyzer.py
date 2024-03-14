@@ -367,7 +367,7 @@ def profile_waypoints(dir_path, output_title, is_collapsed, is_matching_failed):
     # info
     info_path = f"{output_dir_path}/waypoints_info_v{exp_id}.yaml"
     info_dict = {}
-    info_dict["waypoints"] = [{"time_stamp": pair[2], "x": pair[0], "y": pair[1]} for pair in zip(time_stamp, waypoints_x, waypoints_y)]
+    info_dict["waypoints"] = [{"time_stamp": time_stamp[i], "x": waypoints_x[i], "y": waypoints_y[i]} for i in range(len(time_stamp))]
     with open(f"{info_path}", "w") as f:
         yaml.dump(info_dict, f, default_flow_style=False)
     
@@ -650,8 +650,11 @@ def get_user_measures(output_title):
     def get_braking_user_measure(output_title):
         waypoints_fpath = f"analyzation/{output_title}/trajectories/"
         fnames = os.listdir(waypoints_fpath)
-        min_distance = 1000
-               
+        distance_to_obstacle_list = []
+        
+        obstacle_x = 5
+        front_length = 4.5
+        
         for fname in fnames:
             if ".yaml" not in fname: continue
             with open(f"{waypoints_fpath}{fname}", "r") as f:
@@ -659,56 +662,118 @@ def get_user_measures(output_title):
                 if len(data["waypoints"]) < 1: continue                
                 last_x = data["waypoints"][-1]["x"]
                 distance = last_x - 5 - 4.5 # Hard coding (5: end of obstacle, 4.5: base_link to front)
-                min_distance = min(distance, min_distance)
+                distance_to_obstacle_list.append(distance)
         
-        return min_distance_to_obstacle
-    
-    # def get_lane_change_user_measure(output_title):
-    #     waypoints_fpath = f"analyzation/{output_title}/trajectories/"
-    #     fnames = os.listdir(waypoints_fpath)
-               
-    #     center_line_y = 57.0
-    #     left_line_y = 52.0
-        
-    #     for fname in fnames:
-    #         lane_change_duration = 0.0
-    #         max_center_offset_after_change = 0.0
-    #         avg_center_offset_after_change = 0.0
-    #         lane_chnage_start_idx = -1
-    #         lane_chnage_end_idx = -1
+        if len(distance_to_obstacle_list) != 0:
+            min_distance_to_obstacle = min(distance_to_obstacle_list)
+            avg_distance_to_obstacle = sum(distance_to_obstacle_list)/len(distance_to_obstacle_list)
+        else:
+            min_distance_to_obstacle = -1.0
+            avg_distance_to_obstacle = -1.0
             
-    #         if ".yaml" not in fname: continue
-    #         with open(f"{waypoints_fpath}{fname}", "r") as f:
-    #             data = yaml.safe_load(f)
-    #             if len(data["waypoints"]) < 1: continue
-                
-    #             # Find start idx of lane change
-    #             for i in range(len(data)):
-    #                 if i > len(data)-10: break
-    #                 local_start_pose = data[i]                    
-                    
-    #                 if float(data[i]["y"]) > 40: continue
-                    
-    #                 for j in range(i,i+10):
-    #                     if float(data[j]["y"]) < (center_line - 0.5):
-                
-                    
-                    
-                        
-                    
-                
-                    
-    #             # end: x가 40 이하고, y가 51~53 이하인 구간이 20회 이상 반복 됐을 때 시작 시점
-                
+        return min_distance_to_obstacle, avg_distance_to_obstacle
+    
+    def get_lane_change_user_measure(output_title):
+        with open(f"results/{output_title}/0/experiment_info.yaml", "r") as f:
+            experiment_info = yaml.safe_load(f)
+        scenario = experiment_info["scenario"]
         
-    #     return
+        waypoints_fpath = f"analyzation/{output_title}/trajectories/"
+        fnames = os.listdir(waypoints_fpath)
+               
+        obstacle_x = -7.5
+        front_length = 4.5
+        center_line_y = 57.0
+        left_line_y = 52.0
+        
+        """
+                                   (start)-------------------- <- y: 57
+                                  /
+        (end) -----------(finish)/ <- y: 52
+        """
+        
+        lane_change_duration_list = []
+        distance_to_obstacle_at_start_list = []
+        for fname in fnames:
+            lane_change_duration = 0.0
+            start_idx = -1
+            finish_idx = -1
+            end_idx = -1
+            
+            if ".yaml" not in fname: continue
+            with open(f"{waypoints_fpath}{fname}", "r") as f:
+                data = yaml.safe_load(f)
+                waypoints = data["waypoints"]
+                if len(waypoints) < 1: continue
+                
+                idx_line_map = {}
+                
+                # Get idx-line map and end idx
+                for i in range(len(waypoints)):
+                    cur_x = float(waypoints[i]["x"])
+                    cur_y = float(waypoints[i]["y"])
+                    
+                    # Skip start
+                    if cur_x > 40:
+                        continue
+                    
+                    if abs(cur_y - center_line_y) < 1.0: idx_line_map[i] = "center"
+                    elif abs(cur_y - left_line_y) < 1.0: idx_line_map[i] = "left"
+                    else: idx_line_map[i] = "change"
+                    
+                    # End idx
+                    if cur_x < -40 or i == len(waypoints)-1:
+                        end_idx = i
+                        break
+        
+                # Find start and finish idx
+                prev_line = "None"
+                for idx in idx_line_map:
+                    line = idx_line_map[idx]
+                    if prev_line == "None":
+                        prev_line = line
+                        continue
+                    
+                    if start_idx == -1 and line == "change": start_idx = idx
+                    if start_idx == -1 and line != "change": start_idx = -1
+                    
+                    if finish_idx == -1 and line == "left": finish_idx = idx
+                    if finish_idx != -1 and line != "left": finish_idx = -1
+                    
+                    prev_line = line
+            
+            lane_change_duration = float(waypoints[end_idx]["time_stamp"]) - float(waypoints[start_idx]["time_stamp"])
+            lane_change_duration_list.append(lane_change_duration)
+            distance_to_obstacle_at_start_list.append(float(waypoints[start_idx]["x"]) - obstacle_x - front_length)
     
-    max_center_offset, avg_center_offset = get_handling_user_measure(output_title)
-    min_distance_to_obstacle = get_braking_user_measure(output_title)
+        if len(lane_change_duration_list) != 0:
+            max_lane_change_duration = max(lane_change_duration_list)
+            avg_lane_change_duration = sum(lane_change_duration_list)/len(lane_change_duration_list)
+            max_distance_to_obstacle_at_start = max(distance_to_obstacle_at_start_list)
+            avg_distance_to_obstacle_at_start = sum(distance_to_obstacle_at_start_list)/len(distance_to_obstacle_at_start_list)
+        else:
+            max_lane_change_duration = -1.0
+            avg_lane_change_duration = -1.0
+            max_distance_to_obstacle_at_start = -1.0
+            avg_distance_to_obstacle_at_start = -1.0
+
+        return max_lane_change_duration, avg_lane_change_duration, max_distance_to_obstacle_at_start, avg_distance_to_obstacle_at_start
     
-    print("handling:", max_center_offset)
+    user_measure_info = {"scenario": scenario}
+    if scenario == "handling":
+        max_center_offset, avg_center_offset = get_handling_user_measure(output_title)    
+        user_measure_info["center_offset"] = {"max": max_center_offset, "avg": avg_center_offset}
+    elif scenario == "braking":
+        min_distance_to_obstacle, avg_distance_to_obstacle = get_braking_user_measure(output_title)
+        user_measure_info["distance_to_obstacle"] = {"min": min_distance_to_obstacle, "avg": avg_distance_to_obstacle}
+    elif scenario == "lane_change":
+        max_lane_change_duration, avg_lane_change_duration, max_distance_to_obstacle_at_start, avg_distance_to_obstacle_at_start = get_lane_change_user_measure(output_title)
+        user_measure_info["lane_change_duration"] = {"max": max_lane_change_duration, "avg": avg_lane_change_duration}
+        user_measure_info["distance_to_obstacle_at_start"] = {"max": max_distance_to_obstacle_at_start, "avg": avg_distance_to_obstacle_at_start}
     
-    print("braking:", min_distance_when_stop)
+    with open(f"analyzation/{output_title}/user_measure.yaml", "w") as f:
+        yaml.dump(user_measure_info, f)
+    
     
     return
 
@@ -795,4 +860,4 @@ if __name__ == '__main__':
         profile_waypoints_for_experiment(source_path, output_title, is_collapsed_list, is_matching_failed)
 
         # Get user measure
-        # get_user_measures(output_title)
+        get_user_measures(output_title)

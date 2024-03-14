@@ -13,7 +13,7 @@ exynos:
   rosbridge_cmd: roslaunch lgsvl_ros_bridge rosbridge_websocket.launch
   target_ip: 192.168.0.11
   termination_cmd: ./scripts/terminate_exynos.sh
-iterations: 1
+iterations: 3
 run_stream: false
 svl_cfg_path: ./scenario/lane_change/svl_scenario.yaml
 target_environment: exynos

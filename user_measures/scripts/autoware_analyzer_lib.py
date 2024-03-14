@@ -200,7 +200,7 @@ def get_waypoints(center_offset_path, simulator):
                 print('# Wrong simulator!')
                 exit()
             time_stamp = line[column_idx["ts"]]
-            waypoints.append([pose_x,pose_y, time_stamp])
+            waypoints.append([pose_x, pose_y, time_stamp])
     
     return waypoints
 

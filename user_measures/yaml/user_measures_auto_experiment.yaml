@@ -2,7 +2,7 @@
 epochs: 1
 
 # Repeat number of each epoch
-iterations: 1
+iterations: 3
 
 # adas_duration: auto set (to handling -> 100 / braking,lane_change -> 20)
 ssh_address: 'root@192.168.0.11'
@@ -17,7 +17,7 @@ experiment_tag: 'test'
 
 # each measure do "len(iterations) * len(adas_budget)" times
 # user_measure_scenario: ['braking', 'handling', 'lane_change']
-user_measure_scenario: ['lane_change']
+user_measure_scenario: ['braking', 'handling', 'lane_change']
 
 # adas_budget: 0 -> no budget / not 0 -> clguard budget
 adas_budget: [10000]

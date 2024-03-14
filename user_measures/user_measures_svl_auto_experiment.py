@@ -25,6 +25,7 @@ barrier = threading.Barrier(2)
 configs = {}
 target_environment = 'null'
 slack_webhook = 'null'
+scenario = "null"
 
 def autorunner():
     while True:
@@ -309,6 +310,7 @@ def experiment_manager(main_thread_pid):
         experiment_info['l3d_cache_refill_event_cnt_of_all_cores(per sec)'] = l3d_cache_refill_event_cnt_of_all_cores
         experiment_info['l3d_cache_refill_event_cnt_of_ADAS_cores(per sec)'] = l3d_cache_refill_event_cnt_of_ADAS_cores
         experiment_info['avg_total_memory_bandwidth_usage(GB/s)'] = calculate_avg_memory_bandwidth_usage(l3d_cache_refill_event_cnt_of_all_cores)
+        experiment_info["scenario"] = scenario
 
         print('- Manager: Save result')
         save_result(i, experiment_info) 
@@ -384,36 +386,35 @@ if __name__ == '__main__':
     os.system('mkdir -p results/'+configs['experiment_title'])
     os.system('mkdir -p results/'+configs['experiment_title']+'/configs')
     
-    # select params for the measure
+    # Check scenario
     scenario = configs['svl_cfg_path'].split("/")[-2]
-    measure = scenario
     
     # Move params to the target board ant backup it
     if target_environment == 'desktop':
-        os.system(f'scenario/{measure}/cubetown_autorunner_params.yaml ~/rubis_ws/src/rubis_autorunner/cfg/cubetown_autorunner/cubetown_autorunner_params.yaml')
-        os.system(f'scenario/{measure}/cubetown_autorunner_params.yaml results/{experiment_title}/configs')
+        os.system(f'scenario/{scenario}/cubetown_autorunner_params.yaml ~/rubis_ws/src/rubis_autorunner/cfg/cubetown_autorunner/cubetown_autorunner_params.yaml')
+        os.system(f'scenario/{scenario}/cubetown_autorunner_params.yaml results/{experiment_title}/configs')
     elif target_environment == 'exynos':        
-        os.system(f'scp -r scenario/{measure}/cubetown_autorunner_params.yaml root@{target_ip}:/var/lib/lxc/linux1/rootfs/home/root/rubis_ws/src/rubis_autorunner/cfg/cubetown_autorunner/cubetown_autorunner_params.yaml')
+        os.system(f'scp -r scenario/{scenario}/cubetown_autorunner_params.yaml root@{target_ip}:/var/lib/lxc/linux1/rootfs/home/root/rubis_ws/src/rubis_autorunner/cfg/cubetown_autorunner/cubetown_autorunner_params.yaml')
         
-        os.system(f'scp -r scenario/{measure}/_cubetown_autorunner_1_sensing.launch root@{target_ip}:/var/lib/lxc/linux1/rootfs/opt/ros/melodic/share/rubis_autorunner/scripts/cubetown_autorunner/_cubetown_autorunner_1_sensing.launch')
-        os.system(f'scp -r scenario/{measure}/_cubetown_autorunner_2_localization.launch root@{target_ip}:/var/lib/lxc/linux1/rootfs/opt/ros/melodic/share/rubis_autorunner/scripts/cubetown_autorunner/_cubetown_autorunner_2_localization.launch')
-        os.system(f'scp -r scenario/{measure}/_cubetown_autorunner_3_detection.launch root@{target_ip}:/var/lib/lxc/linux1/rootfs/opt/ros/melodic/share/rubis_autorunner/scripts/cubetown_autorunner/_cubetown_autorunner_3_detection.launch')
-        os.system(f'scp -r scenario/{measure}/_cubetown_autorunner_4_planning.launch root@{target_ip}:/var/lib/lxc/linux1/rootfs/opt/ros/melodic/share/rubis_autorunner/scripts/cubetown_autorunner/_cubetown_autorunner_4_planning.launch')
-        os.system(f'scp -r scenario/{measure}/_cubetown_autorunner_5_control.launch root@{target_ip}:/var/lib/lxc/linux1/rootfs/opt/ros/melodic/share/rubis_autorunner/scripts/cubetown_autorunner/_cubetown_autorunner_5_control.launch')
+        os.system(f'scp -r scenario/{scenario}/_cubetown_autorunner_1_sensing.launch root@{target_ip}:/var/lib/lxc/linux1/rootfs/opt/ros/melodic/share/rubis_autorunner/scripts/cubetown_autorunner/_cubetown_autorunner_1_sensing.launch')
+        os.system(f'scp -r scenario/{scenario}/_cubetown_autorunner_2_localization.launch root@{target_ip}:/var/lib/lxc/linux1/rootfs/opt/ros/melodic/share/rubis_autorunner/scripts/cubetown_autorunner/_cubetown_autorunner_2_localization.launch')
+        os.system(f'scp -r scenario/{scenario}/_cubetown_autorunner_3_detection.launch root@{target_ip}:/var/lib/lxc/linux1/rootfs/opt/ros/melodic/share/rubis_autorunner/scripts/cubetown_autorunner/_cubetown_autorunner_3_detection.launch')
+        os.system(f'scp -r scenario/{scenario}/_cubetown_autorunner_4_planning.launch root@{target_ip}:/var/lib/lxc/linux1/rootfs/opt/ros/melodic/share/rubis_autorunner/scripts/cubetown_autorunner/_cubetown_autorunner_4_planning.launch')
+        os.system(f'scp -r scenario/{scenario}/_cubetown_autorunner_5_control.launch root@{target_ip}:/var/lib/lxc/linux1/rootfs/opt/ros/melodic/share/rubis_autorunner/scripts/cubetown_autorunner/_cubetown_autorunner_5_control.launch')
         
         os.system(f'scp -r scripts/terminate_cubetown_autorunner.py root@{target_ip}:/home/root/scripts/terminate_cubetown_autorunner.py')
-        os.system(f'cp yaml/cubetown_autorunner_params{measure}.yaml results/{experiment_title}/configs')
+        os.system(f'cp scenario/{scenario}/cubetown_autorunner_params.yaml results/{experiment_title}/configs')
     
     
     # Backup autoware params
     if target_environment == 'desktop':
-        os.system(f'cp ~/rubis_ws/src/rubis_autorunner/cfg/cubetown_autorunner/cubetown_autorunner_params{measure}.yaml ' + 'results/'+configs['experiment_title']+'/configs')
+        os.system(f'cp ~/rubis_ws/src/rubis_autorunner/cfg/cubetown_autorunner/cubetown_autorunner_params.yaml ' + 'results/'+configs['experiment_title']+'/configs')
     elif target_environment == 'exynos':
         os.system(f'scp -r root@' + configs[target_environment]['target_ip'] +':/var/lib/lxc/linux1/rootfs/home/root/rubis_ws/src/rubis_autorunner/cfg/cubetown_autorunner/cubetown_autorunner_params.yaml ' + 'results/'+configs['experiment_title']+'/configs')        
         # os.system('scp -r root@' + configs[target_environment]['target_ip'] +':/var/lib/lxc/linux1/rootfs/opt/ros/melodic/share/rubis_autorunner/cfg/cubetown_autorunner/cubetown_autorunner_params.yaml ' + 'results/'+configs['experiment_title']+'/configs')        
 
     # Backup svl scenario
-    os.system(f'cp yaml/svl_scenario{measure}.yaml ' + 'results/'+configs['experiment_title']+'/configs')
+    os.system(f'cp yaml/{scenario}/svl_scenario.yaml ' + 'results/'+configs['experiment_title']+'/configs')
 
     # Backup image name
     with open('results/'+configs['experiment_title']+'/configs/image.txt', 'w') as f:
