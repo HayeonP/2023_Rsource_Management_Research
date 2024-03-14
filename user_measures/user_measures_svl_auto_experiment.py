@@ -414,7 +414,7 @@ if __name__ == '__main__':
         # os.system('scp -r root@' + configs[target_environment]['target_ip'] +':/var/lib/lxc/linux1/rootfs/opt/ros/melodic/share/rubis_autorunner/cfg/cubetown_autorunner/cubetown_autorunner_params.yaml ' + 'results/'+configs['experiment_title']+'/configs')        
 
     # Backup svl scenario
-    os.system(f'cp yaml/{scenario}/svl_scenario.yaml ' + 'results/'+configs['experiment_title']+'/configs')
+    os.system(f'cp scenario/{scenario}/svl_scenario.yaml ' + 'results/'+configs['experiment_title']+'/configs')
 
     # Backup image name
     with open('results/'+configs['experiment_title']+'/configs/image.txt', 'w') as f:
