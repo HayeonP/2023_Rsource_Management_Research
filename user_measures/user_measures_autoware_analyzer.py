@@ -269,7 +269,7 @@ def profile_center_offset(dir_path, output_title, center_offset, max_center_offs
     if not os.path.exists(output_dir_path): os.system('mkdir -p ' + output_dir_path)
 
     # Plot graph
-    center_offset = {x:center_offset[x] for x in center_offset if x < 1000}
+    # center_offset = {x:center_offset[x] for x in center_offset if x < 1000}
     x_data = list(center_offset.keys()) # Instance IDs
     y_data = list(center_offset.values()) # Center offset(m)
 
@@ -624,7 +624,7 @@ def get_user_measures(output_title):
     elif "lane_change" in output_title:
         scenario = "lane_change"
     else:
-        pritn(f"[ERROR] Cannot detect scenario from experiment path: {output_title}")
+        print(f"[ERROR] Cannot detect scenario from experiment path: {output_title}")
         exit()
     
     def get_handling_user_measure(output_title):
