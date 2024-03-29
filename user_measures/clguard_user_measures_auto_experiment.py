@@ -7,6 +7,7 @@ from tqdm import tqdm
 import rospy
 from autoware_msgs.msg import VehicleCmd
 import rospy
+import xml.etree.ElementTree as ET
 
 
 # perf-based table
@@ -20,6 +21,35 @@ budget_to_target_convert_table = {
     7000: 7880,
     204800: 204800,
 }
+
+max_verocity_to_lookahead_ratio_convert_table = {
+    8.0: 1.2,
+    9.0: 1.3,
+    10.0: 1.4,
+    11.0: 1.5,
+    12.0: 1.7,
+    13.0: 1.8,
+    14.0: 1.9,
+    15.0: 2.0
+}
+
+def change_lookahead_ratio(scenario, max_velocity):
+    tree = ET.parse(f'scenario/{scenario}/_cubetown_autorunner_5_control.launch')
+    root = tree.getroot()
+
+    lookahead_ratio = max_verocity_to_lookahead_ratio_convert_table[max_velocity]
+
+    # find "lookahead_ratio"
+    for arg in root.findall(".//arg"):
+        if arg.attrib["name"] == "lookahead_ratio":
+            arg.attrib["value"] = str(lookahead_ratio)
+            print(arg.attrib["name"] + " : " + arg.attrib["value"])
+            break
+            
+    with open(f'scenario/{scenario}/_cubetown_autorunner_5_control.launch', "wb") as f:
+        f.write(ET.tostring(root, encoding="utf-8"))
+
+    return
 
 def terminate_seqwr():
     cmd = "ssh root@192.168.0.11 \"ps -ax\" | grep sequential_write"
@@ -110,9 +140,12 @@ def update_adas_config(label, scenario):
     # select user measure scenario    
     config["svl_cfg_path"] = f"./scenario/{scenario}/svl_scenario.yaml"
     
-    if scenario == 'handling':
-        config["duration"] = 100
-    else:
+    if scenario == 'braking':
+        config["duration"] = 15
+    elif scenario == 'handling':
+        # config["duration"] = 100
+        config["duration"] = 15
+    elif scenario == 'lane_change':
         config["duration"] = 20
 
     with open("yaml/svl_auto_experiment_configs.yaml", "w") as f:
@@ -133,9 +166,12 @@ def profile_bandwidth(scenario, label, iterations, adas_budget):
 
     for i in range(iterations):
         bw_profiler_title = f'{label}_it{i}'
-        if scenario == 'handling':
-            os.system(f'sed -i \'/profiling_duration:/ c\profiling_duration: 80\' {host_bandwidth_profiler_dir}/configs/bw_profiler.yaml')
-        else:
+        if scenario == 'braking':
+            os.system(f'sed -i \'/profiling_duration:/ c\profiling_duration: 10\' {host_bandwidth_profiler_dir}/configs/bw_profiler.yaml')
+        elif scenario == 'handling':
+            # os.system(f'sed -i \'/profiling_duration:/ c\profiling_duration: 80\' {host_bandwidth_profiler_dir}/configs/bw_profiler.yaml')
+            os.system(f'sed -i \'/profiling_duration:/ c\profiling_duration: 10\' {host_bandwidth_profiler_dir}/configs/bw_profiler.yaml')
+        elif scenario == 'lane_change':
             os.system(f'sed -i \'/profiling_duration:/ c\profiling_duration: 15\' {host_bandwidth_profiler_dir}/configs/bw_profiler.yaml')
         os.system(f'sed -i \'/label:/ c\label: {bw_profiler_title}\' {host_bandwidth_profiler_dir}/configs/bw_profiler.yaml')
         os.system(f'sed -i \'/profiling_frequency:/ c\profiling_frequency: 200\' {host_bandwidth_profiler_dir}/configs/bw_profiler.yaml')
@@ -192,7 +228,8 @@ def start_experiment(scenario, adas_budget, epoch, max_velocity, seqwr_budget, s
         # Setup ADAS budget to clguard
         insmod_clguard('clguard1', '4-7', adas_budget)
         
-        label = f'{experiment_tag}_{scenario}_vel{max_velocity}_b{adas_budget}_adas_only_v{epoch}'
+        # label = f'{experiment_tag}_{scenario}_vel{max_velocity}_b{adas_budget}_adas_only_v{epoch}'
+        label = f'{experiment_tag}_lookahead{max_verocity_to_lookahead_ratio_convert_table[max_velocity]}_{scenario}_vel{max_velocity}_b{adas_budget}_adas_only_v{epoch}'
         update_adas_config(label, scenario)
         update_autorunner_params(scenario, max_velocity)
 
@@ -293,4 +330,5 @@ if __name__ == '__main__':
                 for i in range(len(adas_budget_list)):
                     adas_budget = adas_budget_list[i]
                     seqwr_budget = seqwr_budget_list[i]
+                    change_lookahead_ratio(scenario, max_velocity)
                     start_experiment(scenario, adas_budget, epoch, max_velocity, seqwr_budget, seqwr_clguard)

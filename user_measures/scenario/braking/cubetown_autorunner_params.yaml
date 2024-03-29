@@ -80,7 +80,7 @@ op_common_params:
   blockIdx: -1
   maxAcceleration: 7.5
   maxDeceleration: -7.5
-  maxVelocity: 12.0
+  maxVelocity: 11.0
   rollOutDensity: 4
   rollOutsNumber: 0
 op_global_planner:

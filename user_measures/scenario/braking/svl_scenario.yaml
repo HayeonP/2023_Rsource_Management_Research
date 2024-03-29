@@ -6,7 +6,7 @@ origin:
     x: 1.62       # right to left (ROS -y)
     y: 0          # Vertical (ROS z)
     z: 18.3       # Forward (ROS x)
-    r: 90         # Counter-Clockwise, degree
+    r: 0         # Counter-Clockwise, degree
 
 simulator:
   address: localhost
@@ -28,20 +28,20 @@ npc:
     name: Rubis
     type: BoxTruck
     offset:
-      forward: 57
-      right: 0
-      rotation: -90
+      forward: 30
+      right: 3
+      rotation: 0
   - npc1:
     name: hayeon
     type: Bob
     offset:
-      forward: 52
-      right: 0
-      rotation: 180
+      forward: 30
+      right: -4
+      rotation: 270
   - npc4:
     name: hoyong
     type: Bob
     offset:
-      forward: 49
-      right: 0
-      rotation: 0
+      forward: 30
+      right: -2
+      rotation: 90

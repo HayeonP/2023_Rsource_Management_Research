@@ -624,7 +624,7 @@ def get_user_measures(output_title):
     elif "lane_change" in output_title:
         scenario = "lane_change"
     else:
-        pritn(f"[ERROR] Cannot detect scenario from experiment path: {output_title}")
+        print(f"[ERROR] Cannot detect scenario from experiment path: {output_title}")
         exit()
     
     def get_handling_user_measure(output_title):
@@ -652,7 +652,7 @@ def get_user_measures(output_title):
         fnames = os.listdir(waypoints_fpath)
         distance_to_obstacle_list = []
         
-        obstacle_x = 5
+        obstacle_x = -20
         front_length = 4.5
         
         for fname in fnames:
@@ -661,7 +661,8 @@ def get_user_measures(output_title):
                 data = yaml.safe_load(f)
                 if len(data["waypoints"]) < 1: continue                
                 last_x = data["waypoints"][-1]["x"]
-                distance = last_x - 5 - 4.5 # Hard coding (5: end of obstacle, 4.5: base_link to front)
+                # distance = last_x - 5 - 4.5 # Hard coding (5: end of obstacle, 4.5: base_link to front)
+                distance = last_x - obstacle_x - front_length # obstacles moved to -25
                 distance_to_obstacle_list.append(distance)
         
         if len(distance_to_obstacle_list) != 0:

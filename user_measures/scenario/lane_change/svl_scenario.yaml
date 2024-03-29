@@ -6,7 +6,7 @@ origin:
     x: 1.62       # right to left (ROS -y)
     y: 0          # Vertical (ROS z)
     z: 18.3       # Forward (ROS x)
-    r: 90         # Counter-Clockwise, degree
+    r: 0         # Counter-Clockwise, degree
 
 simulator:
   address: localhost
@@ -28,6 +28,6 @@ npc:
     name: Rubis
     type: Sedan
     offset:
-      forward: 57
-      right: -15
-      rotation: -90
+      forward: 20 #20
+      right: 3
+      rotation: 0

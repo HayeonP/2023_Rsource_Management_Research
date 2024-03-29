@@ -1,5 +1,5 @@
 ADAS_cores: 4-7
-adas_image_name: 240229_ADAS_with_stop.ext4
+adas_image_name: 240320_gnss_only.ext4
 all_cores: 0-7
 autorunner_mode: FULL
 desktop:
@@ -7,13 +7,13 @@ desktop:
   rosbridge_cmd: roslaunch lgsvl_ros_bridge rosbridge_websocket.launch
   termination_cmd: ./scripts/terminate_desktop.sh
 duration: 20
-experiment_title: 240314/vel7.5_braking_vel12.0_b7000_adas_only_v0
+experiment_title: 240329/test_lookahead1.5_lane_change_vel11.0_b11000_adas_only_v0
 exynos:
   response_time_path: /var/lib/lxc/linux1/rootfs/home/root/Documents/profiling/response_time
   rosbridge_cmd: roslaunch lgsvl_ros_bridge rosbridge_websocket.launch
   target_ip: 192.168.0.11
   termination_cmd: ./scripts/terminate_exynos.sh
-iterations: 20
+iterations: 1
 run_stream: false
-svl_cfg_path: ./scenario/braking/svl_scenario.yaml
+svl_cfg_path: ./scenario/lane_change/svl_scenario.yaml
 target_environment: exynos

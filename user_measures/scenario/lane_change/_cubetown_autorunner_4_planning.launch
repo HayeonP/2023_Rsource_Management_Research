@@ -11,15 +11,15 @@
     <arg name="mapSource" value="0" /> <!-- Autoware=0, Vector Map Folder=1, kml file=2 -->
     <arg name="mapFileName" value="" /> <!-- incase of kml map source -->
     <arg name="use_svl_sensor" value="true" />
-    <!-- Borregas Avenue -->
+    <!-- Cubetown Straight -->
     <arg name="use_static_goal" value="true" />
-    <arg name="goal_pose_x" value="57.0422019958" />
-    <arg name="goal_pose_y" value="-5.43001270294" />
+    <arg name="goal_pose_x" value="-64.214050293" />
+    <arg name="goal_pose_y" value="1.79286587238" />
     <arg name="goal_pose_z" value="0.0" />
     <arg name="goal_ori_x" value="0.0" />
     <arg name="goal_ori_y" value="0.0" />
-    <arg name="goal_ori_z" value="0.719615198264" />
-    <arg name="goal_ori_w" value="0.694373074383" />
+    <arg name="goal_ori_z" value="0.999936905966" />
+    <arg name="goal_ori_w" value="0.0112331690162" />
   </include>
 
   <!-- op_common_params  -->
@@ -65,7 +65,7 @@
   <!-- op_trajectory_generator -->
   <include file="$(find op_local_planner)/launch/op_trajectory_generator.launch">
     <arg name="samplingTipMargin" default="4" />       <!-- Tip Margin (Roll in start) -->
-    <arg name="samplingOutMargin" default="12" />        <!-- Roll In Margin (Roll in end) -->
+    <arg name="samplingOutMargin" default="15" />        <!-- Roll In Margin (Roll in end) -->
     <arg name="samplingSpeedFactor" default="0.25" />
     <arg name="enableHeadingSmoothing" default="false" />
   </include>
@@ -83,7 +83,7 @@
     <!-- Trajectory blocking threshold  -->
     <arg name="lateralBlockingThreshold" default="1.5" />
     <arg name="frontLongitudinalBlockingThreshold" default="30" />
-    <arg name="rearLongitudinalBlockingThreshold" default="-5" />
+    <arg name="rearLongitudinalBlockingThreshold" default="0" />
 
     <arg name="intersectionFile" default="crossing_test/crossing_intersection.yaml" />
   </include>

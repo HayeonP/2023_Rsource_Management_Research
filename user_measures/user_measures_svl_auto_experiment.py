@@ -243,15 +243,12 @@ def kill_stream():
 def experiment_manager(main_thread_pid):
     print('- Manager: Start manager')
     svl_scenario = svl.svl_scenario(configs['svl_cfg_path'])
-
-    # print(configs[target_environment]['target_ip'])
-    # exit(0)
-    # os.system(f'scp -r exynos_scripts/* root@{configs[target_environment]['target_ip']}:/var/lib/lxc/linux1/rootfs/home/root/scripts')
-    os.system('scp -r exynos_scripts/* root@192.168.0.11:/var/lib/lxc/linux1/rootfs/home/root/scripts')
-
-    os.system('ssh root@' + configs[target_environment]['target_ip'] + ' \"lxc-attach -n linux1 -- /home/root/scripts/_cubetown_autorunner_1_sensing.sh\" &')
-    os.system('ssh root@' + configs[target_environment]['target_ip'] + ' \"lxc-attach -n linux1 -- /home/root/scripts/_cubetown_autorunner_2_localization.sh\" &')
-    os.system('ssh root@' + configs[target_environment]['target_ip'] + ' \"lxc-attach -n linux1 -- /home/root/scripts/_cubetown_autorunner_3_detection.sh\" &')
+    
+    if target_environment == "exynos":
+        os.system('scp -r exynos_scripts/* root@192.168.0.11:/var/lib/lxc/linux1/rootfs/home/root/scripts')
+        os.system('ssh root@' + configs[target_environment]['target_ip'] + ' \"lxc-attach -n linux1 -- /home/root/scripts/_cubetown_autorunner_1_sensing.sh\" &')
+        os.system('ssh root@' + configs[target_environment]['target_ip'] + ' \"lxc-attach -n linux1 -- /home/root/scripts/_cubetown_autorunner_2_localization.sh\" &')
+        os.system('ssh root@' + configs[target_environment]['target_ip'] + ' \"lxc-attach -n linux1 -- /home/root/scripts/_cubetown_autorunner_3_detection.sh\" &')
 
     # Threads
     autorunner_thread = threading.Thread(target=autorunner)
@@ -411,7 +408,6 @@ if __name__ == '__main__':
         os.system(f'cp ~/rubis_ws/src/rubis_autorunner/cfg/cubetown_autorunner/cubetown_autorunner_params.yaml ' + 'results/'+configs['experiment_title']+'/configs')
     elif target_environment == 'exynos':
         os.system(f'scp -r root@' + configs[target_environment]['target_ip'] +':/var/lib/lxc/linux1/rootfs/home/root/rubis_ws/src/rubis_autorunner/cfg/cubetown_autorunner/cubetown_autorunner_params.yaml ' + 'results/'+configs['experiment_title']+'/configs')        
-        # os.system('scp -r root@' + configs[target_environment]['target_ip'] +':/var/lib/lxc/linux1/rootfs/opt/ros/melodic/share/rubis_autorunner/cfg/cubetown_autorunner/cubetown_autorunner_params.yaml ' + 'results/'+configs['experiment_title']+'/configs')        
 
     # Backup svl scenario
     os.system(f'cp scenario/{scenario}/svl_scenario.yaml ' + 'results/'+configs['experiment_title']+'/configs')
