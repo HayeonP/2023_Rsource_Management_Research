@@ -186,9 +186,12 @@ def profile_bandwidth(scenario, label, iterations, adas_budget):
             # if current_velocity > 20: continue
             current_vehicle_cmd = rospy.wait_for_message('/vehicle_cmd', VehicleCmd, timeout=None)
             if current_vehicle_cmd.ctrl_cmd.linear_velocity < 1: continue
-            result = subprocess.check_output("ssh root@192.168.0.11 'cat /sys/kernel/debug/clguard1/config'", shell=True, universal_newlines=True)
-            with open(f'results/{label}/configs/it{i}_clguard_config_start.txt', 'w') as f:
-                f.write(result)
+            try:
+                result = subprocess.check_output("ssh root@192.168.0.11 'cat /sys/kernel/debug/clguard1/config'", shell=True, universal_newlines=True)
+                with open(f'results/{label}/configs/it{i}_clguard_config_start.txt', 'w') as f:
+                    f.write(result)
+            except:
+                pass
             os.system(f'cd {host_bandwidth_profiler_dir} && sh profile_bandwidth.sh')
             break
         
@@ -197,10 +200,15 @@ def profile_bandwidth(scenario, label, iterations, adas_budget):
                 current_vehicle_cmd = rospy.wait_for_message('/vehicle_cmd', VehicleCmd, timeout=5)
             except:
                 break
+        
         print("@@@@ rospy.spin is over")
-        result = subprocess.check_output("ssh root@192.168.0.11 'cat /sys/kernel/debug/clguard1/config'", shell=True, universal_newlines=True)
-        with open(f'results/{label}/configs/it{i}_clguard_config_end.txt', 'w') as f:
-            f.write(result)
+
+        try:
+            result = subprocess.check_output("ssh root@192.168.0.11 'cat /sys/kernel/debug/clguard1/config'", shell=True, universal_newlines=True)
+            with open(f'results/{label}/configs/it{i}_clguard_config_end.txt', 'w') as f:
+                f.write(result)
+        except:
+            pass
 
     print('code_end')
 
